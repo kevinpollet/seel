@@ -8,30 +8,32 @@
 import multimatch from "multimatch";
 import { Readable } from "stream";
 import tar from "tar-fs";
+import { Pack } from "tar-stream";
 import { Config } from "./Config";
-import { DockerfileBuilder } from "./DockerfileBuilder";
+
+interface File {
+  readonly name: string;
+  readonly data: string;
+}
 
 export const createBuildContext = (
   rootPath: string,
-  config: Config
-): Readable => {
-  const dockerfile = new DockerfileBuilder()
-    .addCommand({ name: "FROM", value: "node:8-alpine" })
-    .addCommand({ name: "RUN", value: "apk add --no-cache tini" })
-    .addCommand({ name: "COPY", value: ". ." })
-    .addCommand({
-      name: "ENTRYPOINT",
-      value: `["/sbin/tini", "--", "node", "index.js"]`,
-    })
-    .toString();
-
-  return tar.pack(rootPath, {
+  config: Config,
+  files: File[] = []
+): Readable =>
+  tar.pack(rootPath, {
     filter: name => multimatch(name, config.includes).length === 0,
     finalize: false,
-    finish: function(pack) {
-      pack.entry({ name: "Dockerfile", size: dockerfile.length }, dockerfile);
-      pack.entry({ name: ".dockerignore", size: dockerfile.length }, "*");
+    finish: function(pack: Pack) {
+      files.forEach(({ name, data }) =>
+        pack.entry(
+          {
+            name,
+            size: data.length,
+          },
+          data
+        )
+      );
       pack.finalize();
     },
   });
-};
