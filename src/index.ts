@@ -14,13 +14,9 @@ import { DockerfileBuilder } from "./DockerfileBuilder";
 export const buildImage = async (cwd: string): Promise<unknown> => {
   const config = await Config.readFromPkgJSON(cwd);
   const dockerfile = new DockerfileBuilder()
-    .addCommand({ name: "FROM", value: "node:8-alpine" })
-    .addCommand({ name: "RUN", value: "apk add --no-cache tini" })
-    .addCommand({ name: "COPY", value: ". ." })
-    .addCommand({
-      name: "ENTRYPOINT",
-      value: `["/sbin/tini", "--", "node", "index.js"]`,
-    })
+    .pushInstruction("FROM", "gcr.io/distroless/nodejs")
+    .pushInstruction("COPY", ". .")
+    .pushInstruction("CMD", ["index.js"])
     .toString();
 
   const buildContextStream = createBuildContext(cwd, config, [

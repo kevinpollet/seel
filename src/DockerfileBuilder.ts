@@ -1,3 +1,5 @@
+import { isArray } from "util";
+
 /**
  * Copyright © 2019 kevinpollet <pollet.kevin@gmail.com>`
  *
@@ -5,27 +7,39 @@
  * found in the LICENSE.md file.
  */
 
-interface Command {
-  name: string;
-  value: string;
+class Instruction {
+  readonly name: string;
+  readonly value: string | ReadonlyArray<string>;
+
+  constructor(name: string, value: string | string[]) {
+    this.name = name.toUpperCase();
+    this.value = value;
+  }
+
+  toString(): string {
+    const value = isArray(this.value)
+      ? `[${this.value.map(value => `"${value}"`).join(",")}]`
+      : this.value;
+
+    return `${this.name} ${value}`;
+  }
 }
 
 export class DockerfileBuilder {
-  constructor(private readonly commands: Array<Readonly<Command>> = []) {
-    this.commands = commands;
+  constructor(
+    private readonly instructions: Array<Readonly<Instruction>> = []
+  ) {
+    this.instructions = instructions;
   }
 
-  addCommand({ name, value }: Command): DockerfileBuilder {
-    this.commands.push({
-      name: name.toUpperCase(),
-      value,
-    });
+  pushInstruction(name: string, value: string | string[]): DockerfileBuilder {
+    this.instructions.push(new Instruction(name, value));
     return this;
   }
 
   toString(): string {
-    return this.commands
-      .map(command => `${command.name} ${command.value}`)
+    return this.instructions
+      .map(instruction => instruction.toString())
       .join("\n");
   }
 }
