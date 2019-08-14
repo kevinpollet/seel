@@ -15,7 +15,7 @@ export class Config {
 
     return promisify(fs.readFile)(pkgJSONPath)
       .then((data: Buffer) => data.toString())
-      .then(JSON.parse)
+      .then(data => JSON.parse(data))
       .then(({ name, docku }) => {
         const resolvedIncludes =
           docku.includes &&
