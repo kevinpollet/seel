@@ -1,9 +1,9 @@
 {
   "name": "docku",
   "version": "0.0.0",
-  "description": "",
   "author": "kevinpollet <pollet.kevin@gmail.com>",
   "license": "MIT",
+  "bin": "bin/docku.js",
   "scripts": {
     "build": "rm -rf lib && tsc -p tsconfig.json"
   },
@@ -11,6 +11,7 @@
     "@types/dockerode": "^2.5.20",
     "@types/node": "^8.10.51",
     "@types/tar-fs": "^1.16.1",
+    "commander": "^3.0.0",
     "dockerode": "^2.5.8",
     "multimatch": "^4.0.0",
     "tar-fs": "^2.0.0"
