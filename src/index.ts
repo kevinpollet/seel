@@ -12,37 +12,37 @@ import tar from "tar-fs";
 import { DockerfileBuilder } from "./DockerfileBuilder";
 import fs from "fs";
 
-const pwd = join(process.cwd(), "..", "doki-example");
-const dockerClient = new Docker();
+export const buildImage = async (cwd: string) => {
+  const dockerClient = new Docker();
+  const packageJSONPath = join(cwd, "package.json");
+  const { name, docku } = JSON.parse(
+    fs.readFileSync(packageJSONPath).toString()
+  );
 
-const pkgJSONString = fs.readFileSync(join(pwd, "package.json"));
-const { name, doki } = JSON.parse(pkgJSONString.toString());
+  const dockerfile = new DockerfileBuilder()
+    .addCommand({ name: "FROM", value: "node:8-alpine" })
+    .addCommand({ name: "RUN", value: "apk add --no-cache tini" })
+    .addCommand({ name: "COPY", value: ". ." })
+    .addCommand({
+      name: "ENTRYPOINT",
+      value: `["/sbin/tini", "--", "node", "index.js"]`,
+    })
+    .toString();
 
-const dockerfile = new DockerfileBuilder()
-  .addCommand({ name: "FROM", value: "node:8-alpine" })
-  .addCommand({ name: "RUN", value: "apk add --no-cache tini" })
-  .addCommand({ name: "COPY", value: ". ." })
-  .addCommand({
-    name: "ENTRYPOINT",
-    value: `["/sbin/tini", "--", "node", "index.js"]`,
-  })
-  .toString();
+  const tarStream = tar.pack(resolve(process.cwd(), cwd), {
+    filter: name => {
+      const normalizedIncludes = docku.includes.map((glob: string) =>
+        resolve(cwd, glob)
+      );
+      return multimatch(name, normalizedIncludes).length === 0;
+    },
+    finalize: false,
+    finish: function(pack) {
+      pack.entry({ name: "Dockerfile", size: dockerfile.length }, dockerfile);
+      pack.entry({ name: ".dockerignore", size: dockerfile.length }, "*");
+      pack.finalize();
+    },
+  });
 
-const tarStream = tar.pack(pwd, {
-  filter: name => {
-    const normalizedIncludes = doki.includes.map((glob: string) =>
-      resolve(pwd, glob)
-    );
-    return multimatch(name, normalizedIncludes).length === 0;
-  },
-  finalize: false,
-  finish: function(pack) {
-    pack.entry({ name: "Dockerfile", size: dockerfile.length }, dockerfile);
-    pack.entry({ name: ".dockerignore", size: dockerfile.length }, "*");
-    pack.finalize();
-  },
-});
-
-dockerClient
-  .buildImage(tarStream, { t: `${name}:latest` })
-  .then(stream => stream.pipe(process.stdout));
+  return dockerClient.buildImage(tarStream, { t: `${name}:latest` });
+};

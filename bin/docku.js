@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const program = require("commander");
+const { buildImage } = require("../lib");
 
 program
   .option(
@@ -11,4 +12,6 @@ program
   .version("0.0.1")
   .parse(process.argv);
 
-console.log(program.cwd);
+buildImage(program.cwd)
+  .then(stream => stream.pipe(process.stdout))
+  .catch(err => console.log(err));
