@@ -23,7 +23,7 @@ export class DockerfileBuilder {
     return this;
   }
 
-  toString() {
+  toString(): string {
     return this.commands
       .map(command => `${command.name} ${command.value}`)
       .join("\n");

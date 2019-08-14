@@ -12,7 +12,7 @@ import tar from "tar-fs";
 import { DockerfileBuilder } from "./DockerfileBuilder";
 import fs from "fs";
 
-export const buildImage = async (cwd: string) => {
+export const buildImage = async (cwd: string): Promise<unknown> => {
   const dockerClient = new Docker();
   const packageJSONPath = join(cwd, "package.json");
   const { name, docku } = JSON.parse(
