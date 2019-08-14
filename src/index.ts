@@ -16,7 +16,7 @@ export const buildImage = async (cwd: string): Promise<unknown> => {
   const dockerfile = new DockerfileBuilder()
     .pushInstruction("FROM", "gcr.io/distroless/nodejs")
     .pushInstruction("COPY", ". .")
-    .pushInstruction("CMD", ["index.js"])
+    .pushInstruction("CMD", [config.entryPoint])
     .toString();
 
   const buildContextStream = createBuildContext(cwd, config, [

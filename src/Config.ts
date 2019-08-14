@@ -16,20 +16,22 @@ export class Config {
     return promisify(fs.readFile)(pkgJSONPath)
       .then((data: Buffer) => data.toString())
       .then(data => JSON.parse(data))
-      .then(({ name, docku }) => {
+      .then(({ name, main, docku }) => {
         const resolvedIncludes =
           docku.includes &&
           docku.includes.map((pattern: string) => resolve(cwd, pattern));
 
-        return new Config(name, resolvedIncludes);
+        return new Config(name, main, resolvedIncludes);
       });
   }
 
   readonly name: string;
+  readonly entryPoint: string;
   readonly includes: string[];
 
-  constructor(name: string, includes: string[] = []) {
+  constructor(name: string, entryPoint: string, includes: string[] = []) {
     this.name = name;
     this.includes = includes;
+    this.entryPoint = entryPoint;
   }
 }
