@@ -17,9 +17,16 @@ export class Config {
       .then((data: Buffer) => data.toString())
       .then(data => JSON.parse(data))
       .then(({ name, main, docku }) => {
-        const resolvedIncludes =
+        let resolvedIncludes: string[] =
+          docku &&
           docku.includes &&
           docku.includes.map((pattern: string) => resolve(cwd, pattern));
+
+        // TODO: must be reworked
+        resolvedIncludes = Array.of(
+          ...(resolvedIncludes || []),
+          resolve(cwd, main)
+        );
 
         return new Config(name, main, resolvedIncludes);
       });
