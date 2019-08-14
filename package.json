@@ -5,7 +5,8 @@
   "license": "MIT",
   "bin": "bin/docku.js",
   "scripts": {
-    "build": "rm -rf lib && tsc -p tsconfig.json"
+    "build": "rm -rf lib && tsc -p tsconfig.json",
+    "format": "prettier --write '*.{json,md}' '{src,bin}/**/*.{ts,js}'"
   },
   "dependencies": {
     "@types/dockerode": "^2.5.20",
@@ -17,6 +18,10 @@
     "tar-fs": "^2.0.0"
   },
   "devDependencies": {
+    "prettier": "^1.18.2",
     "typescript": "^3.5.3"
+  },
+  "prettier": {
+    "trailingComma": "es5"
   }
 }

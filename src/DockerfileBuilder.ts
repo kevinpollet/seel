@@ -18,7 +18,7 @@ export class DockerfileBuilder {
   addCommand({ name, value }: Command): DockerfileBuilder {
     this.commands.push({
       name: name.toUpperCase(),
-      value
+      value,
     });
     return this;
   }

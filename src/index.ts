@@ -24,23 +24,23 @@ const dockerfile = new DockerfileBuilder()
   .addCommand({ name: "COPY", value: ". ." })
   .addCommand({
     name: "ENTRYPOINT",
-    value: `["/sbin/tini", "--", "node", "index.js"]`
+    value: `["/sbin/tini", "--", "node", "index.js"]`,
   })
   .toString();
 
-
-  
 const tarStream = tar.pack(pwd, {
   filter: name => {
-    const normalizedIncludes = doki.includes.map((glob: string) => resolve(pwd, glob))
-    return multimatch(name, normalizedIncludes).length === 0
+    const normalizedIncludes = doki.includes.map((glob: string) =>
+      resolve(pwd, glob)
+    );
+    return multimatch(name, normalizedIncludes).length === 0;
   },
   finalize: false,
   finish: function(pack) {
     pack.entry({ name: "Dockerfile", size: dockerfile.length }, dockerfile);
     pack.entry({ name: ".dockerignore", size: dockerfile.length }, "*");
     pack.finalize();
-  }
+  },
 });
 
 dockerClient
