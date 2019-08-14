@@ -3,7 +3,17 @@
   "version": "0.0.0",
   "author": "kevinpollet <pollet.kevin@gmail.com>",
   "license": "MIT",
-  "bin": "bin/docku.js",
+  "homepage": "https://github.com/kevinpollet/docku#readme",
+  "repository": "github.com:kevinpollet/docku",
+  "bugs": "https://github.com/kevinpollet/docku/issues",
+  "keywords": [
+    "docker",
+    "node",
+    "node-js"
+  ],
+  "bin": {
+    "docku": "bin/docku.js"
+  },
   "scripts": {
     "build": "rm -rf lib && tsc -p tsconfig.json",
     "format": "prettier --write '*.{json,md}' '{src,bin}/**/*.{ts,js}'",
