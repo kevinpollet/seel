@@ -6,12 +6,15 @@
  */
 
 import Docker from "dockerode";
+import JSONStream from "jsonstream";
 import { Config } from "./Config";
 import { createBuildContext } from "./createBuildContext";
 import { DockerfileBuilder } from "./DockerfileBuilder";
 
 // TODO: cwd must be absolute
-export const buildImage = async (cwd: string): Promise<unknown> => {
+export const buildImage = async (
+  cwd: string
+): Promise<NodeJS.ReadableStream> => {
   const config = await Config.readFromPkgJSON(cwd);
   const dockerfile = new DockerfileBuilder()
     .pushInstruction("FROM", "gcr.io/distroless/nodejs")
@@ -24,7 +27,7 @@ export const buildImage = async (cwd: string): Promise<unknown> => {
     { name: ".dockerignore", data: "*" },
   ]);
 
-  return new Docker().buildImage(buildContextStream, {
-    t: `${config.name}:latest`,
-  });
+  return new Docker()
+    .buildImage(buildContextStream, { t: `${config.name}:latest` })
+    .then(outputStream => outputStream.pipe(JSONStream.parse("stream")));
 };
