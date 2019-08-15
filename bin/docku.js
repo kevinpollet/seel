@@ -5,18 +5,21 @@ const { isAbsolute, resolve } = require("path");
 const { buildImage } = require("../lib");
 const { version } = require("../lib/version");
 
+program.version(version);
+
 program
   .command("build")
   .description("Build a Docker image for the current project.")
   .option(
-    "--cwd <cwd>",
+    "--cwd <path>",
     "override the current working directory",
-    cwd => (!isAbsolute(cwd) ? resolve(process.cwd(), cwd) : process.cwd()),
+    path => (!isAbsolute(path) ? resolve(process.cwd(), path) : process.cwd()),
     process.cwd()
   )
-  .version(version, "-v --version", "output current version")
-  .parse(process.argv);
+  .action(options => {
+    buildImage(options.cwd)
+      .then(stream => stream.pipe(process.stdout))
+      .catch(err => console.log(err));
+  });
 
-buildImage(program.cwd)
-  .then(stream => stream.pipe(process.stdout))
-  .catch(err => console.log(err));
+program.parse(process.argv);
