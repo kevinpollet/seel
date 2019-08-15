@@ -3,6 +3,7 @@
 const program = require("commander");
 const { isAbsolute, resolve } = require("path");
 const { buildImage } = require("../lib");
+const { version } = require("../lib/version");
 
 program
   .command("build")
@@ -13,7 +14,7 @@ program
     cwd => (!isAbsolute(cwd) ? resolve(process.cwd(), cwd) : process.cwd()),
     process.cwd()
   )
-  .version("0.0.1")
+  .version(version, "-v --version", "output current version")
   .parse(process.argv);
 
 buildImage(program.cwd)
