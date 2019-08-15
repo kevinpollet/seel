@@ -10,7 +10,7 @@ program
   .description("Build a Docker image for the current project.")
   .option(
     "--cwd <cwd>",
-    "Override the current working directory",
+    "override the current working directory",
     cwd => (!isAbsolute(cwd) ? resolve(process.cwd(), cwd) : process.cwd()),
     process.cwd()
   )
