@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 
-const path = require("path");
 const program = require("commander");
+const { isAbsolute, resolve } = require("path");
 const { buildImage } = require("../lib");
 
 program
+  .command("build")
+  .description("Build a Docker image for the current project.")
   .option(
     "--cwd <cwd>",
     "Override the current working directory",
-    cwd =>
-      !path.isAbsolute(cwd) ? path.resolve(process.cwd(), cwd) : process.cwd(),
+    cwd => (!isAbsolute(cwd) ? resolve(process.cwd(), cwd) : process.cwd()),
     process.cwd()
   )
   .version("0.0.1")
