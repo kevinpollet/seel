@@ -1,9 +1,15 @@
 #!/usr/bin/env node
 
+/**
+ * Copyright © 2019 kevinpollet <pollet.kevin@gmail.com>`
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE.md file.
+ */
+
 const program = require("commander");
 const { isAbsolute, resolve } = require("path");
-const { buildImage } = require("../lib");
-const { version } = require("../lib/version");
+const { buildImage, version } = require("../lib");
 
 program.version(version);
 
