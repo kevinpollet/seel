@@ -25,7 +25,9 @@ export class Config {
         // TODO: must be reworked
         resolvedIncludes = Array.of(
           ...(resolvedIncludes || []),
-          resolve(cwd, main)
+          resolve(cwd, main),
+          resolve(cwd, "package.json"),
+          resolve(cwd, "package-lock.json")
         );
 
         return new Config(name, main, resolvedIncludes);

@@ -17,7 +17,11 @@ export const buildImage = async (
 ): Promise<NodeJS.ReadableStream> => {
   const config = await Config.readFromPkgJSON(cwd);
   const dockerfile = new DockerfileBuilder()
+    .pushInstruction("FROM", "node:8-alpine AS builder")
+    .pushInstruction("COPY", "package*.json ./")
+    .pushInstruction("RUN", "npm install --production")
     .pushInstruction("FROM", "gcr.io/distroless/nodejs")
+    .pushInstruction("COPY", "--from=builder node_modules/ node_modules/")
     .pushInstruction("COPY", ". .")
     .pushInstruction("CMD", [config.entryPoint])
     .toString();
