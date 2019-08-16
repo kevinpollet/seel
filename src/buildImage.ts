@@ -26,10 +26,12 @@ export const buildImage = async ({
   const config = await Config.fromPkgJSON(pkgJSONPath);
   const dockerfile = new DockerfileBuilder()
     .pushInstruction("FROM", "node:8-alpine AS builder")
+    .pushInstruction("WORKDIR", "app")
     .pushInstruction("COPY", "package*.json ./")
     .pushInstruction("RUN", "npm install --production")
     .pushInstruction("FROM", "gcr.io/distroless/nodejs")
-    .pushInstruction("COPY", "--from=builder node_modules/ node_modules/")
+    .pushInstruction("WORKDIR", "app")
+    .pushInstruction("COPY", "--from=builder app/node_modules node_modules/")
     .pushInstruction("COPY", ". .")
     .pushInstruction("CMD", [config.entryPoint])
     .toString();
