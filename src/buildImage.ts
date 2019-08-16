@@ -12,10 +12,16 @@ import { Config } from "./Config";
 import { createBuildContext } from "./createBuildContext";
 import { DockerfileBuilder } from "./DockerfileBuilder";
 
+interface Options {
+  readonly cwd: string;
+  readonly tar: boolean;
+}
+
 // TODO: cwd must be absolute
-export const buildImage = async (
-  cwd: string
-): Promise<NodeJS.ReadableStream> => {
+export const buildImage = async ({
+  cwd,
+  tar,
+}: Options): Promise<NodeJS.ReadableStream> => {
   const pkgJSONPath = join(cwd, "package.json");
   const config = await Config.fromPkgJSON(pkgJSONPath);
   const dockerfile = new DockerfileBuilder()
@@ -37,7 +43,9 @@ export const buildImage = async (
     ],
   });
 
-  return new Docker()
-    .buildImage(buildContext, { t: `${config.name}:latest` })
-    .then(outputStream => outputStream.pipe(JSONStream.parse("stream")));
+  return tar
+    ? buildContext
+    : new Docker()
+        .buildImage(buildContext, { t: `${config.name}:latest` })
+        .then(outputStream => outputStream.pipe(JSONStream.parse("stream")));
 };
