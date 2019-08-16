@@ -22,7 +22,7 @@ export const createBuildContext = (
   files: File[] = []
 ): Readable =>
   tar.pack(rootPath, {
-    filter: name => multimatch(name, config.includes).length === 0,
+    ignore: name => multimatch(name, config.includes).length === 0,
     finalize: false,
     finish: function(pack: Pack) {
       files.forEach(({ name, data }) =>
