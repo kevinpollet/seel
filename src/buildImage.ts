@@ -7,6 +7,7 @@
 
 import Docker from "dockerode";
 import JSONStream from "jsonstream";
+import { join } from "path";
 import { Config } from "./Config";
 import { createBuildContext } from "./createBuildContext";
 import { DockerfileBuilder } from "./DockerfileBuilder";
@@ -15,7 +16,8 @@ import { DockerfileBuilder } from "./DockerfileBuilder";
 export const buildImage = async (
   cwd: string
 ): Promise<NodeJS.ReadableStream> => {
-  const config = await Config.readFromPkgJSON(cwd);
+  const pkgJSONPath = join(cwd, "package.json");
+  const config = await Config.fromPkgJSON(pkgJSONPath);
   const dockerfile = new DockerfileBuilder()
     .pushInstruction("FROM", "node:8-alpine AS builder")
     .pushInstruction("COPY", "package*.json ./")
@@ -26,12 +28,16 @@ export const buildImage = async (
     .pushInstruction("CMD", [config.entryPoint])
     .toString();
 
-  const buildContextStream = createBuildContext(cwd, config, [
-    { name: "Dockerfile", data: dockerfile },
-    { name: ".dockerignore", data: "*" },
-  ]);
+  const buildContext = createBuildContext({
+    rootDir: cwd,
+    includePatterns: config.includes,
+    filesToInject: [
+      { name: "Dockerfile", content: dockerfile },
+      { name: ".dockerignore", content: "*" },
+    ],
+  });
 
   return new Docker()
-    .buildImage(buildContextStream, { t: `${config.name}:latest` })
+    .buildImage(buildContext, { t: `${config.name}:latest` })
     .then(outputStream => outputStream.pipe(JSONStream.parse("stream")));
 };
