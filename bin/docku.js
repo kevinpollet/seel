@@ -22,8 +22,9 @@ program
     path => (!isAbsolute(path) ? resolve(process.cwd(), path) : process.cwd()),
     process.cwd()
   )
+  .option("--tar", "output the build context tarball to stdout")
   .action(options => {
-    buildImage(options.cwd)
+    buildImage(options)
       .then(stream => stream.pipe(process.stdout))
       .catch(err => console.log(err));
   });

@@ -36,7 +36,7 @@ export const createBuildContext = (options: Options): NodeJS.ReadableStream => {
     },
     finish(pack: Pack): void {
       (options.filesToInject || []).forEach(({ name, content }) =>
-        pack.entry({ name }, content)
+        pack.entry({ name, size: content.length }, content)
       );
       pack.finalize();
     },
