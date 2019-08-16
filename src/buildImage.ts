@@ -38,7 +38,7 @@ export const buildImage = async ({
 
   const buildContext = createBuildContext({
     rootDir: cwd,
-    includePatterns: config.includes,
+    entryPoint: config.entryPoint,
     filesToInject: [
       { name: "Dockerfile", content: dockerfile },
       { name: ".dockerignore", content: "*" },
