@@ -5,42 +5,31 @@
  * found in the LICENSE.md file.
  */
 
-import fs from "fs";
-import { join, resolve } from "path";
-import { promisify } from "util";
+import { readFile } from "./util";
 
 export class Config {
-  static readFromPkgJSON(cwd: string): Promise<Config> {
-    const pkgJSONPath = join(cwd, "package.json");
+  static async fromPkgJSON(path: string): Promise<Config> {
+    const pkgJSONString = await readFile(path);
+    const { name, main, docku = {} } = JSON.parse(pkgJSONString);
 
-    return promisify(fs.readFile)(pkgJSONPath)
-      .then((data: Buffer) => data.toString())
-      .then(data => JSON.parse(data))
-      .then(({ name, main, docku }) => {
-        let resolvedIncludes: string[] =
-          docku &&
-          docku.includes &&
-          docku.includes.map((pattern: string) => resolve(cwd, pattern));
-
-        // TODO: must be reworked
-        resolvedIncludes = Array.of(
-          ...(resolvedIncludes || []),
-          resolve(cwd, main),
-          resolve(cwd, "package.json"),
-          resolve(cwd, "package-lock.json")
-        );
-
-        return new Config(name, main, resolvedIncludes);
-      });
+    return new Config(name, main, docku.includes);
   }
 
   readonly name: string;
   readonly entryPoint: string;
-  readonly includes: string[];
+  readonly includes: ReadonlyArray<string>;
 
-  constructor(name: string, entryPoint: string, includes: string[] = []) {
+  constructor(
+    name: string,
+    entryPoint: string,
+    includes: ReadonlyArray<string> = []
+  ) {
     this.name = name;
-    this.includes = includes;
     this.entryPoint = entryPoint;
+    this.includes = includes.concat(
+      entryPoint,
+      "package.json",
+      "package-lock.json"
+    );
   }
 }
