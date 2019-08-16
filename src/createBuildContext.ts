@@ -5,7 +5,7 @@
  * found in the LICENSE.md file.
  */
 
-import multimatch from "multimatch";
+import dependencyTree from "dependency-tree";
 import { resolve } from "path";
 import tar from "tar-fs";
 import { Pack } from "tar-stream";
@@ -17,23 +17,23 @@ interface File {
 
 interface Options {
   readonly rootDir: string;
-  readonly includePatterns?: ReadonlyArray<string>;
+  readonly entryPoint: string;
   readonly filesToInject?: ReadonlyArray<File>;
 }
 
 export const createBuildContext = (options: Options): NodeJS.ReadableStream => {
-  const absoluteIncludePatterns = (options.includePatterns || []).map(pattern =>
-    resolve(options.rootDir, pattern)
-  );
+  const entries = dependencyTree
+    .toList({
+      directory: options.rootDir,
+      filename: resolve(options.rootDir, options.entryPoint),
+      filter: path => !path.includes("node_modules"),
+    })
+    .map(entry => entry.replace(`${options.rootDir}/`, ""))
+    .concat("package.json", "package-lock.json");
 
   return tar.pack(options.rootDir, {
+    entries,
     finalize: false,
-    ignore(name: string): boolean {
-      return (
-        absoluteIncludePatterns.length !== 0 &&
-        multimatch(name, absoluteIncludePatterns).length === 0
-      );
-    },
     finish(pack: Pack): void {
       (options.filesToInject || []).forEach(({ name, content }) =>
         pack.entry({ name, size: content.length }, content)

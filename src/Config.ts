@@ -10,26 +10,16 @@ import { readFile } from "./util";
 export class Config {
   static async fromPkgJSON(path: string): Promise<Config> {
     const pkgJSONString = await readFile(path);
-    const { name, main, docku = {} } = JSON.parse(pkgJSONString);
+    const { name, main } = JSON.parse(pkgJSONString);
 
-    return new Config(name, main, docku.includes);
+    return new Config(name, main);
   }
 
   readonly name: string;
   readonly entryPoint: string;
-  readonly includes: ReadonlyArray<string>;
 
-  constructor(
-    name: string,
-    entryPoint: string,
-    includes: ReadonlyArray<string> = []
-  ) {
+  constructor(name: string, entryPoint: string) {
     this.name = name;
     this.entryPoint = entryPoint;
-    this.includes = includes.concat(
-      entryPoint,
-      "package.json",
-      "package-lock.json"
-    );
   }
 }
