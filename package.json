@@ -8,8 +8,10 @@
   "bugs": "https://github.com/kevinpollet/docku/issues",
   "keywords": [
     "docker",
+    "container",
     "node",
-    "node-js"
+    "nodejs",
+    "cli"
   ],
   "bin": {
     "docku": "bin/docku.js"
