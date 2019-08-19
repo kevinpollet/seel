@@ -11,6 +11,7 @@ import { join } from "path";
 import { Config } from "./Config";
 import { createBuildContext } from "./createBuildContext";
 import { DockerfileBuilder } from "./DockerfileBuilder";
+import { getImageTags } from "./util";
 
 interface Options {
   readonly cwd: string;
@@ -48,6 +49,8 @@ export const buildImage = async ({
   return tar
     ? buildContext
     : new Docker()
-        .buildImage(buildContext, { t: `${config.name}:latest` })
+        .buildImage(buildContext, {
+          t: getImageTags(config.name, config.version),
+        })
         .then(outputStream => outputStream.pipe(JSONStream.parse("stream")));
 };

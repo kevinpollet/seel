@@ -6,7 +6,24 @@
  */
 
 import fs from "fs";
+import semver, { major, minor, patch } from "semver";
 import { promisify } from "util";
+
+export const getImageTags = (
+  name: string,
+  version: string
+): string | string[] => {
+  const isPreRelease = semver.prerelease(version) != null;
+  if (isPreRelease) {
+    return `${name}:${version}`;
+  }
+  return [
+    `${name}:latest`,
+    `${name}:${major(version)}`,
+    `${name}:${major(version)}.${minor(version)}`,
+    `${name}:${major(version)}.${minor(version)}.${patch(version)}`,
+  ];
+};
 
 export const readFile = (path: string): Promise<string> =>
   promisify(fs.readFile)(path).then(buffer => buffer.toString());
