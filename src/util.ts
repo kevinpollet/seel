@@ -6,7 +6,7 @@
  */
 
 import { major, minor, prerelease } from "semver";
-import { PkgJSON } from "./PkgJSON";
+import { PackageJSON } from "./PackageJSON";
 
 const getSemverTags = (version: string): ReadonlyArray<string> =>
   prerelease(version) !== null
@@ -18,7 +18,7 @@ const getSemverTags = (version: string): ReadonlyArray<string> =>
         version,
       ];
 
-const getEntryPoint = ({ bin, main }: PkgJSON): string =>
+const getEntryPoint = ({ bin, main }: PackageJSON): string =>
   typeof bin === "string"
     ? bin
     : typeof bin === "object"
