@@ -16,10 +16,15 @@
   "bin": {
     "docku": "bin/docku.js"
   },
+  "files": [
+    "bin",
+    "lib"
+  ],
   "scripts": {
     "build": "rm -rf lib && tsc -p tsconfig.json",
     "format": "prettier --write '*.{json,md}' '{src,bin}/**/*.{ts,js}'",
-    "lint": "eslint 'src/**'"
+    "lint": "eslint 'src/**'",
+    "prepack": "npm run build"
   },
   "dependencies": {
     "@types/dependency-tree": "^6.1.0",

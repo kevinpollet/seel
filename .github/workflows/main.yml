@@ -1,4 +1,9 @@
-on: [push, pull_request]
+on:
+  pull_request:
+  push:
+    branches:
+    tags:
+      - "!*"
 
 jobs:
   build:
@@ -11,5 +16,5 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - run: npm install
-      - run: npm run build
       - run: npm run lint
+      - run: npm run build

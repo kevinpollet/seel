@@ -1,0 +1,35 @@
+on:
+  push:
+    tags:
+    branches:
+      - "!*"
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        node: [8, 10, 12]
+
+    steps:
+      - uses: actions/checkout@master
+      - run: npm install
+      - run: npm run lint
+      - run: npm run build
+
+  publish:
+    needs: build
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          version: 8
+          registry-url: https://registry.npmjs.org/
+
+      - run: npm install
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
