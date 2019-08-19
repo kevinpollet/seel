@@ -9,7 +9,7 @@ import Docker from "dockerode";
 import JSONStream from "jsonstream";
 import { getConfig } from "./getConfig";
 import { createBuildContext } from "./createBuildContext";
-import { DockerfileBuilder } from "./DockerfileBuilder";
+import { generateDockerfile } from "./generateDockerfile";
 
 interface Options {
   readonly cwd: string;
@@ -22,18 +22,7 @@ export const buildImage = async ({
   tar,
 }: Options): Promise<NodeJS.ReadableStream> => {
   const config = await getConfig(cwd);
-  const dockerfile = new DockerfileBuilder()
-    .pushInstruction("FROM", "node:8-alpine AS builder")
-    .pushInstruction("WORKDIR", "app")
-    .pushInstruction("COPY", "package*.json ./")
-    .pushInstruction("RUN", "npm install --production")
-    .pushInstruction("FROM", "gcr.io/distroless/nodejs")
-    .pushInstruction("WORKDIR", "app")
-    .pushInstruction("COPY", "--from=builder app/node_modules node_modules/")
-    .pushInstruction("COPY", ". .")
-    .pushInstruction("CMD", [config.entryPoint])
-    .toString();
-
+  const dockerfile = generateDockerfile(config);
   const buildContext = createBuildContext({
     rootDir: cwd,
     entryPoint: config.entryPoint,
