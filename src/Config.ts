@@ -5,14 +5,15 @@
  * found in the LICENSE.md file.
  */
 
-import { readFile } from "./util";
+import { readFile, resolveEntryPoint } from "./util";
 
 export class Config {
   static async fromPkgJSON(path: string): Promise<Config> {
     const pkgJSONString = await readFile(path);
-    const { name, main } = JSON.parse(pkgJSONString);
+    const { bin, main, name } = JSON.parse(pkgJSONString);
+    const entryPoint = resolveEntryPoint({ bin, main });
 
-    return new Config(name, main);
+    return new Config(name, entryPoint);
   }
 
   readonly name: string;

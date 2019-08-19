@@ -8,9 +8,27 @@
 import fs from "fs";
 import { promisify } from "util";
 
-const readFileSync = (path: string): string => fs.readFileSync(path).toString();
-
-const readFile = (path: string): Promise<string> =>
+export const readFile = (path: string): Promise<string> =>
   promisify(fs.readFile)(path).then(buffer => buffer.toString());
 
-export { readFileSync, readFile };
+export const readFileSync = (path: string): string =>
+  fs.readFileSync(path).toString();
+
+export const resolveEntryPoint = ({
+  bin,
+  main,
+}: {
+  bin: string | { [key: string]: string } | undefined;
+  main: string | undefined;
+}): string => {
+  let entryPoint = main || "index.js";
+
+  if (typeof bin === "string") {
+    entryPoint = bin;
+  } else if (typeof bin === "object") {
+    const keys = Object.keys(bin);
+    entryPoint = keys.length > 0 ? bin[keys[0]] : entryPoint;
+  }
+
+  return entryPoint;
+};
