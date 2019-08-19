@@ -21,10 +21,11 @@
     "lib"
   ],
   "scripts": {
-    "build": "rm -rf lib && tsc -p tsconfig.json",
+    "build": "rm -rf lib && tsc -p tsconfig.build.json",
     "format": "prettier --write '*.{json,md}' '{src,bin}/**/*.{ts,js}'",
     "lint": "eslint 'src/**'",
-    "prepack": "npm run build"
+    "prepack": "npm run build",
+    "test": "jest --preset ts-jest"
   },
   "dependencies": {
     "@types/dependency-tree": "^6.1.0",
@@ -42,13 +43,16 @@
     "tar-fs": "^2.0.0"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.17",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.0.0",
     "husky": "^3.0.3",
+    "jest": "^24.9.0",
     "lint-staged": "^9.2.1",
     "prettier": "^1.18.2",
+    "ts-jest": "^24.0.2",
     "typescript": "^3.5.3"
   },
   "eslintConfig": {
