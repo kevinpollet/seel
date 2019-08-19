@@ -5,7 +5,7 @@
  * found in the LICENSE.md file.
  */
 
-export interface PkgJSON {
+export interface PackageJSON {
   readonly name: string;
   readonly version: string;
   readonly main: string | undefined;
