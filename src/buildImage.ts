@@ -9,28 +9,18 @@ import Docker from "dockerode";
 import JSONStream from "jsonstream";
 import { getConfig } from "./getConfig";
 import { createBuildContext } from "./createBuildContext";
-import { generateDockerfile } from "./generateDockerfile";
 
 interface Options {
   readonly cwd: string;
   readonly tar: boolean;
 }
 
-// TODO: cwd must be absolute
 export const buildImage = async ({
   cwd,
   tar,
 }: Options): Promise<NodeJS.ReadableStream> => {
   const config = await getConfig(cwd);
-  const dockerfile = generateDockerfile(config);
-  const buildContext = createBuildContext({
-    rootDir: cwd,
-    entryPoint: config.entryPoint,
-    filesToInject: [
-      { name: "Dockerfile", content: dockerfile },
-      { name: ".dockerignore", content: "*" },
-    ],
-  });
+  const buildContext = createBuildContext(cwd, config);
 
   return tar
     ? buildContext
