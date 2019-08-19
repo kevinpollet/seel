@@ -5,47 +5,24 @@
  * found in the LICENSE.md file.
  */
 
-import fs from "fs";
-import semver, { major, minor, patch } from "semver";
-import { promisify } from "util";
+import { major, minor, prerelease } from "semver";
+import { PkgJSON } from "./PkgJSON";
 
-export const getImageTags = (
-  name: string,
-  version: string
-): string | string[] => {
-  const isPreRelease = semver.prerelease(version) != null;
-  if (isPreRelease) {
-    return `${name}:${version}`;
-  }
-  return [
-    `${name}:latest`,
-    `${name}:${major(version)}`,
-    `${name}:${major(version)}.${minor(version)}`,
-    `${name}:${major(version)}.${minor(version)}.${patch(version)}`,
-  ];
-};
+const getSemverTags = (version: string): ReadonlyArray<string> =>
+  prerelease(version) !== null
+    ? [version]
+    : [
+        "latest",
+        `${major(version)}`,
+        `${major(version)}.${minor(version)}`,
+        version,
+      ];
 
-export const readFile = (path: string): Promise<string> =>
-  promisify(fs.readFile)(path).then(buffer => buffer.toString());
+const getEntryPoint = ({ bin, main }: PkgJSON): string =>
+  typeof bin === "string"
+    ? bin
+    : typeof bin === "object"
+    ? Object.values(bin)[0]
+    : main || "index.js";
 
-export const readFileSync = (path: string): string =>
-  fs.readFileSync(path).toString();
-
-export const resolveEntryPoint = ({
-  bin,
-  main,
-}: {
-  bin: string | { [key: string]: string } | undefined;
-  main: string | undefined;
-}): string => {
-  let entryPoint = main || "index.js";
-
-  if (typeof bin === "string") {
-    entryPoint = bin;
-  } else if (typeof bin === "object") {
-    const keys = Object.keys(bin);
-    entryPoint = keys.length > 0 ? bin[keys[0]] : entryPoint;
-  }
-
-  return entryPoint;
-};
+export { getEntryPoint, getSemverTags };
