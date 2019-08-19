@@ -10,17 +10,19 @@ import { readFile, resolveEntryPoint } from "./util";
 export class Config {
   static async fromPkgJSON(path: string): Promise<Config> {
     const pkgJSONString = await readFile(path);
-    const { bin, main, name } = JSON.parse(pkgJSONString);
+    const { bin, main, name, version } = JSON.parse(pkgJSONString);
     const entryPoint = resolveEntryPoint({ bin, main });
 
-    return new Config(name, entryPoint);
+    return new Config(name, version, entryPoint);
   }
 
   readonly name: string;
+  readonly version: string;
   readonly entryPoint: string;
 
-  constructor(name: string, entryPoint: string) {
+  constructor(name: string, version: string, entryPoint: string) {
     this.name = name;
+    this.version = version;
     this.entryPoint = entryPoint;
   }
 }
