@@ -7,11 +7,9 @@
 
 import Docker from "dockerode";
 import JSONStream from "jsonstream";
-import { join } from "path";
-import { Config } from "./Config";
+import { getConfig } from "./getConfig";
 import { createBuildContext } from "./createBuildContext";
 import { DockerfileBuilder } from "./DockerfileBuilder";
-import { getImageTags } from "./util";
 
 interface Options {
   readonly cwd: string;
@@ -23,8 +21,7 @@ export const buildImage = async ({
   cwd,
   tar,
 }: Options): Promise<NodeJS.ReadableStream> => {
-  const pkgJSONPath = join(cwd, "package.json");
-  const config = await Config.fromPkgJSON(pkgJSONPath);
+  const config = await getConfig(cwd);
   const dockerfile = new DockerfileBuilder()
     .pushInstruction("FROM", "node:8-alpine AS builder")
     .pushInstruction("WORKDIR", "app")
@@ -50,7 +47,7 @@ export const buildImage = async ({
     ? buildContext
     : new Docker()
         .buildImage(buildContext, {
-          t: getImageTags(config.name, config.version),
+          t: config.tags.map(tag => `${config.name}:${tag}`),
         })
         .then(outputStream => outputStream.pipe(JSONStream.parse("stream")));
 };
