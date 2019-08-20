@@ -9,7 +9,7 @@ const { greet } = require("./greet");
 const express = require("express");
 
 const app = express().get("/greet", (req, res) => {
-  const { name } = req.params;
+  const { name } = req.query;
   res.json({ message: greet(name) });
 });
 
