@@ -31,10 +31,15 @@ program
       exposedPorts.split(",").map(exposedPort => exposedPort.trim())
   )
   .action(options => {
+    const errorHandler = err => {
+      console.error(err.message);
+      process.exit(1);
+    };
+
     getBuildConfig(options.cwd, { exposedPorts: options.exposedPorts })
       .then(config => buildImage(options.cwd, config))
-      .then(stream => stream.pipe(process.stdout))
-      .catch(err => console.log(err));
+      .then(stream => stream.on("error", errorHandler).pipe(process.stdout))
+      .catch(errorHandler);
   });
 
 program.parse(process.argv);
