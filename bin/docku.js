@@ -9,14 +9,14 @@
 
 const program = require("commander");
 const { isAbsolute, resolve } = require("path");
-const { buildImage, version } = require("../lib");
+const { buildImage, getBuildConfig, version } = require("../lib");
 
 program.version(version);
 
 program
   .command("build")
   .description(
-    "build a Docker image for the Node.js app in the current directory"
+    "build a container image for the Node.js app in the current directory"
   )
   .option(
     "--cwd <path>",
@@ -24,8 +24,15 @@ program
     path => (!isAbsolute(path) ? resolve(process.cwd(), path) : process.cwd()),
     process.cwd()
   )
+  .option(
+    "--exposedPorts <ports>",
+    "define the comma-separated list of ports that the container exposes at runtime",
+    exposedPorts =>
+      exposedPorts.split(",").map(exposedPort => exposedPort.trim())
+  )
   .action(options => {
-    buildImage(options.cwd)
+    getBuildConfig(options.cwd, { exposedPorts: options.exposedPorts })
+      .then(config => buildImage(options.cwd, config))
       .then(stream => stream.pipe(process.stdout))
       .catch(err => console.log(err));
   });
