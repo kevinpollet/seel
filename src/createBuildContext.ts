@@ -17,7 +17,7 @@ export const createBuildContext = (
   rootDir: string,
   config: BuildConfig
 ): Promise<NodeJS.ReadableStream> =>
-  new Promise(resolve => {
+  new Promise((resolve): void => {
     const entries = dependencyTree
       .toList({
         directory: rootDir,
