@@ -5,8 +5,9 @@
  * found in the LICENSE.md file.
  */
 
+import fs from "fs";
 import dependencyTree from "dependency-tree";
-import { resolve } from "path";
+import path from "path";
 import tar from "tar-fs";
 import { Pack } from "tar-stream";
 import { BuildConfig } from "./BuildConfig";
@@ -15,23 +16,36 @@ import { generateDockerfile } from "./generateDockerfile";
 export const createBuildContext = (
   rootDir: string,
   config: BuildConfig
-): NodeJS.ReadableStream => {
-  const entries = dependencyTree
-    .toList({
-      directory: rootDir,
-      filename: resolve(rootDir, config.entryPoint),
-      filter: path => !path.includes("node_modules"),
-    })
-    .map(entry => entry.replace(`${rootDir}/`, ""))
-    .concat("package.json", "package-lock.json");
+): Promise<NodeJS.ReadableStream> =>
+  new Promise(resolve => {
+    const entries = dependencyTree
+      .toList({
+        directory: rootDir,
+        filename: path.resolve(rootDir, config.entryPoint),
+        filter: path => !path.includes("node_modules"),
+      })
+      .map(entry => entry.replace(`${rootDir}/`, ""))
+      .concat("package.json");
 
-  return tar.pack(rootDir, {
-    entries,
-    finalize: false,
-    finish(pack: Pack): void {
-      pack.entry({ name: "Dockerfile" }, generateDockerfile(config));
-      pack.entry({ name: ".dockerignore" }, "*");
-      pack.finalize();
-    },
+    fs.access(
+      path.resolve(rootDir, "package-lock.json"),
+      fs.constants.F_OK,
+      err => {
+        if (!err) {
+          entries.push("package-lock.json");
+        }
+
+        resolve(
+          tar.pack(rootDir, {
+            entries,
+            finalize: false,
+            finish(pack: Pack): void {
+              pack.entry({ name: "Dockerfile" }, generateDockerfile(config));
+              pack.entry({ name: ".dockerignore" }, "*");
+              pack.finalize();
+            },
+          })
+        );
+      }
+    );
   });
-};
