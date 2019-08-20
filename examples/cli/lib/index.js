@@ -5,8 +5,8 @@
  * found in the LICENSE.md file.
  */
 
-const { greeter } = require("./greeter");
+const { greet } = require("./greet");
 
 module.exports = {
-  greeter,
+  greet,
 };

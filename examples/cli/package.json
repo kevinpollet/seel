@@ -1,5 +1,5 @@
 {
-  "name": "cli",
+  "name": "cli-example",
   "description": "CLI tool packaged as a container",
   "version": "1.0.0",
   "author": "kevinpollet <pollet.kevin@gmail.com>",

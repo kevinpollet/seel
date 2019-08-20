@@ -7,10 +7,10 @@
  */
 
 const boxen = require("boxen");
-const { greeter } = require("../lib");
+const { greet } = require("../lib");
 
 console.log(
-  boxen(greeter(process.argv[2]), {
+  boxen(greet(process.argv[2]), {
     margin: 1,
     padding: 2,
     borderStyle: "double",
