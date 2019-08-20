@@ -12,7 +12,10 @@ import { Pack } from "tar-stream";
 import { Config } from "./Config";
 import { generateDockerfile } from "./generateDockerfile";
 
-export const createBuildContext = (rootDir: string, config: Config) => {
+export const createBuildContext = (
+  rootDir: string,
+  config: Config
+): NodeJS.ReadableStream => {
   const entries = dependencyTree
     .toList({
       directory: rootDir,

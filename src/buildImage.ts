@@ -10,23 +10,15 @@ import JSONStream from "jsonstream";
 import { getConfig } from "./getConfig";
 import { createBuildContext } from "./createBuildContext";
 
-interface Options {
-  readonly cwd: string;
-  readonly tar: boolean;
-}
-
-export const buildImage = async ({
-  cwd,
-  tar,
-}: Options): Promise<NodeJS.ReadableStream> => {
+export const buildImage = async (
+  cwd: string
+): Promise<NodeJS.ReadableStream> => {
   const config = await getConfig(cwd);
   const buildContext = createBuildContext(cwd, config);
 
-  return tar
-    ? buildContext
-    : new Docker()
-        .buildImage(buildContext, {
-          t: config.tags.map(tag => `${config.name}:${tag}`),
-        })
-        .then(outputStream => outputStream.pipe(JSONStream.parse("stream")));
+  return new Docker()
+    .buildImage(buildContext, {
+      t: config.tags.map(tag => `${config.name}:${tag}`),
+    })
+    .then(outputStream => outputStream.pipe(JSONStream.parse("stream")));
 };
