@@ -17,5 +17,5 @@ FROM gcr.io/distroless/nodejs
 WORKDIR app
 COPY --from=builder app/node_modules node_modules/
 COPY . .
-CMD ["${config.entryPoint}"]
+ENTRYPOINT ["/nodejs/bin/node", "${config.entryPoint}"]
 `;
