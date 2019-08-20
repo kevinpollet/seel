@@ -15,7 +15,7 @@ export const buildImage = async (
   rootDir: string,
   config: BuildConfig
 ): Promise<NodeJS.ReadableStream> => {
-  const buildContext = createBuildContext(rootDir, config);
+  const buildContext = await createBuildContext(rootDir, config);
   const getDaemonMessage = new Transform({
     writableObjectMode: true,
     transform(chunk, _, callback): void {
