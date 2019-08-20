@@ -5,8 +5,9 @@
  * found in the LICENSE.md file.
  */
 
-export interface Config {
+export interface BuildConfig {
   readonly name: string;
   readonly tags: ReadonlyArray<string>;
   readonly entryPoint: string;
+  readonly exposedPorts?: ReadonlyArray<string>;
 }

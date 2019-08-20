@@ -9,12 +9,12 @@ import dependencyTree from "dependency-tree";
 import { resolve } from "path";
 import tar from "tar-fs";
 import { Pack } from "tar-stream";
-import { Config } from "./Config";
+import { BuildConfig } from "./BuildConfig";
 import { generateDockerfile } from "./generateDockerfile";
 
 export const createBuildContext = (
   rootDir: string,
-  config: Config
+  config: BuildConfig
 ): NodeJS.ReadableStream => {
   const entries = dependencyTree
     .toList({
