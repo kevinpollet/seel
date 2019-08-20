@@ -6,7 +6,8 @@
  */
 
 import Docker from "dockerode";
-import JSONStream from "jsonstream";
+import split2 from "split2";
+import { Transform } from "stream";
 import { createBuildContext } from "./createBuildContext";
 import { BuildConfig } from "./BuildConfig";
 
@@ -15,10 +16,19 @@ export const buildImage = async (
   config: BuildConfig
 ): Promise<NodeJS.ReadableStream> => {
   const buildContext = createBuildContext(rootDir, config);
+  const getDaemonMessage = new Transform({
+    writableObjectMode: true,
+    transform(chunk, _, callback) {
+      const { stream, error } = chunk as any;
+      callback(error ? new Error(error) : null, stream || null);
+    },
+  });
 
   return new Docker()
     .buildImage(buildContext, {
       t: config.tags.map(tag => `${config.name}:${tag}`),
     })
-    .then(outputStream => outputStream.pipe(JSONStream.parse("stream")));
+    .then(daemonStream =>
+      daemonStream.pipe(split2(JSON.parse)).pipe(getDaemonMessage)
+    );
 };
