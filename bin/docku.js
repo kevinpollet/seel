@@ -16,7 +16,7 @@ program.version(version);
 program
   .command("build")
   .description(
-    "build a Docker image for the Node.js app in the current working directory"
+    "build a Docker image for the Node.js app in the current directory"
   )
   .option(
     "--cwd <path>",
