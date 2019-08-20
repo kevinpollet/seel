@@ -13,9 +13,7 @@
     "nodejs",
     "cli"
   ],
-  "bin": {
-    "docku": "bin/docku.js"
-  },
+  "bin": "bin/docku.js",
   "files": [
     "bin",
     "lib"
