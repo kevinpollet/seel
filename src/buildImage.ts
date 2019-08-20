@@ -18,8 +18,8 @@ export const buildImage = async (
   const buildContext = createBuildContext(rootDir, config);
   const getDaemonMessage = new Transform({
     writableObjectMode: true,
-    transform(chunk, _, callback) {
-      const { stream, error } = chunk as any;
+    transform(chunk, _, callback): void {
+      const { stream, error } = chunk as any; // eslint-disable-line @typescript-eslint/no-explicit-any
       callback(error ? new Error(error) : null, stream || null);
     },
   });
@@ -29,6 +29,6 @@ export const buildImage = async (
       t: config.tags.map(tag => `${config.name}:${tag}`),
     })
     .then(daemonStream =>
-      daemonStream.pipe(split2(JSON.parse)).pipe(getDaemonMessage)
+      daemonStream.pipe(split2(line => JSON.parse(line))).pipe(getDaemonMessage)
     );
 };
