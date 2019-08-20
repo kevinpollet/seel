@@ -6,4 +6,5 @@
  */
 
 export { buildImage } from "./buildImage";
+export { getBuildConfig } from "./getBuildConfig";
 export { version } from "./version";

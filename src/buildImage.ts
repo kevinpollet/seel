@@ -7,14 +7,14 @@
 
 import Docker from "dockerode";
 import JSONStream from "jsonstream";
-import { getConfig } from "./getConfig";
 import { createBuildContext } from "./createBuildContext";
+import { BuildConfig } from "./BuildConfig";
 
 export const buildImage = async (
-  cwd: string
+  rootDir: string,
+  config: BuildConfig
 ): Promise<NodeJS.ReadableStream> => {
-  const config = await getConfig(cwd);
-  const buildContext = createBuildContext(cwd, config);
+  const buildContext = createBuildContext(rootDir, config);
 
   return new Docker()
     .buildImage(buildContext, {

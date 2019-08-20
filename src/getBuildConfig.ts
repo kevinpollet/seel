@@ -9,9 +9,12 @@ import { readFile } from "fs";
 import { join } from "path";
 import { promisify } from "util";
 import { getSemverTags, getEntryPoint } from "./util";
-import { Config } from "./Config";
+import { BuildConfig } from "./BuildConfig";
 
-export const getConfig = async (rootDir: string): Promise<Config> => {
+export const getBuildConfig = async (
+  rootDir: string,
+  overrides: Partial<BuildConfig>
+): Promise<BuildConfig> => {
   const pkgJSONPath = join(rootDir, "package.json");
   const pkgJSONBuffer = await promisify(readFile)(pkgJSONPath);
   const { name, version, ...rest } = JSON.parse(pkgJSONBuffer.toString());
@@ -20,5 +23,6 @@ export const getConfig = async (rootDir: string): Promise<Config> => {
     name,
     entryPoint: getEntryPoint(rest),
     tags: getSemverTags(version),
+    ...overrides,
   };
 };
