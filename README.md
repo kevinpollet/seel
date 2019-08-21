@@ -4,6 +4,18 @@
 [![Code Style](https://img.shields.io/badge/code_style-prettier-blue.svg)](https://github.com/prettier/prettier)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.md)
 
+## Install
+
+```shell
+$ npm install --save-dev docku
+
+# or globally
+$ npm install --global docku
+
+# or with npx
+$ npx docku
+```
+
 ## Contributing
 
 Contributions are welcome!
