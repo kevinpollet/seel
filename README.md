@@ -7,13 +7,9 @@
 ## Install
 
 ```shell
-$ npm install --save-dev docku
-
-# or globally
-$ npm install --global docku
-
-# or with npx
-$ npx docku
+$ npm install --save-dev docku   # Install locally to use it in npm scripts
+$ npm install --global docku     # Install globally
+$ npx docku                      # Run it once
 ```
 
 ## Contributing
