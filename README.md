@@ -1,5 +1,7 @@
 # Docku
 
+[![Build Status](https://github.com/kevinpollet/docku/workflows/Build/badge.svg)](https://github.com/kevinpollet/docku/actions) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.md)
+
 ## Contributing
 
 Contributions are welcome!
