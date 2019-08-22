@@ -18,9 +18,9 @@ WORKDIR app
 COPY --from=builder app/node_modules node_modules/
 COPY . .
 ${
-  !config.exposedPorts || config.exposedPorts.length <= 0
-    ? ""
-    : config.exposedPorts.map(exposedPort => `EXPOSE ${exposedPort}`).join("\n")
+  config.exposedPorts && config.exposedPorts.length > 0
+    ? `EXPOSE ${config.exposedPorts.join(" ")}`
+    : ""
 }
 ENTRYPOINT ["/nodejs/bin/node", "${config.entryPoint}"]
 `;
