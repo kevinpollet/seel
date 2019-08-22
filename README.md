@@ -12,6 +12,32 @@ $ npm install --global docku     # Install globally
 $ npx docku                      # Run it once
 ```
 
+## Usage
+
+```shell
+Usage: docku [options] [command]
+
+Options:
+  -v, --version    output the version string
+  -h, --help       output usage information
+
+Commands:
+  build [options]  build a container image for the Node.js app in the current directory
+```
+
+### `build` command
+
+```shell
+Usage: docku build [options]
+
+build a container image for the Node.js app in the current directory
+
+Options:
+  --cwd <path>            override the current working directory (default: .)
+  --exposedPorts <ports>  define the comma-separated list of ports that the container exposes at runtime
+  -h, --help              output usage information
+```
+
 ## Contributing
 
 Contributions are welcome!
