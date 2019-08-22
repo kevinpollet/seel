@@ -10,4 +10,8 @@ export interface BuildConfig {
   readonly tags: ReadonlyArray<string>;
   readonly entryPoint: string;
   readonly exposedPorts?: ReadonlyArray<string>;
+  readonly labels?: ReadonlyArray<{
+    key: string;
+    value: string;
+  }>;
 }
