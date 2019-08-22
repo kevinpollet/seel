@@ -6,6 +6,9 @@
   "license": "MIT",
   "private": true,
   "bin": "bin/server.js",
+  "scripts": {
+    "build:image": "npm run --prefix ../../ build && ../../bin/docku.js build --exposedPorts 3000"
+  },
   "dependencies": {
     "express": "^4.17.1"
   }
