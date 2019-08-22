@@ -11,7 +11,7 @@ const program = require("commander");
 const { isAbsolute, resolve } = require("path");
 const { buildImage, getBuildConfig, version } = require("../lib");
 
-program.version(version);
+program.version(version, "-v, --version", "output the version string");
 
 program
   .command("build")
