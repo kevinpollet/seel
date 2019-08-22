@@ -33,8 +33,9 @@ Usage: docku build [options]
 build a container image for the Node.js app in the current directory
 
 Options:
-  --cwd <path>            override the current working directory (default: .)
+  --cwd <path>            override the current working directory (default: ".")
   --exposedPorts <ports>  define the comma-separated list of ports that the container exposes at runtime
+  --labels <labels>       define the comma-separated list of the container image labels
   -h, --help              output usage information
 ```
 
