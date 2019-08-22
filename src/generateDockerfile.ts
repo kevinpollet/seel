@@ -15,19 +15,23 @@ RUN npm install --production
 
 FROM gcr.io/distroless/nodejs
 
-${config.labels &&
-  config.labels.length > 0 &&
-  `LABEL ${config.labels
-    .map(({ key, value }) => `"${key}"="${value}"`)
-    .join(" ")}`}
+${
+  !config.labels || config.labels.length <= 0
+    ? ""
+    : `LABEL ${config.labels
+        .map(({ key, value }) => `"${key}"="${value}"`)
+        .join(" ")}`
+}
 
 WORKDIR app
 COPY --from=builder app/node_modules node_modules/
 COPY . .
 
-${config.exposedPorts &&
-  config.exposedPorts.length > 0 &&
-  `EXPOSE ${config.exposedPorts.join(" ")}`}
+${
+  !config.exposedPorts || config.exposedPorts.length <= 0
+    ? ""
+    : `EXPOSE ${config.exposedPorts.join(" ")}`
+}
   
 ENTRYPOINT ["/nodejs/bin/node", "${config.entryPoint}"]
 `;
