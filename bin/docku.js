@@ -27,17 +27,25 @@ program
   .option(
     "--exposedPorts <ports>",
     "define the comma-separated list of ports that the container exposes at runtime",
-    exposedPorts =>
-      exposedPorts.split(",").map(exposedPort => exposedPort.trim())
+    ports => ports.split(",").map(port => port.trim())
   )
-  .action(options => {
+  .option(
+    "--labels <labels>",
+    "define the comma-separated list of the container image labels",
+    labels =>
+      labels.split(",").map(label => {
+        const [key, value] = label.split("=");
+        return { key, value };
+      })
+  )
+  .action(({ cwd, ...rest }) => {
     const errorHandler = err => {
       console.error(err.message);
       process.exit(1);
     };
 
-    getBuildConfig(options.cwd, { exposedPorts: options.exposedPorts })
-      .then(config => buildImage(options.cwd, config))
+    getBuildConfig(cwd, rest)
+      .then(config => buildImage(cwd, config))
       .then(stream => stream.on("error", errorHandler).pipe(process.stdout))
       .catch(errorHandler);
   });
