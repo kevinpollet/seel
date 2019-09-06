@@ -5,6 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE.md file.
  */
+"use strict";
 
 const program = require("commander");
 const { isAbsolute, resolve } = require("path");
