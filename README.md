@@ -5,7 +5,7 @@
 [![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.md)
 
-## Install
+## Installation
 
 ```shell
 $ npm install --save-dev docku   # Install locally to use it in npm scripts
