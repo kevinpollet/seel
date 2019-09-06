@@ -1,7 +1,8 @@
 # Docku
 
 [![Build Status](https://github.com/kevinpollet/docku/workflows/Build/badge.svg)](https://github.com/kevinpollet/docku/actions)
-[![Code Style](https://img.shields.io/badge/code_style-prettier-blue.svg)](https://github.com/prettier/prettier)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.md)
 
 ## Install
@@ -45,11 +46,8 @@ Contributions are welcome!
 
 Want to file a bug, request a feature or contribute some code?
 
-Check out the [contribution guidelines][2].
+Check out the [contribution guidelines](./CONTRIBUTING.md).
 
 ## License
 
-[MIT][1] © kevinpollet
-
-[1]: ./LICENSE.md
-[2]: ./CONTRIBUTING.md
+[MIT](./LICENSE.md) © kevinpollet
