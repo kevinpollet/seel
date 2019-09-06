@@ -21,7 +21,7 @@
   "scripts": {
     "build": "rm -rf lib && tsc -p tsconfig.build.json",
     "format": "prettier --write '*.{json,md}' '{src,bin}/**/*.{ts,js}'",
-    "lint": "eslint 'src/**'",
+    "lint": "eslint '{src,bin}/**'",
     "prepack": "npm run build",
     "test": "jest --preset ts-jest"
   },
@@ -54,16 +54,42 @@
     "typescript": "^3.5.3"
   },
   "eslintConfig": {
-    "parserOptions": {
-      "project": "./tsconfig.json"
-    },
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/eslint-recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:@typescript-eslint/recommended-requiring-type-checking",
-      "prettier",
-      "prettier/@typescript-eslint"
+    "overrides": [
+      {
+        "files": [
+          "*.js"
+        ],
+        "parserOptions": {
+          "ecmaVersion": 9
+        },
+        "env": {
+          "node": true
+        },
+        "extends": [
+          "eslint:recommended",
+          "prettier"
+        ]
+      },
+      {
+        "files": [
+          "*.ts"
+        ],
+        "parser": "@typescript-eslint/parser",
+        "plugins": [
+          "@typescript-eslint"
+        ],
+        "parserOptions": {
+          "project": "./tsconfig.json"
+        },
+        "extends": [
+          "eslint:recommended",
+          "plugin:@typescript-eslint/eslint-recommended",
+          "plugin:@typescript-eslint/recommended",
+          "plugin:@typescript-eslint/recommended-requiring-type-checking",
+          "prettier",
+          "prettier/@typescript-eslint"
+        ]
+      }
     ]
   },
   "husky": {

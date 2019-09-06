@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 /**
  * Copyright © 2019 kevinpollet <pollet.kevin@gmail.com>`
  *
