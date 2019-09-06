@@ -26,12 +26,12 @@ program
   )
   .option(
     "--exposedPorts <ports>",
-    "define the comma-separated list of ports that the container exposes at runtime",
+    "comma-separated list of ports that the container exposes at runtime",
     ports => ports.split(",").map(port => port.trim())
   )
   .option(
     "--labels <labels>",
-    "define the comma-separated list of the container image labels",
+    "comma-separated list of the container image labels",
     labels =>
       labels.split(",").map(label => {
         const [key, value] = label.split("=");
