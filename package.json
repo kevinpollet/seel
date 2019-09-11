@@ -1,11 +1,11 @@
 {
-  "name": "docku",
+  "name": "seel",
   "version": "0.0.0",
   "author": "kevinpollet <pollet.kevin@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/kevinpollet/docku#readme",
-  "repository": "github.com:kevinpollet/docku",
-  "bugs": "https://github.com/kevinpollet/docku/issues",
+  "homepage": "https://github.com/kevinpollet/seel#readme",
+  "repository": "github.com:kevinpollet/seel",
+  "bugs": "https://github.com/kevinpollet/seel/issues",
   "keywords": [
     "docker",
     "container",
@@ -13,7 +13,7 @@
     "nodejs",
     "cli"
   ],
-  "bin": "bin/docku.js",
+  "bin": "bin/seel.js",
   "files": [
     "bin",
     "lib"
