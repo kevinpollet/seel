@@ -1,6 +1,6 @@
-# Docku <!-- omit in toc -->
+# Seel <!-- omit in toc -->
 
-[![Build Status](https://github.com/kevinpollet/docku/workflows/Build/badge.svg)](https://github.com/kevinpollet/docku/actions)
+[![Build Status](https://github.com/kevinpollet/seel/workflows/Build/badge.svg)](https://github.com/kevinpollet/seel/actions)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.md)
@@ -16,15 +16,15 @@
 ## Installation
 
 ```shell
-$ npm install --save-dev docku   # Install locally to use it in npm scripts
-$ npm install --global docku     # Install globally
-$ npx docku                      # Run it once
+$ npm install --save-dev seel   # Install locally to use it in npm scripts
+$ npm install --global seel     # Install globally
+$ npx seel                      # Run it once
 ```
 
 ## Usage
 
 ```shell
-Usage: docku [options] [command]
+Usage: seel [options] [command]
 
 Options:
   -v, --version    output the version string
@@ -37,7 +37,7 @@ Commands:
 ### `build` command
 
 ```shell
-Usage: docku build [options]
+Usage: seel build [options]
 
 build a container image for the Node.js app in the current directory
 

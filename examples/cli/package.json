@@ -8,7 +8,7 @@
   "bin": "bin/cli.js",
   "main": "index.js",
   "scripts": {
-    "build:image": "npm run --prefix ../../ build && ../../bin/docku.js build"
+    "build:image": "npm run --prefix ../../ build && ../../bin/seel.js build"
   },
   "dependencies": {
     "boxen": "^4.1.0"
