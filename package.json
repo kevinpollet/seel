@@ -15,6 +15,7 @@
   ],
   "bin": "bin/seel.js",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "bin",
     "lib"
@@ -22,7 +23,7 @@
   "scripts": {
     "build": "rm -rf lib && tsc -p tsconfig.build.json",
     "format": "prettier --write '*.{json,md}' '{src,bin}/**/*.{ts,js}'",
-    "lint": "eslint '{src,bin}/**'",
+    "lint": "eslint '{bin,examples,src,test}/**/*.{js,ts}'",
     "prepack": "npm run build",
     "test": "jest --preset ts-jest"
   },
