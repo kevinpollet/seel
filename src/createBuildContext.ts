@@ -21,7 +21,7 @@ export const createBuildContext = (
     const entries = dependencyTree
       .toList({
         directory: rootDir,
-        filename: path.resolve(rootDir, config.entryPoint),
+        filename: path.resolve(rootDir, config.entrypoint),
         filter: path => !path.includes("node_modules"),
       })
       .map(entry => entry.replace(`${rootDir}/`, ""))
