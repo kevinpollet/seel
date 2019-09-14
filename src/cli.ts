@@ -15,7 +15,7 @@ program.version(version, "-v, --version", "output version");
 
 program
   .description(
-    "build a container image for the Node.js app in the current directory"
+    "build a container image for the Node.js app in the current working directory"
   )
   .option(
     "--cwd <path>",
@@ -24,8 +24,12 @@ program
     process.cwd()
   )
   .option(
+    "--entrypoint <path>",
+    "override the app entrypoint, the path is relative to the current working directory"
+  )
+  .option(
     "--exposedPorts <ports>",
-    "comma-separated list of ports that the container exposes at runtime",
+    "comma-separated list of ports that the app exposes at runtime",
     (ports: string) => ports.split(",").map(port => port.trim())
   )
   .option(
@@ -37,7 +41,7 @@ program
         return { key, value };
       })
   )
-  .action(({ cwd, rest }) => {
+  .action(({ cwd, ...rest }) => {
     const errorHandler = (err: Error): void => {
       console.error(err.message);
       process.exit(1);
