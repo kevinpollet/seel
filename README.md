@@ -7,6 +7,14 @@
 
 **seel** is a command-line tool that facilitates the build of container image for your Node.js applications. You don't need to master container best practices or write a Dockerfile to build a container image for your application, it's just as simple as invoking a command from your shell or npm script.
 
+## Table of Contents <!-- omit in toc -->
+
+- [Install](#install)
+- [Usage](#usage)
+  - [Options](#options)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## Install
 
 ```shell
