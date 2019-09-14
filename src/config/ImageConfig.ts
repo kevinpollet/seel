@@ -7,7 +7,7 @@
 
 import { readPkgJSON } from "../utils/readPkgJSON";
 import { getEntryPoint } from "./getEntryPoint";
-import { getImageTags } from "./getImageTags";
+import { getTags } from "./getImageTags";
 import { Label } from "./Label";
 
 export class ImageConfig {
@@ -17,7 +17,7 @@ export class ImageConfig {
     return new ImageConfig({
       name: pkgJSON.name,
       entryPoint: getEntryPoint(pkgJSON),
-      tags: getImageTags(pkgJSON),
+      tags: getTags(pkgJSON),
     });
   }
 
