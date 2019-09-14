@@ -8,7 +8,7 @@
 import { major, minor, prerelease } from "semver";
 import { PkgJSON } from "../utils/PkgJSON";
 
-export const getImageTags = ({ version }: PkgJSON): ReadonlyArray<string> =>
+export const getTags = ({ version }: PkgJSON): ReadonlyArray<string> =>
   prerelease(version) !== null
     ? [version]
     : [
