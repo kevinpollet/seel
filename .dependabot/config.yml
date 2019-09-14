@@ -1,0 +1,21 @@
+version: 1
+
+update_configs:
+  - package_manager: javascript
+    directory: "/"
+    update_schedule: weekly
+    allowed_updates: production
+    ignored_updates:
+      - match:
+          dependency_name: "@types/node"
+    commit_message:
+      prefix: fix
+      include_scope: true
+
+  - package_manager: javascript
+    directory: "/"
+    update_schedule: weekly
+    allowed_updates: development
+    commit_message:
+      prefix: chore
+      include_scope: true
