@@ -12,6 +12,7 @@
 - [Install](#install)
 - [Usage](#usage)
   - [Options](#options)
+- [Examples](#examples)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -35,6 +36,12 @@ $ npm install --save-dev seel   # Install locally to use it in npm scripts
 | --entrypoint <path>    | Override the app entrypoint, the path is relative to the current working directory |
 | --exposedPorts <ports> | Comma-separated list of ports that the app exposes at runtime                      |
 | --labels <labels>      | Comma-separated list of the container image labels                                 |
+
+## Examples
+
+- [hello-world-cli](./examples/hello-world-cli) - A command-line application which outputs `Hello, World!` or greets the name passed as an argument.
+
+- [hello-world-express](./examples/hello-world-express) - An Express application which outputs `Hello, World!` on `GET /` or greets the given name on `GET /?name=`.
 
 ## Contributing
 
