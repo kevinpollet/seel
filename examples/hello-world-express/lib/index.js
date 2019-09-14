@@ -8,7 +8,7 @@
 const { greet } = require("./greet");
 const express = require("express");
 
-const app = express().get("/greet", (req, res) => {
+const app = express().get("/", (req, res) => {
   const { name } = req.query;
   res.json({ message: greet(name) });
 });
