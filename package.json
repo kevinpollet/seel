@@ -31,7 +31,7 @@
     "@types/commander": "^2.12.2",
     "@types/dependency-tree": "^6.1.0",
     "@types/dockerode": "^2.5.20",
-    "@types/node": "^8.10.51",
+    "@types/node": "^12.7.5",
     "@types/semver": "^6.0.1",
     "@types/split2": "^2.1.6",
     "@types/tar-fs": "^1.16.1",
