@@ -23,6 +23,7 @@
   "scripts": {
     "build": "rm -rf lib && tsc -p tsconfig.build.json",
     "format": "prettier --write '*.{json,md}' '{bin,examples,src,test}/**/*.{ts,js,json}'",
+    "format:check": "prettier --check '*.{json,md}' '{bin,examples,src,test}/**/*.{ts,js,json}'",
     "lint": "eslint '{bin,examples,src,test}/**/*.{js,ts}'",
     "prepack": "npm run build",
     "test": "jest --preset ts-jest"
