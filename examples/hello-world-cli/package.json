@@ -1,12 +1,11 @@
 {
-  "name": "cli-example",
-  "description": "CLI tool packaged as a container",
+  "name": "hello-world-cli",
+  "description": "CLI tool packaged as a container with seel",
   "version": "1.0.0",
   "author": "kevinpollet <pollet.kevin@gmail.com>",
   "license": "MIT",
   "private": true,
   "bin": "bin/cli.js",
-  "main": "index.js",
   "scripts": {
     "build:image": "npm run --prefix ../../ build && ../../bin/seel.js"
   },
