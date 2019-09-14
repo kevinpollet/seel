@@ -5,5 +5,7 @@
  * found in the LICENSE.md file.
  */
 
-export { buildImage } from "./buildImage";
-export { ImageConfig } from "./config/ImageConfig";
+export interface Label {
+  readonly key: string;
+  readonly value: string;
+}

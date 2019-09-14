@@ -5,12 +5,11 @@
  * found in the LICENSE.md file.
  */
 
-export interface PackageJSON {
+export interface PkgJSON {
   readonly name: string;
   readonly version: string;
-  readonly main: string | undefined;
+  readonly main?: string;
   readonly bin?:
-    | undefined
     | string
     | {
         [key: string]: string;

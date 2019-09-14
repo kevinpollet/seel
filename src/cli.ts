@@ -8,7 +8,7 @@
 import program from "commander";
 import { isAbsolute, resolve } from "path";
 import { buildImage } from "./buildImage";
-import { getBuildConfig } from "./getBuildConfig";
+import { ImageConfig } from "./config/ImageConfig";
 import { version } from "./version";
 
 program.version(version, "-v, --version", "output version");
@@ -37,14 +37,14 @@ program
         return { key, value };
       })
   )
-  .action(({ cwd, ...rest }) => {
+  .action(({ cwd, rest }) => {
     const errorHandler = (err: Error): void => {
       console.error(err.message);
       process.exit(1);
     };
 
-    getBuildConfig(cwd, rest)
-      .then(config => buildImage(cwd, config))
+    ImageConfig.fromPkgJSON(cwd)
+      .then(config => buildImage(cwd, config.assign(rest)))
       .then(stream => stream.on("error", errorHandler).pipe(process.stdout))
       .catch(errorHandler);
   });

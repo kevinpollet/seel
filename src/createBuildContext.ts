@@ -10,12 +10,12 @@ import dependencyTree from "dependency-tree";
 import path from "path";
 import tar from "tar-fs";
 import { Pack } from "tar-stream";
-import { BuildConfig } from "./BuildConfig";
+import { ImageConfig } from "./config/ImageConfig";
 import { generateDockerfile } from "./generateDockerfile";
 
 export const createBuildContext = (
   rootDir: string,
-  config: BuildConfig
+  config: ImageConfig
 ): Promise<NodeJS.ReadableStream> =>
   new Promise((resolve): void => {
     const entries = dependencyTree
@@ -34,7 +34,6 @@ export const createBuildContext = (
         if (!err) {
           entries.push("package-lock.json");
         }
-
         resolve(
           tar.pack(rootDir, {
             entries,

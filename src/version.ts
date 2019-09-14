@@ -5,10 +5,9 @@
  * found in the LICENSE.md file.
  */
 
-import { readFileSync } from "fs";
 import { join } from "path";
+import { readPkgJSONSync } from "./utils/readPkgJSON";
 
-const pkgJSONPath = join(__dirname, "..", "package.json");
-const pkgJSON = JSON.parse(readFileSync(pkgJSONPath).toString());
+const pkgJSON = readPkgJSONSync(join(__dirname, ".."));
 
 export const version = `${pkgJSON.name}/${pkgJSON.version} ${process.platform}-${process.arch} node-${process.version}`;
