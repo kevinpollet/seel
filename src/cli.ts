@@ -11,10 +11,9 @@ import { buildImage } from "./buildImage";
 import { getBuildConfig } from "./getBuildConfig";
 import { version } from "./version";
 
-program.version(version, "-v, --version", "output the version string");
+program.version(version, "-v, --version", "output version");
 
 program
-  .command("build")
   .description(
     "build a container image for the Node.js app in the current directory"
   )
