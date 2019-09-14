@@ -17,30 +17,15 @@ $ npm install --save-dev seel   # Install locally to use it in npm scripts
 
 ## Usage
 
-```shell
-Usage: seel [options] [command]
+### Options
 
-Options:
-  -v, --version    output the version string
-  -h, --help       output usage information
-
-Commands:
-  build [options]  build a container image for the Node.js app in the current directory
-```
-
-### `build` command
-
-```shell
-Usage: seel build [options]
-
-build a container image for the Node.js app in the current directory
-
-Options:
-  --cwd <path>            override the current working directory (default: ".")
-  --exposedPorts <ports>  comma-separated list of ports that the container exposes at runtime
-  --labels <labels>       comma-separated list of the container image labels
-  -h, --help              output usage information
-```
+| Name                   | Description                                                         |
+| ---------------------- | ------------------------------------------------------------------- |
+| -v, --version          | Output version                                                      |
+| -h, --help             | Output usage information                                            |
+| --cwd <path>           | Override the current working directory (default: `process.cwd()`)   |
+| --exposedPorts <ports> | Comma-separated list of ports that the container exposes at runtime |
+| --labels <labels>      | Comma-separated list of the container image labels                  |
 
 ## Contributing
 
