@@ -38,7 +38,7 @@ program
       })
   )
   .action(({ cwd, ...rest }) => {
-    const errorHandler = (err: Error) => {
+    const errorHandler = (err: Error): void => {
       console.error(err.message);
       process.exit(1);
     };
