@@ -9,11 +9,11 @@ import Docker from "dockerode";
 import split2 from "split2";
 import { Transform } from "stream";
 import { createBuildContext } from "./createBuildContext";
-import { BuildConfig } from "./BuildConfig";
+import { ImageConfig } from "./config/ImageConfig";
 
 export const buildImage = async (
   rootDir: string,
-  config: BuildConfig
+  config: ImageConfig
 ): Promise<NodeJS.ReadableStream> => {
   const buildContext = await createBuildContext(rootDir, config);
   const getDaemonMessage = new Transform({
@@ -25,9 +25,12 @@ export const buildImage = async (
   });
 
   return new Docker()
-    .buildImage(buildContext, {
-      t: config.tags.map(tag => `${config.name}:${tag}`),
-    })
+    .buildImage(
+      buildContext,
+      config.tags && {
+        t: config.tags.map(tag => `${config.name}:${tag}`),
+      }
+    )
     .then(daemonStream =>
       daemonStream.pipe(split2(line => JSON.parse(line))).pipe(getDaemonMessage)
     );

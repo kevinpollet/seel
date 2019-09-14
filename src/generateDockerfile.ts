@@ -5,9 +5,9 @@
  * found in the LICENSE.md file.
  */
 
-import { BuildConfig } from "./BuildConfig";
+import { ImageConfig } from "./config/ImageConfig";
 
-export const generateDockerfile = (config: BuildConfig): string => `
+export const generateDockerfile = (config: ImageConfig): string => `
 FROM node:8-alpine AS builder
 WORKDIR app
 COPY package*.json ./
@@ -32,6 +32,6 @@ ${
     ? ""
     : `EXPOSE ${config.exposedPorts.join(" ")}`
 }
-  
+
 ENTRYPOINT ["/nodejs/bin/node", "${config.entryPoint}"]
 `;
