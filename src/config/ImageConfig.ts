@@ -6,7 +6,7 @@
  */
 
 import { readPkgJSON } from "../utils/readPkgJSON";
-import { getEntryPoint } from "./getEntryPoint";
+import { getEntrypoint } from "./getEntrypoint";
 import { getTags } from "./getImageTags";
 import { Label } from "./Label";
 
@@ -16,13 +16,13 @@ export class ImageConfig {
 
     return new ImageConfig({
       name: pkgJSON.name,
-      entryPoint: getEntryPoint(pkgJSON),
+      entrypoint: getEntrypoint(pkgJSON),
       tags: getTags(pkgJSON),
     });
   }
 
   readonly name: string;
-  readonly entryPoint: string;
+  readonly entrypoint: string;
   readonly tags?: ReadonlyArray<string>;
   readonly exposedPorts?: ReadonlyArray<string>;
   readonly labels?: ReadonlyArray<Label>;
@@ -30,19 +30,19 @@ export class ImageConfig {
   constructor({
     name,
     tags,
-    entryPoint,
+    entrypoint,
     exposedPorts,
     labels,
   }: {
     name: string;
     tags?: ReadonlyArray<string>;
-    entryPoint: string;
+    entrypoint: string;
     exposedPorts?: ReadonlyArray<string>;
     labels?: ReadonlyArray<Label>;
   }) {
     this.name = name;
     this.tags = tags;
-    this.entryPoint = entryPoint;
+    this.entrypoint = entrypoint;
     this.exposedPorts = exposedPorts;
     this.labels = labels;
   }

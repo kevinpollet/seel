@@ -7,7 +7,7 @@
 
 import { PkgJSON } from "../utils/PkgJSON";
 
-export const getEntryPoint = ({ bin, main }: PkgJSON): string =>
+export const getEntrypoint = ({ bin, main }: PkgJSON): string =>
   typeof bin === "string"
     ? bin
     : typeof bin === "object"

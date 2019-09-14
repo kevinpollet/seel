@@ -33,5 +33,5 @@ ${
     : `EXPOSE ${config.exposedPorts.join(" ")}`
 }
 
-ENTRYPOINT ["/nodejs/bin/node", "${config.entryPoint}"]
+ENTRYPOINT ["/nodejs/bin/node", "${config.entrypoint}"]
 `;
