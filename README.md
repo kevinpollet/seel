@@ -27,13 +27,14 @@ $ npm install --save-dev seel   # Install locally to use it in npm scripts
 
 ### Options
 
-| Name                   | Description                                                         |
-| ---------------------- | ------------------------------------------------------------------- |
-| -v, --version          | Output version                                                      |
-| -h, --help             | Output usage information                                            |
-| --cwd <path>           | Override the current working directory (default: `process.cwd()`)   |
-| --exposedPorts <ports> | Comma-separated list of ports that the container exposes at runtime |
-| --labels <labels>      | Comma-separated list of the container image labels                  |
+| Name                   | Description                                                                        |
+| ---------------------- | ---------------------------------------------------------------------------------- |
+| -v, --version          | Output version                                                                     |
+| -h, --help             | Output usage information                                                           |
+| --cwd <path>           | Override the current working directory (default: `process.cwd()`)                  |
+| --entrypoint <path>    | Override the app entrypoint, the path is relative to the current working directory |
+| --exposedPorts <ports> | Comma-separated list of ports that the app exposes at runtime                      |
+| --labels <labels>      | Comma-separated list of the container image labels                                 |
 
 ## Contributing
 
