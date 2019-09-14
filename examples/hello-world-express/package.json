@@ -1,11 +1,12 @@
 {
-  "name": "http-example",
-  "description": "HTTP service packaged as a container",
+  "name": "hello-world-express",
+  "description": "Express application packaged as a container with seel",
   "version": "1.0.0",
   "author": "kevinpollet <pollet.kevin@gmail.com>",
   "license": "MIT",
   "private": true,
   "bin": "bin/server.js",
+  "main": "lib/index.js",
   "scripts": {
     "build:image": "npm run --prefix ../../ build && ../../bin/seel.js --exposedPorts 3000"
   },
