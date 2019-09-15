@@ -19,32 +19,32 @@ program
   )
   .option(
     "--cwd <path>",
-    "override the current working directory",
+    "define the current working directory",
     path => (!isAbsolute(path) ? resolve(process.cwd(), path) : process.cwd()),
     process.cwd()
   )
   .option(
     "--entrypoint <path>",
-    "override the app entrypoint, the path is relative to the current working directory"
+    "define the app entrypoint path relative to the current working directory"
   )
   .option(
     "--labels <labels>",
-    "comma-separated list of the container image labels",
+    "define the container image labels as a comma-separated list of key-value pairs",
     (labels: string) =>
       labels.split(",").map(label => {
         const [key, value] = label.split("=");
         return { key, value };
       })
   )
-  .option("--name <name>", "override the container image name")
+  .option("--name <name>", "define the container image name")
   .option(
     "--ports <ports>",
-    "comma-separated list of ports that the app exposes at runtime",
+    "define the ports that the app exposes at runtime as a comma-separated list of values",
     (ports: string) => ports.split(",").map(port => port.trim())
   )
   .option(
     "--tags <tags>",
-    "comma-separated list of the container image tags",
+    "define the container image tags as a comma-separated list of values",
     (ports: string) => ports.split(",").map(port => port.trim())
   )
   .action(({ cwd, ...rest }) => {
