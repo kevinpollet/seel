@@ -8,14 +8,14 @@
 import Docker from "dockerode";
 import split2 from "split2";
 import { Transform } from "stream";
-import { createBuildContext } from "./createBuildContext";
+import { createDockerBuildContext } from "./createDockerBuildContext";
 import { ImageConfig } from "./config/ImageConfig";
 
 export const buildImage = async (
   rootDir: string,
   config: ImageConfig
 ): Promise<NodeJS.ReadableStream> => {
-  const buildContext = await createBuildContext(rootDir, config);
+  const buildContext = await createDockerBuildContext(rootDir, config);
   const getDaemonMessage = new Transform({
     writableObjectMode: true,
     transform(chunk, _, callback): void {
