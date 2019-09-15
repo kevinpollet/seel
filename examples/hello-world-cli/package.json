@@ -7,7 +7,8 @@
   "private": true,
   "bin": "bin/cli.js",
   "scripts": {
-    "build:image": "npm run --prefix ../../ build && ../../bin/seel.js"
+    "build:seel": "npm run --prefix ../../ build",
+    "build:image": "npm run build:seel && ../../bin/seel.js"
   },
   "dependencies": {
     "boxen": "^4.1.0"
