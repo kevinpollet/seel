@@ -3,5 +3,5 @@ lib/
 node_modules/
 .DS_Store
 package-lock.json
-*.tar
+!examples/*/package-lock.json
 *.log
