@@ -9,9 +9,14 @@ export interface PkgJSON {
   readonly name: string;
   readonly version: string;
   readonly main?: string;
+
   readonly bin?:
     | string
     | {
         [key: string]: string;
       };
+
+  readonly dependencies?: {
+    [key: string]: string;
+  };
 }

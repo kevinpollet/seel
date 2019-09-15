@@ -8,10 +8,14 @@
 import { ImageConfig } from "./config/ImageConfig";
 
 export const generateDockerfile = (config: ImageConfig): string => `
-FROM node:8-alpine AS builder
-WORKDIR app
-COPY package*.json ./
-RUN npm install --production --no-package-lock
+${
+  config.installDependencies
+    ? "FROM node:8-alpine AS builder\
+  WORKDIR app\
+  COPY package*.json ./\
+  RUN npm install --production --no-package-lock"
+    : ""
+}
 
 FROM gcr.io/distroless/nodejs
 
@@ -24,7 +28,13 @@ ${
 }
 
 WORKDIR app
-COPY --from=builder app/node_modules node_modules/
+
+${
+  config.installDependencies
+    ? "COPY --from=builder app/node_modules node_modules/"
+    : ""
+}
+
 COPY . .
 
 ${
