@@ -28,9 +28,9 @@ COPY --from=builder app/node_modules node_modules/
 COPY . .
 
 ${
-  !config.exposedPorts || config.exposedPorts.length <= 0
+  !config.ports || config.ports.length <= 0
     ? ""
-    : `EXPOSE ${config.exposedPorts.join(" ")}`
+    : `EXPOSE ${config.ports.join(" ")}`
 }
 
 ENTRYPOINT ["/nodejs/bin/node", "${config.entrypoint}"]

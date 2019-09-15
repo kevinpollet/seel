@@ -8,7 +8,7 @@
   "bin": "bin/server.js",
   "main": "lib/index.js",
   "scripts": {
-    "build:image": "npm run --prefix ../../ build && ../../bin/seel.js --exposedPorts 3000"
+    "build:image": "npm run --prefix ../../ build && ../../bin/seel.js --ports 3000"
   },
   "dependencies": {
     "express": "^4.17.1"

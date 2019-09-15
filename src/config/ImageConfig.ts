@@ -24,26 +24,26 @@ export class ImageConfig {
   readonly name: string;
   readonly entrypoint: string;
   readonly tags?: ReadonlyArray<string>;
-  readonly exposedPorts?: ReadonlyArray<string>;
+  readonly ports?: ReadonlyArray<string>;
   readonly labels?: ReadonlyArray<Label>;
 
   constructor({
     name,
     tags,
     entrypoint,
-    exposedPorts,
+    ports,
     labels,
   }: {
     name: string;
     tags?: ReadonlyArray<string>;
     entrypoint: string;
-    exposedPorts?: ReadonlyArray<string>;
+    ports?: ReadonlyArray<string>;
     labels?: ReadonlyArray<Label>;
   }) {
     this.name = name;
     this.tags = tags;
     this.entrypoint = entrypoint;
-    this.exposedPorts = exposedPorts;
+    this.ports = ports;
     this.labels = labels;
   }
 
