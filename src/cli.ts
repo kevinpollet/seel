@@ -28,11 +28,6 @@ program
     "override the app entrypoint, the path is relative to the current working directory"
   )
   .option(
-    "--ports <ports>",
-    "comma-separated list of ports that the app exposes at runtime",
-    (ports: string) => ports.split(",").map(port => port.trim())
-  )
-  .option(
     "--labels <labels>",
     "comma-separated list of the container image labels",
     (labels: string) =>
@@ -40,6 +35,11 @@ program
         const [key, value] = label.split("=");
         return { key, value };
       })
+  )
+  .option(
+    "--ports <ports>",
+    "comma-separated list of ports that the app exposes at runtime",
+    (ports: string) => ports.split(",").map(port => port.trim())
   )
   .action(({ cwd, ...rest }) => {
     const errorHandler = (err: Error): void => {
