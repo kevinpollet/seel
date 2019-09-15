@@ -5,18 +5,12 @@
  * found in the LICENSE.md file.
  */
 
-export interface PkgJSON {
+import { StringDictionary } from "./StringDictionary";
+
+export interface PkgJson {
   readonly name: string;
   readonly version: string;
   readonly main?: string;
-
-  readonly bin?:
-    | string
-    | {
-        [key: string]: string;
-      };
-
-  readonly dependencies?: {
-    [key: string]: string;
-  };
+  readonly bin?: Readonly<StringDictionary>;
+  readonly dependencies?: Readonly<StringDictionary>;
 }
