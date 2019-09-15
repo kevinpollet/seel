@@ -19,9 +19,9 @@
 ## Install
 
 ```shell
-$ npx seel                      # Run it once
-$ npm install --global seel     # Install globally
-$ npm install --save-dev seel   # Install locally to use it in npm scripts
+$ npx seel                      # Run it once.
+$ npm install --global seel     # Install globally.
+$ npm install --save-dev seel   # Install locally to use it in npm scripts.
 ```
 
 ## Usage
