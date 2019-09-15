@@ -28,7 +28,7 @@ program
     "override the app entrypoint, the path is relative to the current working directory"
   )
   .option(
-    "--exposedPorts <ports>",
+    "--ports <ports>",
     "comma-separated list of ports that the app exposes at runtime",
     (ports: string) => ports.split(",").map(port => port.trim())
   )
