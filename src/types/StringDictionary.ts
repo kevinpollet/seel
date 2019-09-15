@@ -5,7 +5,6 @@
  * found in the LICENSE.md file.
  */
 
-import { PkgJson } from "../types/PkgJson";
-
-export const getEntrypoint = ({ bin, main }: PkgJson): string =>
-  bin ? Object.values(bin)[0] : main || "index.js";
+export interface StringDictionary {
+  [key: string]: string;
+}

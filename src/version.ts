@@ -6,8 +6,10 @@
  */
 
 import { join } from "path";
-import { readPkgJSONSync } from "./utils/readPkgJSON";
+import { readPkgSync } from "./utils/readPkg";
 
-const pkgJSON = readPkgJSONSync(join(__dirname, ".."));
+const pkgJsonPath = join(__dirname, "..");
+const { name, version: pkgJsonVersion } = readPkgSync(pkgJsonPath);
+const { arch, platform, version: processVersion } = process;
 
-export const version = `${pkgJSON.name}/${pkgJSON.version} ${process.platform}-${process.arch} node-${process.version}`;
+export const version = `${name}/${pkgJsonVersion} ${platform}-${arch} node-${processVersion}`;

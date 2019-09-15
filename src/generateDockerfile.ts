@@ -6,42 +6,32 @@
  */
 
 import { ImageConfig } from "./config/ImageConfig";
+import { ifNotEmpty, ifTruthy } from "./utils/template";
 
 export const generateDockerfile = (config: ImageConfig): string => `
-${
-  config.installDependencies
-    ? `FROM node:8-alpine AS builder
-  WORKDIR app
-  COPY package*.json ./
-  RUN npm install --production --no-package-lock`
-    : ""
-}
+${ifTruthy(config.installDependencies)(
+  `FROM node:8-alpine AS builder
+WORKDIR app
+COPY package*.json ./
+RUN npm install --production --no-package-lock`
+)}
 
 FROM gcr.io/distroless/nodejs
 
-${
-  !config.labels || config.labels.length <= 0
-    ? ""
-    : `LABEL ${config.labels
-        .map(({ key, value }) => `"${key}"="${value}"`)
-        .join(" ")}`
-}
+${ifNotEmpty(config.labels)(
+  labels =>
+    `LABEL ${labels.map(({ key, value }) => `"${key}"="${value}"`).join(" ")}`
+)}
 
 WORKDIR app
 
-${
-  config.installDependencies
-    ? "COPY --from=builder app/node_modules node_modules/"
-    : ""
-}
+${ifTruthy(config.installDependencies)(
+  "COPY --from=builder app/node_modules node_modules/"
+)}
 
 COPY . .
 
-${
-  !config.ports || config.ports.length <= 0
-    ? ""
-    : `EXPOSE ${config.ports.join(" ")}`
-}
+${ifNotEmpty(config.ports)(ports => `EXPOSE ${ports.join(" ")}`)}
 
 ENTRYPOINT ["/nodejs/bin/node", "${config.entrypoint}"]
 `;

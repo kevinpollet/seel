@@ -32,6 +32,7 @@
     "@types/dependency-tree": "^6.1.0",
     "@types/dockerode": "^2.5.20",
     "@types/node": "^8.10.51",
+    "@types/normalize-package-data": "^2.4.0",
     "@types/semver": "^6.0.1",
     "@types/split2": "^2.1.6",
     "@types/tar-fs": "^1.16.1",
@@ -39,6 +40,7 @@
     "commander": "^3.0.0",
     "dependency-tree": "^7.0.2",
     "dockerode": "^2.5.8",
+    "normalize-package-data": "^2.5.0",
     "semver": "^6.3.0",
     "split2": "^3.1.1",
     "tar-fs": "^2.0.0"
