@@ -11,7 +11,7 @@ export const generateDockerfile = (config: ImageConfig): string => `
 FROM node:8-alpine AS builder
 WORKDIR app
 COPY package*.json ./
-RUN npm install --production
+RUN npm install --production --no-package-lock
 
 FROM gcr.io/distroless/nodejs
 
