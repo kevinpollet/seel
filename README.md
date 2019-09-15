@@ -41,9 +41,9 @@ $ npm install --save-dev seel   # Install locally to use it in npm scripts.
 
 ## Examples
 
-- [hello-world-cli](./examples/hello-world-cli) - A command-line application which outputs `Hello, World!` or greets the name passed as an argument.
+- [hello-world-cli](./examples/hello-world-cli) - Command-line tool which outputs `Hello, World!` or greets the name passed as an argument.
 
-- [hello-world-express](./examples/hello-world-express) - An Express application which outputs `Hello, World!` on `GET /` or greets the given name on `GET /?name=`.
+- [hello-world-express](./examples/hello-world-express) - Express app which outputs `{"message":"Hello, World!"}` or greets the given name.
 
 ## Contributing
 
