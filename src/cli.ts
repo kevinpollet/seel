@@ -36,6 +36,7 @@ program
         return { key, value };
       })
   )
+  .option("--name <name>", "override the container image name")
   .option(
     "--ports <ports>",
     "comma-separated list of ports that the app exposes at runtime",

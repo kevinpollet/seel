@@ -35,6 +35,7 @@ $ npm install --save-dev seel   # Install locally to use it in npm scripts
 | --cwd <path>        | Override the current working directory (default: `process.cwd()`)                  |
 | --entrypoint <path> | Override the app entrypoint, the path is relative to the current working directory |
 | --labels <labels>   | Comma-separated list of the container image labels                                 |
+| --name <name>       | Override the container image name, defaults to name defined in `package.json`      |
 | --ports <ports>     | Comma-separated list of ports that the app exposes at runtime                      |
 
 ## Examples
