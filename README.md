@@ -37,6 +37,7 @@ $ npm install --save-dev seel   # Install locally to use it in npm scripts
 | --labels <labels>   | Comma-separated list of the container image labels                                 |
 | --name <name>       | Override the container image name, defaults to name defined in `package.json`      |
 | --ports <ports>     | Comma-separated list of ports that the app exposes at runtime                      |
+| --tags <tags>       | Comma-separated list of the container image tags                                   |
 
 ## Examples
 
