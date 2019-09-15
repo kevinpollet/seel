@@ -30,8 +30,8 @@ $ npm install --save-dev seel   # Install locally to use it in npm scripts.
 
 | Name          | Description                                                                                                                              |
 | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| -v, --version | Output version                                                                                                                           |
-| -h, --help    | Output usage information                                                                                                                 |
+| -v, --version | Output version.                                                                                                                          |
+| -h, --help    | Output usage information.                                                                                                                |
 | --cwd         | Define the current working directory, defaults to `.`.                                                                                   |
 | --entrypoint  | Define the app entrypoint path, relative to the current working directory, defaults to `bin` or `main` script defined in `package.json`. |
 | --labels      | Define the container image labels as a comma-separated list of key-value pairs, e.g. `--labels key=value,key2=value2`.                   |
