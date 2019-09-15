@@ -13,7 +13,7 @@ import { Pack } from "tar-stream";
 import { ImageConfig } from "./config/ImageConfig";
 import { generateDockerfile } from "./generateDockerfile";
 
-export const createBuildContext = (
+export const createDockerBuildContext = (
   rootDir: string,
   config: ImageConfig
 ): Promise<NodeJS.ReadableStream> =>
