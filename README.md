@@ -28,16 +28,16 @@ $ npm install --save-dev seel   # Install locally to use it in npm scripts.
 
 ### Options
 
-| Name                | Description                                                                        |
-| ------------------- | ---------------------------------------------------------------------------------- |
-| -v, --version       | Output version                                                                     |
-| -h, --help          | Output usage information                                                           |
-| --cwd <path>        | Override the current working directory (default: `process.cwd()`)                  |
-| --entrypoint <path> | Override the app entrypoint, the path is relative to the current working directory |
-| --labels <labels>   | Comma-separated list of the container image labels                                 |
-| --name <name>       | Override the container image name, defaults to name defined in `package.json`      |
-| --ports <ports>     | Comma-separated list of ports that the app exposes at runtime                      |
-| --tags <tags>       | Comma-separated list of the container image tags                                   |
+| Name          | Description                                                                                                                              |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| -v, --version | Output version                                                                                                                           |
+| -h, --help    | Output usage information                                                                                                                 |
+| --cwd         | Define the current working directory, defaults to `.`.                                                                                   |
+| --entrypoint  | Define the app entrypoint path, relative to the current working directory, defaults to `bin` or `main` script defined in `package.json`. |
+| --labels      | Define the container image labels as a comma-separated list of key-value pairs, e.g. `--labels key=value,key2=value2`.                   |
+| --name        | Define the container image name, defaults to the app `name` defined in `package.json`.                                                   |
+| --ports       | Define the ports that the app exposes at runtime as a comma-separated list of values, e.g. `--ports 3000,4000/udp`.                      |
+| --tags        | Define the container image tags as a comma-separated list of values, e.g. `--tags latest,1.0.0`.                                         |
 
 ## Examples
 
