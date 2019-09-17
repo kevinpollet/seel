@@ -6,4 +6,4 @@
  */
 
 export { buildImage } from "./buildImage";
-export { ImageConfig } from "./config/ImageConfig";
+export { BuildImageOptions } from "./BuildImageOptions";

@@ -5,22 +5,30 @@
  * found in the LICENSE.md file.
  */
 
-import { ImageConfig } from "./config/ImageConfig";
+import { BuildConfig } from "./config/BuildConfig";
 import { ifNotEmpty, ifTruthy } from "./utils/template";
 
-export const generateDockerfile = (config: ImageConfig): string => `
+export const generateDockerfile = (config: BuildConfig): string => `
 ${ifTruthy(config.installDependencies)(
   `FROM node:8-alpine AS builder
 WORKDIR app
-COPY package*.json ./
-RUN npm install --production --no-package-lock`
+
+${ifTruthy(config.useYarn)(
+  `COPY package.json ${ifTruthy(config.copyLockFile)("yarn.lock")} ./`
+)}
+${ifTruthy(!config.useYarn)(
+  `COPY package.json ${ifTruthy(config.copyLockFile)("package-lock.json")} ./`
+)}
+
+${ifTruthy(config.useYarn)("RUN yarn install --production ---pure-lockfile")}
+${ifTruthy(!config.useYarn)("RUN npm install --production --no-package-lock")}`
 )}
 
 FROM gcr.io/distroless/nodejs
 
 ${ifNotEmpty(config.labels)(
   labels =>
-    `LABEL ${labels.map(({ key, value }) => `"${key}"="${value}"`).join(" ")}`
+    `LABEL ${labels.map(([key, value]) => `"${key}"="${value}"`).join(" ")}`
 )}
 
 WORKDIR app

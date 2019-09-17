@@ -8,7 +8,6 @@
 import program from "commander";
 import { isAbsolute, resolve } from "path";
 import { buildImage } from "./buildImage";
-import { ImageConfig } from "./config/ImageConfig";
 import { version } from "./version";
 
 program.version(version, "-v, --version", "output version");
@@ -20,7 +19,7 @@ program
   .option(
     "--cwd <path>",
     "define the current working directory",
-    path => (!isAbsolute(path) ? resolve(process.cwd(), path) : process.cwd()),
+    (path: string) => (!isAbsolute(path) ? resolve(process.cwd(), path) : path),
     process.cwd()
   )
   .option(
@@ -30,11 +29,7 @@ program
   .option(
     "--labels <labels>",
     "define the container image labels as a comma-separated list of key-value pairs",
-    (labels: string) =>
-      labels.split(",").map(label => {
-        const [key, value] = label.split("=");
-        return { key, value };
-      })
+    (labels: string) => labels.split(",").map(label => label.split("="))
   )
   .option("--name <name>", "define the container image name")
   .option(
@@ -45,7 +40,7 @@ program
   .option(
     "--tags <tags>",
     "define the container image tags as a comma-separated list of values",
-    (ports: string) => ports.split(",").map(port => port.trim())
+    (tags: string) => tags.split(",").map(tag => tag.trim())
   )
   .action(({ cwd, ...rest }) => {
     const errorHandler = (err: Error): void => {
@@ -53,8 +48,7 @@ program
       process.exit(1);
     };
 
-    ImageConfig.fromPkgJSON(cwd)
-      .then(config => buildImage(cwd, config.assign(rest)))
+    buildImage(cwd, rest)
       .then(stream => stream.on("error", errorHandler).pipe(process.stdout))
       .catch(errorHandler);
   });
