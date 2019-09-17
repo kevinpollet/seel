@@ -5,7 +5,8 @@
  * found in the LICENSE.md file.
  */
 
-export interface Label {
-  readonly key: string;
-  readonly value: string;
-}
+import { BuildConfig } from "./config/BuildConfig";
+
+export type BuildImageOptions = Partial<
+  Omit<BuildConfig, "useYarn" | "copyLockFile" | "installDependencies">
+>;

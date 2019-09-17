@@ -9,13 +9,15 @@ import Docker from "dockerode";
 import split2 from "split2";
 import { Transform } from "stream";
 import { createDockerBuildContext } from "./createDockerBuildContext";
-import { ImageConfig } from "./config/ImageConfig";
+import { BuildImageOptions } from "./BuildImageOptions";
+import { getBuildConfig } from "./config/getBuildConfig";
 
 export const buildImage = async (
-  rootDir: string,
-  config: ImageConfig
+  dir: string,
+  options: BuildImageOptions
 ): Promise<NodeJS.ReadableStream> => {
-  const buildContext = await createDockerBuildContext(rootDir, config);
+  const buildConfig = (await getBuildConfig(dir)).merge(options);
+  const dockerBuildContext = await createDockerBuildContext(dir, buildConfig);
   const getDaemonMessage = new Transform({
     writableObjectMode: true,
     transform(chunk, _, callback): void {
@@ -26,9 +28,9 @@ export const buildImage = async (
 
   return new Docker()
     .buildImage(
-      buildContext,
-      config.tags && {
-        t: config.tags.map(tag => `${config.name}:${tag}`),
+      dockerBuildContext,
+      buildConfig.tags && {
+        t: buildConfig.tags.map(tag => `${buildConfig.name}:${tag}`),
       }
     )
     .then(daemonStream =>
