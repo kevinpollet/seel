@@ -35,22 +35,22 @@ $ yarn add seel --dev           # Install locally to use it in npm scripts.
 
 ### Options
 
-| Name          | Description                                                                                                                              |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| -v, --version | Output version.                                                                                                                          |
-| -h, --help    | Output usage information.                                                                                                                |
-| --cwd         | Define the current working directory, defaults to `.`.                                                                                   |
-| --entrypoint  | Define the app entrypoint path, relative to the current working directory, defaults to `bin` or `main` script defined in `package.json`. |
-| --labels      | Define the container image labels as a comma-separated list of key-value pairs, e.g. `--labels key=value,key2=value2`.                   |
-| --name        | Define the container image name, defaults to the app `name` defined in `package.json`.                                                   |
-| --ports       | Define the ports that the app exposes at runtime as a comma-separated list of values, e.g. `--ports 3000,4000/udp`.                      |
-| --tags        | Define the container image tags as a comma-separated list of values, e.g. `--tags latest,1.0.0`.                                         |
+| Name          | Description                                                                                                                             |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| -v, --version | Output version.                                                                                                                         |
+| -h, --help    | Output usage information.                                                                                                               |
+| --cwd         | Define the current working directory, defaults to `.`.                                                                                  |
+| --entrypoint  | Define the app entrypoint path relative to the current working directory, defaults to `bin` or `main` script defined in `package.json`. |
+| --labels      | Define the container image labels, as a comma-separated list of key-value pairs, e.g. `--labels label1=value,label2=value`.             |
+| --name        | Define the container image name, defaults to the `name` defined in `package.json`.                                                      |
+| --ports       | Define the ports that the app exposes at runtime, as a comma-separated list of values, e.g. `--ports 3000,4000/udp`.                    |
+| --tags        | Define the container image tags, as a comma-separated list of values, e.g. `--tags latest,1.0.0`.                                       |
 
 ## Examples
 
-- [hello-world-cli](./examples/hello-world-cli) - Command-line tool which outputs `Hello, World!` or greets the name passed as an argument.
+- [hello-world-cli](./examples/hello-world-cli) - A command-line app that outputs `Hello, World!` or greets the name passed as an argument.
 
-- [hello-world-express](./examples/hello-world-express) - Express app which outputs `{"message":"Hello, World!"}` or greets the given name.
+- [hello-world-express](./examples/hello-world-express) - An Express app that responds `{"message":"Hello, World!"}` to HTTP `GET /` requests or greets the name passed as query param.
 
 ## Contributing
 
