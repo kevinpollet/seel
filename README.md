@@ -11,7 +11,8 @@
 
 - [Install](#install)
 - [Usage](#usage)
-  - [Options](#options)
+  - [CLI](#cli)
+  - [API](#api)
 - [Examples](#examples)
 - [Contributing](#contributing)
 - [License](#license)
@@ -33,7 +34,9 @@ $ yarn add seel --dev           # Install locally to use it in npm scripts.
 
 > Currently, **seel** uses the Docker daemon to build the container image for your Node.js application. When you invoke the **seel** command, the Docker daemon must be **running** and **accessible** through the `/var/run/docker.sock` socket.
 
-### Options
+### CLI
+
+#### Options <!-- omit in toc -->
 
 | Name          | Description                                                                                                                             |
 | ------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
@@ -45,6 +48,29 @@ $ yarn add seel --dev           # Install locally to use it in npm scripts.
 | --name        | Define the container image name, defaults to the `name` defined in `package.json`.                                                      |
 | --ports       | Define the ports that the app exposes at runtime, as a comma-separated list of values, e.g. `--ports 3000,4000/udp`.                    |
 | --tags        | Define the container image tags, as a comma-separated list of values, e.g. `--tags latest,1.0.0`.                                       |
+
+### API
+
+```typescript
+import { join } from "path";
+import { buildImage } from "seel";
+
+const appDir = join(__dirname, "my-app");
+const options = {
+  name?: string;
+  entrypoint?: string;
+  tags?: string[];
+  ports?: string[];
+  labels?: [string, string][];
+};
+
+buildImage(appDir, options)
+  .then(stream => stream.pipe(process.stdout))
+  .catch(err => {
+    console.log(err);
+    process.exit(1);
+  });
+```
 
 ## Examples
 
