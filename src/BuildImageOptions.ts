@@ -8,5 +8,8 @@
 import { BuildConfig } from "./config/BuildConfig";
 
 export type BuildImageOptions = Partial<
-  Omit<BuildConfig, "useYarn" | "copyLockFile" | "installDependencies">
+  Omit<
+    BuildConfig,
+    "useYarn" | "copyLockFile" | "installDependencies" | "merge"
+  >
 >;
