@@ -10,36 +10,36 @@ import { isAbsolute, resolve } from "path";
 import { buildImage } from "./buildImage";
 import { version } from "./version";
 
-program.version(version, "-v, --version", "output version");
-
 program
+  .version(version, "-v, --version", "Output version.")
+  .helpOption("-h, --help", "Output usage information.")
   .description(
-    "build a container image for the Node.js app in the current working directory"
+    "Build a container image for the Node.js app in the current working directory."
   )
   .option(
     "--cwd <path>",
-    "define the current working directory",
+    "Define the current working directory.",
     (path: string) => (!isAbsolute(path) ? resolve(process.cwd(), path) : path),
     process.cwd()
   )
   .option(
     "--entrypoint <path>",
-    "define the app entrypoint path relative to the current working directory"
+    "Define the app entrypoint path relative to the current working directory."
   )
   .option(
     "--labels <labels>",
-    "define the container image labels as a comma-separated list of key-value pairs",
+    "Define the container image labels as a comma-separated list of key-value pairs.",
     (labels: string) => labels.split(",").map(label => label.split("="))
   )
-  .option("--name <name>", "define the container image name")
+  .option("--name <name>", "Define the container image name.")
   .option(
     "--ports <ports>",
-    "define the ports that the app exposes at runtime as a comma-separated list of values",
+    "Define the ports that the app exposes at runtime as a comma-separated list of values.",
     (ports: string) => ports.split(",").map(port => port.trim())
   )
   .option(
     "--tags <tags>",
-    "define the container image tags as a comma-separated list of values",
+    "Define the container image tags as a comma-separated list of values.",
     (tags: string) => tags.split(",").map(tag => tag.trim())
   )
   .action(({ cwd, ...rest }) => {
