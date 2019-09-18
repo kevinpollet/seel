@@ -33,7 +33,7 @@ program
   )
   .option("--name <name>", "Define the container image name.")
   .option(
-    "--ports <ports>",
+    "--exposedPorts <ports>",
     "Define the ports that the app exposes at runtime as a comma-separated list of values.",
     (ports: string) => ports.split(",").map(port => port.trim())
   )
