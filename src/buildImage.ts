@@ -14,7 +14,7 @@ import { getBuildConfig } from "./config/getBuildConfig";
 
 export const buildImage = async (
   dir: string,
-  options: BuildImageOptions
+  options: BuildImageOptions = {}
 ): Promise<NodeJS.ReadableStream> => {
   const buildConfig = (await getBuildConfig(dir)).merge(options);
   const dockerBuildContext = await createDockerBuildContext(dir, buildConfig);
