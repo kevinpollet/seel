@@ -31,6 +31,8 @@ $ yarn add seel --dev           # Install locally to use it in npm scripts.
 
 ## Usage
 
+> Currently, **seel** uses the Docker daemon to build the container image for your Node.js application. When you invoke the **seel** command, the Docker daemon must be **running** and **accessible** through the `/var/run/docker.sock` socket.
+
 ### Options
 
 | Name          | Description                                                                                                                              |
