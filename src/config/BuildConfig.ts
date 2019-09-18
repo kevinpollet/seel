@@ -9,8 +9,8 @@ interface BuildConfigArgs {
   readonly name: string;
   readonly entrypoint: string;
   readonly tags?: ReadonlyArray<string>;
-  readonly ports?: ReadonlyArray<string>;
   readonly labels?: ReadonlyArray<[string, string]>;
+  readonly exposedPorts?: ReadonlyArray<string>;
   readonly useYarn: boolean;
   readonly copyLockFile: boolean;
   readonly installDependencies: boolean;
@@ -20,8 +20,8 @@ export class BuildConfig {
   readonly name: string;
   readonly entrypoint: string;
   readonly tags?: ReadonlyArray<string>;
-  readonly ports?: ReadonlyArray<string>;
   readonly labels?: ReadonlyArray<[string, string]>;
+  readonly exposedPorts?: ReadonlyArray<string>;
   readonly useYarn: boolean;
   readonly copyLockFile: boolean;
   readonly installDependencies: boolean;
@@ -30,7 +30,7 @@ export class BuildConfig {
     this.name = args.name;
     this.entrypoint = args.entrypoint;
     this.tags = args.tags;
-    this.ports = args.ports;
+    this.exposedPorts = args.exposedPorts;
     this.labels = args.labels;
     this.useYarn = args.useYarn;
     this.copyLockFile = args.copyLockFile;
