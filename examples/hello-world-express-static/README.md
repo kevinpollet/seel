@@ -1,15 +1,9 @@
 # hello-world-express-static
 
-## Build container image
-
 ```shell
-$ npm run build:image
-```
+$ npm run build:image # Build container image with seel
 
-## Run container from built image
-
-```shell
-$ docker run --init --rm -p 3000:3000 hello-world-express-static:latest
+$ docker run --init --rm -p 3000:3000 hello-world-express-static:latest # Run container with Docker
 
 $ curl http://localhost:3000
 <!DOCTYPE html>

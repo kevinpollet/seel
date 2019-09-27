@@ -1,15 +1,9 @@
 # hello-world-cli
 
-## Build container image
-
 ```shell
-$ npm run build:image
-```
+$ npm run build:image # Build container image with seel
 
-## Run container from built image
-
-```shell
-$ docker run --init --rm hello-world-cli:latest
+$ docker run --init --rm hello-world-cli:latest # Run container with Docker
 
    ╔═════════════════════════╗
    ║                         ║
