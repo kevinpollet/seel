@@ -80,6 +80,8 @@ buildImage(appDir, options)
 
 - [hello-world-express](./examples/hello-world-express) - An Express app that responds `{"message":"Hello, World!"}` to HTTP `GET /` requests or greets the name passed as query param.
 
+- [hello-world-express-static](./examples/hello-world-express-static) - An Express app that serves the static files stored in the `public` directory.
+
 ## Contributing
 
 Contributions are welcome!
