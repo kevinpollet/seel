@@ -6,6 +6,7 @@
  */
 
 import dependencyTree from "dependency-tree";
+import fg from "fast-glob";
 import path from "path";
 import tar from "tar-fs";
 import { Pack } from "tar-stream";
@@ -16,21 +17,27 @@ export const createDockerBuildContext = (
   dir: string,
   config: BuildConfig
 ): Promise<NodeJS.ReadableStream> =>
-  new Promise((resolve): void => {
-    const entries = dependencyTree
-      .toList({
-        directory: dir,
-        filename: path.resolve(dir, config.entrypoint),
-        filter: path => !path.includes("node_modules"),
-      })
-      .map(entry => path.relative(dir, entry))
-      .concat("package.json");
-
-    if (config.copyLockFile) {
-      entries.push(config.useYarn ? "yarn.lock" : "package-lock.json");
-    }
-
-    resolve(
+  Promise.all([
+    fg((config.extraFiles as string[]) || [], { cwd: dir }),
+    new Promise<string[]>(resolve =>
+      resolve(
+        dependencyTree.toList({
+          directory: dir,
+          filename: path.resolve(dir, config.entrypoint),
+          filter: path => !path.includes("node_modules"),
+        })
+      )
+    ),
+  ])
+    .then(([extraFiles, entrypointDependencies]) => [
+      "package.json",
+      ...extraFiles,
+      ...entrypointDependencies.map(entry => path.relative(dir, entry)),
+      ...(!config.copyLockFile
+        ? []
+        : [config.useYarn ? "yarn.lock" : "package-lock.json"]),
+    ])
+    .then(entries =>
       tar.pack(dir, {
         entries,
         finalize: false,
@@ -41,4 +48,3 @@ export const createDockerBuildContext = (
         },
       })
     );
-  });

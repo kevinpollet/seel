@@ -49,6 +49,7 @@ $ yarn add seel --dev           # Install locally to use it in npm scripts.
 | --labels       | Define the container image labels, as a comma-separated list of key-value pairs, e.g. `--labels label1=value,label2=value`.             |
 | --name         | Define the container image name, defaults to the `name` defined in `package.json`.                                                      |
 | --exposedPorts | Define the ports that the app exposes at runtime, as a comma-separated list of values, e.g. `--exposedPorts 3000,4000/udp`.             |
+| --extraFiles   | Define the extra files to include in the container image with a glob pattern, as , e.g. `--extraFiles 'public/**'`.                     |
 | --tags         | Define the container image tags, as a comma-separated list of values, e.g. `--tags latest,1.0.0`.                                       |
 
 ### API

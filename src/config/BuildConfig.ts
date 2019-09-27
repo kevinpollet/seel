@@ -14,6 +14,7 @@ interface BuildConfigArgs {
   readonly useYarn: boolean;
   readonly copyLockFile: boolean;
   readonly installDependencies: boolean;
+  readonly extraFiles?: ReadonlyArray<string>;
 }
 
 export class BuildConfig {
@@ -25,6 +26,7 @@ export class BuildConfig {
   readonly useYarn: boolean;
   readonly copyLockFile: boolean;
   readonly installDependencies: boolean;
+  readonly extraFiles?: ReadonlyArray<string>;
 
   constructor(args: BuildConfigArgs) {
     this.name = args.name;
@@ -35,6 +37,7 @@ export class BuildConfig {
     this.useYarn = args.useYarn;
     this.copyLockFile = args.copyLockFile;
     this.installDependencies = args.installDependencies;
+    this.extraFiles = args.extraFiles;
   }
 
   merge(source: Partial<BuildConfigArgs>): BuildConfig {

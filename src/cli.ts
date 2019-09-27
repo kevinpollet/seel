@@ -38,6 +38,10 @@ program
     (ports: string) => ports.split(",").map(port => port.trim())
   )
   .option(
+    "--extraFiles <glob>",
+    "Define the extra files to include in the container image with a glob pattern."
+  )
+  .option(
     "--tags <tags>",
     "Define the container image tags as a comma-separated list of values.",
     (tags: string) => tags.split(",").map(tag => tag.trim())
