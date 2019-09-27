@@ -65,6 +65,7 @@ const options = {
   tags?: string[];
   labels?: [string, string][];
   exposedPorts?: string[];
+  extraFiles?: string;
 };
 
 buildImage(appDir, options)
