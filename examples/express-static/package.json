@@ -1,5 +1,5 @@
 {
-  "name": "hello-world-express-static",
+  "name": "express-static",
   "version": "1.0.0",
   "description": "Express application serving static files stored in public directory",
   "author": "kevinpollet <pollet.kevin@gmail.com>",

@@ -1,5 +1,5 @@
 {
-  "name": "hello-world-cli",
+  "name": "cli",
   "description": "CLI tool packaged as a container with seel",
   "version": "1.0.0",
   "author": "kevinpollet <pollet.kevin@gmail.com>",

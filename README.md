@@ -76,11 +76,11 @@ buildImage(appDir, options)
 
 ## Examples
 
-- [hello-world-cli](./examples/hello-world-cli) - A command-line app that outputs `Hello, World!` or greets the name passed as an argument.
+- [cli](./examples/cli) - A command-line app that outputs `Hello, World!` or greets the name passed as an argument.
 
-- [hello-world-express](./examples/hello-world-express) - An Express app that responds `{"message":"Hello, World!"}` to HTTP `GET /` requests or greets the name passed as query param.
+- [express](./examples/express) - An Express app that responds `{"message":"Hello, World!"}` to HTTP `GET /` requests or greets the name passed as query param.
 
-- [hello-world-express-static](./examples/hello-world-express-static) - An Express app that serves the static files stored in the `public` directory.
+- [express-static](./examples/express-static) - An Express app that serves the static files stored in the `public` directory.
 
 ## Contributing
 

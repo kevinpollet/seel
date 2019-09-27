@@ -1,5 +1,5 @@
 {
-  "name": "hello-world-express",
+  "name": "express",
   "description": "Express application packaged as a container with seel",
   "version": "1.0.0",
   "author": "kevinpollet <pollet.kevin@gmail.com>",
