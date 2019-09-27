@@ -19,7 +19,7 @@ export const createDockerBuildContext = (
 ): Promise<NodeJS.ReadableStream> =>
   Promise.all([
     fg((config.extraFiles as string[]) || [], { cwd: dir }),
-    new Promise<string[]>(resolve =>
+    new Promise<string[]>((resolve): void =>
       resolve(
         dependencyTree.toList({
           directory: dir,
