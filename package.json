@@ -30,14 +30,7 @@
     "test": "jest --preset ts-jest"
   },
   "dependencies": {
-    "@types/dependency-tree": "^6.1.0",
-    "@types/dockerode": "^2.5.20",
     "@types/node": "^8.10.51",
-    "@types/normalize-package-data": "^2.4.0",
-    "@types/semver": "^6.0.1",
-    "@types/split2": "^2.1.6",
-    "@types/tar-fs": "^1.16.1",
-    "@types/tar-stream": "^1.6.1",
     "commander": "^3.0.0",
     "dependency-tree": "^7.0.2",
     "dockerode": "^3.0.1",
@@ -48,7 +41,14 @@
     "tar-fs": "^2.0.0"
   },
   "devDependencies": {
+    "@types/dependency-tree": "^6.1.0",
+    "@types/dockerode": "^2.5.20",
     "@types/jest": "^24.0.18",
+    "@types/normalize-package-data": "^2.4.0",
+    "@types/semver": "^6.0.1",
+    "@types/split2": "^2.1.6",
+    "@types/tar-fs": "^1.16.1",
+    "@types/tar-stream": "^1.6.1",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
     "eslint": "^6.4.0",
