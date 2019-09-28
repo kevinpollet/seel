@@ -31,7 +31,7 @@ program
     mapAndCollect()
   )
   .option(
-    "--extraFiles <glob>",
+    "--extraFiles <pattern>",
     "Define the extra files to include in the container image with a glob pattern.",
     mapAndCollect()
   )
