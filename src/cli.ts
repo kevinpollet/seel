@@ -26,12 +26,12 @@ program
     "Define the app entrypoint. The given path must be relative to the current working directory."
   )
   .option(
-    "--exposedPort <port>",
+    "--exposed-port <port>",
     "Define the port that the app exposes at runtime.",
     mapAndCollect()
   )
   .option(
-    "--extraFiles <pattern>",
+    "--extra-files <pattern>",
     "Define the extra files to include in the container image with a glob pattern.",
     mapAndCollect()
   )
