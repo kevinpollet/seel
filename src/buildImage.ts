@@ -12,17 +12,23 @@ import { Transform } from "stream";
 import { createDockerBuildContext } from "./createDockerBuildContext";
 import { BuildImageOptions } from "./BuildImageOptions";
 import { getBuildConfig } from "./config/getBuildConfig";
+import { overrideBuildConfig } from "./config/overrideBuildConfig";
 
 export const buildImage = async (
   dir: string,
   options: BuildImageOptions = {}
 ): Promise<NodeJS.ReadableStream> => {
-  const absoluteDir = resolve(process.cwd(), dir);
-  const buildConfig = (await getBuildConfig(absoluteDir)).merge(options);
-  const dockerBuildContext = await createDockerBuildContext(
-    absoluteDir,
-    buildConfig
+  const absoluteAppDir = resolve(process.cwd(), dir);
+  const defaultBuildConfig = await getBuildConfig(absoluteAppDir);
+  const buildConfigWithOverrides = overrideBuildConfig(
+    defaultBuildConfig,
+    options
   );
+  const dockerBuildContext = await createDockerBuildContext(
+    absoluteAppDir,
+    buildConfigWithOverrides
+  );
+
   const getDaemonMessage = new Transform({
     writableObjectMode: true,
     transform(chunk, _, callback): void {
@@ -34,8 +40,10 @@ export const buildImage = async (
   return new Docker()
     .buildImage(
       dockerBuildContext,
-      buildConfig.tags && {
-        t: buildConfig.tags.map(tag => `${buildConfig.name}:${tag}`),
+      buildConfigWithOverrides.tags && {
+        t: buildConfigWithOverrides.tags.map(
+          tag => `${buildConfigWithOverrides.name}:${tag}`
+        ),
       }
     )
     .then(daemonStream =>

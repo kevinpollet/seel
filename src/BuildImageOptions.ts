@@ -7,9 +7,10 @@
 
 import { BuildConfig } from "./config/BuildConfig";
 
+type InternalOptions<T> = {
+  [K in keyof T]-?: T[K] extends boolean ? K : never;
+}[keyof T];
+
 export type BuildImageOptions = Partial<
-  Omit<
-    BuildConfig,
-    "useYarn" | "copyLockFile" | "installDependencies" | "merge"
-  >
+  Omit<BuildConfig, InternalOptions<BuildConfig>>
 >;

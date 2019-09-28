@@ -32,12 +32,12 @@ export const getBuildConfig = async (dir: string): Promise<BuildConfig> => {
           version,
         ];
 
-  return new BuildConfig({
+  return {
     name,
     entrypoint: (bin && Object.values(bin)[0]) || main || "index.js",
     tags,
     useYarn: hasYarnLock,
     copyLockFile: hasYarnLock || hasPkgLock,
     installDependencies: Object.keys(dependencies || {}).length > 0,
-  });
+  };
 };
