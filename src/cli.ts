@@ -32,7 +32,8 @@ program
   )
   .option(
     "--extraFiles <glob>",
-    "Define the extra files to include in the container image with a glob pattern."
+    "Define the extra files to include in the container image with a glob pattern.",
+    mapAndCollect()
   )
   .option(
     "--label <label>",

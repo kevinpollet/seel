@@ -7,5 +7,5 @@
 
 export const mapAndCollect = <T = string>(m?: (value: string) => T) => (
   value: string,
-  prev: (T | string)[]
+  prev: (T | string)[] = []
 ): (T | string)[] => prev.concat([m ? m(value) : value]);
