@@ -1,4 +1,4 @@
-name: Release
+name: release
 
 on:
   push:
@@ -7,14 +7,19 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
+        os: [ubuntu-18.04, macOS-10.14]
         node: [8, 10, 12]
 
     steps:
       - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+
       - run: npm install
       - run: npm run format:check
       - run: npm run lint
