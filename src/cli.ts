@@ -7,6 +7,7 @@
 
 import program from "commander";
 import { buildImage } from "./buildImage";
+import { mapAndCollect } from "./utils/mapAndCollect";
 import { version } from "./version";
 
 program
@@ -27,7 +28,7 @@ program
   .option(
     "--exposedPort <port>",
     "Define the port that the app exposes at runtime.",
-    (exposedPort: string, prev: string[]) => (prev || []).concat(exposedPort)
+    mapAndCollect()
   )
   .option(
     "--extraFiles <glob>",
@@ -36,14 +37,10 @@ program
   .option(
     "--label <label>",
     "Define the container image label.",
-    (label: string, prev: string[][]) => (prev || []).concat([label.split("=")])
+    mapAndCollect(label => label.split("="))
   )
   .option("--name <name>", "Define the container image name.")
-  .option(
-    "--tag <tag>",
-    "Define the container image tag.",
-    (tag: string, prev: string[]) => (prev || []).concat(tag)
-  )
+  .option("--tag <tag>", "Define the container image tag.", mapAndCollect())
   .action(({ cwd, ...rest }) => {
     const errorHandler = (err: Error): void => {
       console.error(err.message);
