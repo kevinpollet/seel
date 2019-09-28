@@ -6,6 +6,7 @@
  */
 
 import Docker from "dockerode";
+import { resolve } from "path";
 import split2 from "split2";
 import { Transform } from "stream";
 import { createDockerBuildContext } from "./createDockerBuildContext";
@@ -16,8 +17,12 @@ export const buildImage = async (
   dir: string,
   options: BuildImageOptions = {}
 ): Promise<NodeJS.ReadableStream> => {
-  const buildConfig = (await getBuildConfig(dir)).merge(options);
-  const dockerBuildContext = await createDockerBuildContext(dir, buildConfig);
+  const absoluteDir = resolve(process.cwd(), dir);
+  const buildConfig = (await getBuildConfig(absoluteDir)).merge(options);
+  const dockerBuildContext = await createDockerBuildContext(
+    absoluteDir,
+    buildConfig
+  );
   const getDaemonMessage = new Transform({
     writableObjectMode: true,
     transform(chunk, _, callback): void {

@@ -6,7 +6,6 @@
  */
 
 import program from "commander";
-import { isAbsolute, resolve } from "path";
 import { buildImage } from "./buildImage";
 import { version } from "./version";
 
@@ -19,7 +18,6 @@ program
   .option(
     "--cwd <path>",
     "Define the current working directory.",
-    (path: string) => (!isAbsolute(path) ? resolve(process.cwd(), path) : path),
     process.cwd()
   )
   .option(
