@@ -5,7 +5,7 @@
  * found in the LICENSE.md file.
  */
 
-import Docker from "dockerode";
+import Dockerode from "dockerode";
 import { resolve } from "path";
 import split2 from "split2";
 import { Transform } from "stream";
@@ -18,15 +18,18 @@ export const buildImage = async (
   dir: string,
   options: BuildImageOptions = {}
 ): Promise<NodeJS.ReadableStream> => {
-  const absoluteAppDir = resolve(process.cwd(), dir);
-  const defaultBuildConfig = await getBuildConfig(absoluteAppDir);
+  const absoluteDir = resolve(process.cwd(), dir);
+  const defaultBuildConfig = await getBuildConfig(absoluteDir);
   const buildConfigWithOverrides = overrideBuildConfig(
     defaultBuildConfig,
     options
   );
   const dockerBuildContext = await createDockerBuildContext(
-    absoluteAppDir,
+    absoluteDir,
     buildConfigWithOverrides
+  );
+  const dockerImageTags = (buildConfigWithOverrides.tags || []).map(
+    tag => `${buildConfigWithOverrides.name}:${tag}`
   );
 
   const getDaemonMessage = new Transform({
@@ -37,15 +40,8 @@ export const buildImage = async (
     },
   });
 
-  return new Docker()
-    .buildImage(
-      dockerBuildContext,
-      buildConfigWithOverrides.tags && {
-        t: buildConfigWithOverrides.tags.map(
-          tag => `${buildConfigWithOverrides.name}:${tag}`
-        ),
-      }
-    )
+  return new Dockerode()
+    .buildImage(dockerBuildContext, { t: dockerImageTags })
     .then(daemonStream =>
       daemonStream.pipe(split2(line => JSON.parse(line))).pipe(getDaemonMessage)
     );
