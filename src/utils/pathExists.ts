@@ -6,8 +6,9 @@
  */
 
 import fs from "fs";
+import { promisify } from "util";
 
 export const pathExists = (path: string): Promise<boolean> =>
-  new Promise((resolve): void => {
-    fs.access(path, err => (err ? resolve(false) : resolve(true)));
-  });
+  promisify(fs.access)(path)
+    .then(() => true)
+    .catch(() => false);
