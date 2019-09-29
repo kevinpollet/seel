@@ -10,7 +10,7 @@ export interface BuildConfig {
   readonly entrypoint: string;
   readonly tags?: ReadonlyArray<string>;
   readonly labels?: ReadonlyArray<[string, string]>;
-  readonly exposedPorts?: ReadonlyArray<string>;
+  readonly ports?: ReadonlyArray<string>;
   readonly useYarn: boolean;
   readonly copyLockFile: boolean;
   readonly installDependencies: boolean;

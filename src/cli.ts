@@ -26,11 +26,6 @@ const program = new Command()
     "Define the app entrypoint. The given path must be relative to the current working directory."
   )
   .option(
-    "--exposed-port <port>",
-    "Define the port that the container exposes at runtime.",
-    mapAndCollect()
-  )
-  .option(
     "--extra-files <pattern>",
     "Define the extra files to include in the container image with a glob pattern.",
     mapAndCollect()
@@ -41,6 +36,11 @@ const program = new Command()
     mapAndCollect(label => label.split("="))
   )
   .option("--name <name>", "Define the container image name.")
+  .option(
+    "--port <port>",
+    "Define the port that the container exposes at runtime.",
+    mapAndCollect()
+  )
   .option("--tag <tag>", "Define the container image tag.", mapAndCollect())
   .action(options => {
     if (typeof options === "string") {
@@ -55,7 +55,7 @@ const program = new Command()
 
     buildImage(options.cwd, {
       entrypoint: options.entrypoint,
-      exposedPorts: options.exposedPort,
+      ports: options.port,
       extraFiles: options.extraFiles,
       labels: options.label,
       name: options.name,

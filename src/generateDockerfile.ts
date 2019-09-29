@@ -39,7 +39,7 @@ ${ifTruthy(config.installDependencies)(
 
 COPY . .
 
-${ifNotEmpty(config.exposedPorts)(ports => `EXPOSE ${ports.join(" ")}`)}
+${ifNotEmpty(config.ports)(ports => `EXPOSE ${ports.join(" ")}`)}
 
 ENTRYPOINT ["/nodejs/bin/node", "${config.entrypoint}"]
 `;
