@@ -5,12 +5,12 @@
  * found in the LICENSE.md file.
  */
 
-import program from "commander";
+import { Command } from "commander";
 import { buildImage } from "./buildImage";
 import { mapAndCollect } from "./utils/mapAndCollect";
 import { version } from "./version";
 
-program
+const program = new Command()
   .version(version, "-v, --version", "Output version.")
   .helpOption("-h, --help", "Output usage information.")
   .description(
@@ -42,19 +42,24 @@ program
   )
   .option("--name <name>", "Define the container image name.")
   .option("--tag <tag>", "Define the container image tag.", mapAndCollect())
-  .action(({ cwd, ...rest }) => {
+  .action(options => {
+    if (typeof options === "string") {
+      program.outputHelp();
+      process.exit(1);
+    }
+
     const errorHandler = (err: Error): void => {
       console.error(err.message);
       process.exit(1);
     };
 
-    buildImage(cwd, {
-      entrypoint: rest.entrypoint,
-      exposedPorts: rest.exposedPort,
-      extraFiles: rest.extraFiles,
-      labels: rest.label,
-      name: rest.name,
-      tags: rest.tags,
+    buildImage(options.cwd, {
+      entrypoint: options.entrypoint,
+      exposedPorts: options.exposedPort,
+      extraFiles: options.extraFiles,
+      labels: options.label,
+      name: options.name,
+      tags: options.tags,
     })
       .then(stream => stream.on("error", errorHandler).pipe(process.stdout))
       .catch(errorHandler);
