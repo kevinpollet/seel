@@ -6,10 +6,10 @@
  */
 
 import { join } from "path";
-import { major, minor, prerelease } from "semver";
 import { BuildConfig } from "./BuildConfig";
 import { pathExists } from "../utils/pathExists";
 import { readPkg } from "../utils/readPkg";
+import { getSemverTags } from "./getSemverTags";
 
 export const getBuildConfig = async (dir: string): Promise<BuildConfig> => {
   const [
@@ -22,20 +22,10 @@ export const getBuildConfig = async (dir: string): Promise<BuildConfig> => {
     readPkg(dir),
   ]);
 
-  const tags =
-    prerelease(version) !== null
-      ? [version]
-      : [
-          "latest",
-          `${major(version)}`,
-          `${major(version)}.${minor(version)}`,
-          version,
-        ];
-
   return {
     name,
     entrypoint: (bin && Object.values(bin)[0]) || main || "index.js",
-    tags,
+    tags: getSemverTags(version),
     useYarn: hasYarnLock,
     copyLockFile: hasYarnLock || hasPkgLock,
     installDependencies: Object.keys(dependencies || {}).length > 0,
