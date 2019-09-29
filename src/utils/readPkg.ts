@@ -7,28 +7,23 @@
 
 import normalize from "normalize-package-data";
 import { join } from "path";
+import { promisify } from "util";
 import { readFileSync, readFile } from "fs";
 import { PkgJson } from "../types/PkgJson";
 
-const readPkg = (dir: string): Promise<PkgJson> =>
-  new Promise((resolve, reject): void => {
-    const pkgJsonPath = join(dir, "package.json");
+const readPkg = async (dir: string): Promise<PkgJson> => {
+  const pkgJsonPath = join(dir, "package.json");
+  const data = await promisify(readFile)(pkgJsonPath, "utf-8");
+  const pkgJson: PkgJson = JSON.parse(data);
 
-    readFile(pkgJsonPath, "utf-8", (err, data) => {
-      if (err) {
-        reject(err);
-      } else {
-        const pkgJson: PkgJson = JSON.parse(data);
-
-        normalize(pkgJson);
-        resolve(pkgJson);
-      }
-    });
-  });
+  normalize(pkgJson);
+  return pkgJson;
+};
 
 const readPkgSync = (dir: string): PkgJson => {
   const pkgJsonPath = join(dir, "package.json");
-  const pkgJson: PkgJson = JSON.parse(readFileSync(pkgJsonPath, "utf-8"));
+  const data = readFileSync(pkgJsonPath, "utf-8");
+  const pkgJson: PkgJson = JSON.parse(data);
 
   normalize(pkgJson);
   return pkgJson;
