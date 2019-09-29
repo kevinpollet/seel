@@ -46,10 +46,10 @@ $ yarn add seel --dev           # Install locally to use it in npm scripts.
 | ‑h, ‑‑help     | Output usage information.                                                                                                              |
 | ‑‑cwd          | Define the current working directory, defaults to `.`.                                                                                 |
 | ‑‑entrypoint   | Define the app entrypoint, defaults to `bin` or `main` script defined in `package.json`. The given `path` must be relative to the cwd. |
+| ‑‑exposed‑port | Define the port that the container exposes at runtime, e.g. `--exposed-port 3000 --exposed-port 4000/udp`.                             |
+| ‑‑extra‑files  | Define the extra files to include in the container image with a glob pattern, e.g. `--extra-files 'public/**'`.                        |
 | ‑‑label        | Define the container image label, e.g. `--label key=value --label key2=value2`.                                                        |
 | ‑‑name         | Define the container image name, defaults to the app `name` defined in `package.json`.                                                 |
-| ‑‑exposed‑port | Define the port that the app exposes at runtime, e.g. `--exposed-port 3000 --exposed-port 4000/udp`.                                   |
-| ‑‑extra‑files  | Define the extra files to include in the container image with a glob pattern, e.g. `--extra-files 'public/**'`.                        |
 | ‑‑tag          | Define the container image tag, e.g. `--tag latest --tag 1.0.0`.                                                                       |
 
 ### API

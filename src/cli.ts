@@ -27,7 +27,7 @@ program
   )
   .option(
     "--exposed-port <port>",
-    "Define the port that the app exposes at runtime.",
+    "Define the port that the container exposes at runtime.",
     mapAndCollect()
   )
   .option(
