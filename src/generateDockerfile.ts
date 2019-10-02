@@ -14,14 +14,13 @@ ${ifTruthy(config.installDependencies)(
 WORKDIR app
 
 ${ifTruthy(config.useYarn)(
-  `COPY package.json ${ifTruthy(config.copyLockFile)("yarn.lock")} ./`
+  `COPY package.json ${ifTruthy(config.copyLockFile)("yarn.lock")} ./
+  RUN yarn install --production --pure-lockfile`
 )}
 ${ifTruthy(!config.useYarn)(
-  `COPY package.json ${ifTruthy(config.copyLockFile)("package-lock.json")} ./`
-)}
-
-${ifTruthy(config.useYarn)("RUN yarn install --production ---pure-lockfile")}
-${ifTruthy(!config.useYarn)("RUN npm install --production --no-package-lock")}`
+  `COPY package.json ${ifTruthy(config.copyLockFile)("package-lock.json")} ./
+  RUN npm install --production --no-package-lock`
+)}`
 )}
 
 FROM gcr.io/distroless/nodejs
