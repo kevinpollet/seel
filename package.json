@@ -25,7 +25,7 @@
     "format": "prettier --write '*.{json,md}' '{bin,examples,src,test}/**/*.{ts,js,json,md}'",
     "format:check": "prettier --check '*.{json,md}' '{bin,examples,src,test}/**/*.{ts,js,json,md}'",
     "lint": "eslint '{bin,examples,src,test}/**/*.{js,ts}'",
-    "prepack": "npm run build",
+    "prepare": "npm run build",
     "release": "standard-version --sign",
     "test": "jest --preset ts-jest"
   },
