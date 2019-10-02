@@ -28,7 +28,9 @@ FROM gcr.io/distroless/nodejs
 
 ${ifNotEmpty(config.labels)(
   labels =>
-    `LABEL ${labels.map(([key, value]) => `"${key}"="${value}"`).join(" ")}`
+    `LABEL ${Object.entries(labels)
+      .map(([key, value]) => `"${key}"="${value}"`)
+      .join(" ")}`
 )}
 
 WORKDIR app

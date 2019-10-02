@@ -15,7 +15,7 @@ export const getBuildConfig = async (dir: string): Promise<BuildConfig> => {
   const [
     hasYarnLock,
     hasPkgLock,
-    { name, version, bin, main, dependencies },
+    { author, description, name, version, bin, main, dependencies },
   ] = await Promise.all([
     pathExists(join(dir, "yarn.lock")),
     pathExists(join(dir, "package-lock.json")),
@@ -29,5 +29,10 @@ export const getBuildConfig = async (dir: string): Promise<BuildConfig> => {
     useYarn: hasYarnLock,
     copyLockFile: hasYarnLock || hasPkgLock,
     installDependencies: Object.keys(dependencies || {}).length > 0,
+    labels: {
+      version,
+      description,
+      maintainer: author && author.email,
+    },
   };
 };

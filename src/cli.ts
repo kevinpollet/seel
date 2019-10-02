@@ -7,7 +7,7 @@
 
 import { Command } from "commander";
 import { buildImage } from "./buildImage";
-import { mapAndCollect } from "./utils/mapAndCollect";
+import { collectValues, collectKeyPairs } from "./utils/collect";
 import { version } from "./version";
 
 const program = new Command()
@@ -28,20 +28,20 @@ const program = new Command()
   .option(
     "--extra-files <pattern>",
     "Define the extra files to include in the container image with a glob pattern.",
-    mapAndCollect()
+    collectValues
   )
   .option(
     "--label <label>",
     "Define the container image label.",
-    mapAndCollect(label => label.split("="))
+    collectKeyPairs()
   )
   .option("--name <name>", "Define the container image name.")
   .option(
     "--port <port>",
     "Define the port that the container exposes at runtime.",
-    mapAndCollect()
+    collectValues
   )
-  .option("--tag <tag>", "Define the container image tag.", mapAndCollect())
+  .option("--tag <tag>", "Define the container image tag.", collectValues)
   .action(options => {
     if (typeof options === "string") {
       program.outputHelp();

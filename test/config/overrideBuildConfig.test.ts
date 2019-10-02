@@ -12,7 +12,7 @@ describe("overrideBuildConfig", () => {
     name: "name",
     entrypoint: "entrypoint",
     tags: ["tag1", "tag2"],
-    labels: [["label1", "value1"] as [string, string]],
+    labels: { key: "value" },
     exposedPorts: ["3000", "4000/tcp"],
     useYarn: false,
     copyLockFile: true,

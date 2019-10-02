@@ -9,8 +9,14 @@ import { StringDictionary } from "./StringDictionary";
 
 export interface PkgJson {
   readonly name: string;
+  readonly description?: string;
   readonly version: string;
   readonly main?: string;
   readonly bin?: Readonly<StringDictionary>;
   readonly dependencies?: Readonly<StringDictionary>;
+  readonly author?: {
+    readonly name?: string;
+    readonly email?: string;
+    readonly url?: string;
+  };
 }

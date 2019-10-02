@@ -5,11 +5,13 @@
  * found in the LICENSE.md file.
  */
 
+import { StringDictionary } from "../types/StringDictionary";
+
 export interface BuildConfig {
   readonly name: string;
   readonly entrypoint: string;
   readonly tags?: ReadonlyArray<string>;
-  readonly labels?: ReadonlyArray<[string, string]>;
+  readonly labels?: Readonly<Partial<StringDictionary>>;
   readonly ports?: ReadonlyArray<string>;
   readonly useYarn: boolean;
   readonly copyLockFile: boolean;
