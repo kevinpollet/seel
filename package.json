@@ -24,7 +24,7 @@
     "build": "rm -rf lib && tsc -p tsconfig.build.json",
     "format": "prettier --write '*.{json,md}' '{bin,examples,src,test}/**/*.{ts,js,json,md}'",
     "format:check": "prettier --check '*.{json,md}' '{bin,examples,src,test}/**/*.{ts,js,json,md}'",
-    "lint": "eslint '{bin,examples,src,test}/**/*.{js,ts}'",
+    "lint": "eslint --max-warnings 0 '{bin,examples,src,test}/**/*.{js,ts}'",
     "prepare": "npm run build",
     "release": "standard-version --sign",
     "test": "jest --preset ts-jest"
@@ -53,8 +53,9 @@
     "@typescript-eslint/parser": "^2.0.0",
     "eslint": "^6.4.0",
     "eslint-config-prettier": "^6.1.0",
-    "husky": "^3.0.4",
+    "husky": "^3.0.8",
     "jest": "^24.9.0",
+    "lint-staged": "^9.4.1",
     "prettier": "1.18.2",
     "pretty-quick": "^1.11.1",
     "standard-version": "^7.0.0",
@@ -102,8 +103,14 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged"
+      "pre-commit": "lint-staged && pretty-quick --staged"
     }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --max-warnings 0",
+      "git add"
+    ]
   },
   "prettier": {
     "trailingComma": "es5"
