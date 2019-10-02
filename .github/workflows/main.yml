@@ -23,8 +23,26 @@ jobs:
       - run: npm run build
       - run: npm run test
 
+  build-examples:
+    runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        node: [8, 10, 12]
+
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - run: npm install
+      - run: npm run build:image --prefix examples/cli
+      - run: npm run build:image --prefix examples/express
+      - run: npm run build:image --prefix examples/express-static
+
   publish:
-    needs: build
+    needs: [build, build-examples]
     runs-on: ubuntu-18.04
     if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
 
