@@ -5,7 +5,6 @@
  * found in the LICENSE.md file.
  */
 
-import { join } from "path";
 import { BuildConfig } from "./BuildConfig";
 import { pathExists } from "../utils/pathExists";
 import { readPkg } from "../utils/readPkg";
@@ -19,10 +18,10 @@ export const getBuildConfig = async (dir: string): Promise<BuildConfig> => {
     hasYarnrc,
     { author, description, name, version, bin, main },
   ] = await Promise.all([
-    pathExists(join(dir, "yarn.lock")),
-    pathExists(join(dir, "package-lock.json")),
-    pathExists(join(dir, ".npmrc")),
-    pathExists(join(dir, ".yarnrc")),
+    pathExists(dir, "yarn.lock"),
+    pathExists(dir, "package-lock.json"),
+    pathExists(dir, ".npmrc"),
+    pathExists(dir, ".yarnrc"),
     readPkg(dir),
   ]);
 

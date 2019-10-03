@@ -6,9 +6,10 @@
  */
 
 import fs from "fs";
+import { join } from "path";
 import { promisify } from "util";
 
-export const pathExists = (path: string): Promise<boolean> =>
-  promisify(fs.access)(path)
+export const pathExists = (...paths: string[]): Promise<boolean> =>
+  promisify(fs.access)(join(...paths))
     .then(() => true)
     .catch(() => false);
