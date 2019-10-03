@@ -14,6 +14,9 @@ export interface BuildConfig {
   readonly labels?: Readonly<Partial<StringDictionary>>;
   readonly ports?: ReadonlyArray<string>;
   readonly useYarn: boolean;
-  readonly copyLockFile: boolean;
   readonly extraFiles?: ReadonlyArray<string>;
+  readonly pkgRegistryAuthUrl?: string;
+  readonly copyLockFile: boolean;
+  readonly copyNpmrcFile: boolean;
+  readonly copyYarnrcFile: boolean;
 }
