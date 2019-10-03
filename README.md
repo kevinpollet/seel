@@ -56,24 +56,29 @@ $ yarn add seel --dev           # Install locally to use it in npm scripts.
 ### API
 
 ```typescript
-import { join } from "path";
-import { buildImage } from "seel";
+import { buildImage, BuildImageOptions } from "seel";
 
-const appDir = join(__dirname, "my-app");
-const options = {
+const options: BuildImageOptions = {
   entrypoint?: string;
   extraFiles?: string[];
   labels?: { [key: string]: string };
   name?: string;
+  pkgRegistryAuthUrl?: string;
   ports?: string[];
   tags?: string[];
 };
 
-buildImage(appDir, options)
-  .then(stream => stream.pipe(process.stdout))
+buildImage("/usr/app", options)
+  .then(stream => stream
+    .once("error", () => {
+      console.log(err);
+      process.exit(1);
+    })
+    .pipe(process.stdout)
+  )
   .catch(err => {
     console.log(err);
-    process.exit(1);
+    process.exit(2);
   });
 ```
 
