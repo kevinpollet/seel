@@ -15,6 +15,5 @@ export interface BuildConfig {
   readonly ports?: ReadonlyArray<string>;
   readonly useYarn: boolean;
   readonly copyLockFile: boolean;
-  readonly installDependencies: boolean;
   readonly extraFiles?: ReadonlyArray<string>;
 }

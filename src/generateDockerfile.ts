@@ -9,8 +9,7 @@ import { BuildConfig } from "./config/BuildConfig";
 import { ifNotEmpty, ifTruthy } from "./utils/template";
 
 export const generateDockerfile = (config: BuildConfig): string => `
-${ifTruthy(config.installDependencies)(
-  `FROM node:8-alpine AS builder
+FROM node:8-alpine AS builder
 WORKDIR app
 
 ${ifTruthy(config.useYarn)(
@@ -20,8 +19,9 @@ ${ifTruthy(config.useYarn)(
 ${ifTruthy(!config.useYarn)(
   `COPY package.json ${ifTruthy(config.copyLockFile)("package-lock.json")} ./
   RUN npm install --production --no-package-lock`
-)}`
 )}
+
+COPY . .
 
 FROM gcr.io/distroless/nodejs
 
@@ -34,11 +34,7 @@ ${ifNotEmpty(config.labels)(
 
 WORKDIR app
 
-${ifTruthy(config.installDependencies)(
-  "COPY --from=builder app/node_modules node_modules/"
-)}
-
-COPY . .
+COPY --from=builder app/ ./
 
 ${ifNotEmpty(config.ports)(ports => `EXPOSE ${ports.join(" ")}`)}
 
