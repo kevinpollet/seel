@@ -5,60 +5,52 @@
  * found in the LICENSE.md file.
  */
 
+import nunjucks from "nunjucks";
 import { BuildConfig } from "./config/BuildConfig";
-import { ifNotEmpty, ifTruthy } from "./utils/template";
 
-export const generateDockerfile = (config: BuildConfig): string => `
+const dockerfileTemplate = `
+{% set comma = joiner(" ") %}
+
 FROM node:8-alpine AS builder
-${ifTruthy(config.pkgRegistryAuthUrl)("ARG AUTH_TOKEN")}
+{{ "ARG AUTH_TOKEN" if pkgRegistryAuthUrl }}
 WORKDIR app
 
-${ifTruthy(config.copyNpmrcFile || config.copyYarnrcFile)(
-  `COPY ${ifTruthy(config.copyNpmrcFile)(".npmrc")} \
-     ${ifTruthy(config.copyYarnrcFile)(".yarnrc")} \
-    ./`
-)}
+{% if copyNpmrcFile or copyYarnrcFile %}
+  COPY {{ ".npmrc" if copyNpmrcFile }} {{ ".yarnrc" if copyYarnrcFile }} ./
+{% endif %}
 
-${ifTruthy(config.useYarn)(
-  `COPY package.json ${ifTruthy(config.copyLockFile)("yarn.lock")} ./
-  ${ifTruthy(!config.pkgRegistryAuthUrl)(
-    "RUN yarn install --production --pure-lockfile"
-  )}
-  ${ifTruthy(
-    config.pkgRegistryAuthUrl
-  )(`RUN echo -e 'always-auth=true\\n${config.pkgRegistryAuthUrl}:_authToken=\${AUTH_TOKEN}\\n' > ~/.npmrc && \
-    yarn install --production --pure-lockfile && \
-    rm -rf ~/.npmrc`)}`
-)}
-${ifTruthy(!config.useYarn)(
-  `COPY package.json ${ifTruthy(config.copyLockFile)("package-lock.json")} ./
-  ${ifTruthy(!config.pkgRegistryAuthUrl)(
-    "RUN npm install --production --pure-lockfile"
-  )}
-  ${ifTruthy(
-    config.pkgRegistryAuthUrl
-  )(`RUN echo -e 'always-auth=true\\n${config.pkgRegistryAuthUrl}:_authToken=\${AUTH_TOKEN}\\n' >> ~/.npmrc && \
-    npm install --production --no-package-lock && \
-    cat ~/.npmrc && \
-    rm -rf ~/.npmrc`)}`
-)}
+COPY package.json {{ "package-lock.json" if copyLockFile and not useYarn }} {{ "yarn.lock" if copyLockFile and useYarn }} ./
+
+{% set install_command = "npm install --production --no-package-lock" %}
+{% if useYarn %}
+  {% set install_command = "yarn install --production --pure-lockfile" %}
+{% endif %}
+
+{% if not pkgRegistryAuthUrl %}
+  RUN {{ install_command }}
+{% else %}
+  RUN echo -e 'always-auth=true\\n{{pkgRegistryAuthUrl}}:_authToken=\${AUTH_TOKEN}\\n' >> ~/.npmrc && \
+    {{ install_command }} && \
+    rm -rf ~/.npmrc
+{% endif %}
 
 COPY . .
 
 FROM gcr.io/distroless/nodejs
 
-${ifNotEmpty(config.labels)(
-  labels =>
-    `LABEL ${Object.entries(labels)
-      .map(([key, value]) => `"${key}"="${value}"`)
-      .join(" ")}`
-)}
+{% if labels %}
+  LABEL {% for key, value in labels %}{{ comma() }}"{{ key }}"="{{value}}"{% endfor %}
+{% endif %}
 
 WORKDIR app
-
 COPY --from=builder app/ ./
 
-${ifNotEmpty(config.ports)(ports => `EXPOSE ${ports.join(" ")}`)}
+{% if ports %}
+  EXPOSE {% for port in ports %}{{ comma() }}{{ port }}{% endfor %}
+{% endif %}
 
-ENTRYPOINT ["/nodejs/bin/node", "${config.entrypoint}"]
+ENTRYPOINT ["/nodejs/bin/node", "{{ entrypoint }}"]
 `;
+
+export const generateDockerfile = (config: BuildConfig): string =>
+  nunjucks.renderString(dockerfileTemplate, config);

@@ -36,6 +36,7 @@
     "dockerode": "^3.0.1",
     "fast-glob": "^3.0.4",
     "normalize-package-data": "^2.5.0",
+    "nunjucks": "^3.2.0",
     "semver": "^6.3.0",
     "split2": "^3.1.1",
     "tar-fs": "^2.0.0"
@@ -45,6 +46,7 @@
     "@types/dockerode": "^2.5.20",
     "@types/jest": "^24.0.18",
     "@types/normalize-package-data": "^2.4.0",
+    "@types/nunjucks": "^3.1.2",
     "@types/semver": "^6.0.1",
     "@types/split2": "^2.1.6",
     "@types/tar-fs": "^1.16.1",
