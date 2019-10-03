@@ -11,8 +11,8 @@ import { collectValues, collectKeyPairs } from "./utils/collect";
 import { version } from "./version";
 
 const program = new Command()
-  .version(version, "-v, --version", "Output version.")
-  .helpOption("-h, --help", "Output usage information.")
+  .version(version, "-v, --version", "Print version.")
+  .helpOption("-h, --help", "Print usage information.")
   .description(
     "Build a container image for the Node.js app in the current working directory."
   )

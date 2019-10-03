@@ -42,8 +42,8 @@ $ yarn add seel --dev           # Install locally to use it in npm scripts.
 
 | Name                    | Description                                                                                                                                                                        |
 | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ‑v, ‑‑version           | Output version.                                                                                                                                                                    |
-| ‑h, ‑‑help              | Output usage information.                                                                                                                                                          |
+| ‑v, ‑‑version           | Print version.                                                                                                                                                                     |
+| ‑h, ‑‑help              | Print usage information.                                                                                                                                                           |
 | ‑‑cwd                   | Define the current working directory, defaults to `.`.                                                                                                                             |
 | ‑‑entrypoint            | Define the app entrypoint, defaults to `bin` or `main` script defined in `package.json`. The given `path` must be relative to the cwd.                                             |
 | ‑‑extra‑files           | Define the extra files to include in the container image with a glob pattern, e.g. `--extra-files 'public/**'`.                                                                    |
