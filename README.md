@@ -49,7 +49,7 @@ $ yarn add seel --dev           # Install locally to use it in npm scripts.
 | ‑‑extra‑files           | Define the extra files to include in the container image with a glob pattern, e.g. `--extra-files 'public/**'`.                                                                    |
 | ‑‑label                 | Define the container image label, e.g. `--label key=value --label key2=value2`. By default, the `version`, `description` and `maintainer` labels are added to the container image. |
 | ‑‑name                  | Define the container image name, defaults to the app `name` defined in `package.json`.                                                                                             |
-| ‑‑pkg-registry-auth-url | Define the Node.js package registry authentication URL. The environment variable named `AUTH_TOKEN` will be used to read the package registry authentication token.                |
+| ‑‑pkg‑registry‑auth‑url | Define the Node.js package registry authentication URL. The environment variable named `AUTH_TOKEN` will be used to read the package registry authentication token.                |
 | ‑‑port                  | Define the port that the container exposes at runtime, e.g. `--port 3000 --port 4000/udp`.                                                                                         |
 | ‑‑tag                   | Define the container image tag, e.g. `--tag latest --tag 1.0.0`. By default, the [Semantic Versioning](https://semver.org/) strategy is used to define the container image tags.   |
 
