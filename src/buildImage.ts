@@ -41,7 +41,10 @@ export const buildImage = async (
   });
 
   return new Dockerode()
-    .buildImage(dockerBuildContext, { t: dockerImageTags })
+    .buildImage(dockerBuildContext, {
+      t: dockerImageTags,
+      buildargs: { AUTH_TOKEN: process.env.AUTH_TOKEN },
+    })
     .then(daemonStream =>
       daemonStream.pipe(split2(line => JSON.parse(line))).pipe(getDaemonMessage)
     );

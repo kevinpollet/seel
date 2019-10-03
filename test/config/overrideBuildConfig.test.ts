@@ -16,7 +16,9 @@ describe("overrideBuildConfig", () => {
     exposedPorts: ["3000", "4000/tcp"],
     useYarn: false,
     copyLockFile: true,
-    installDependencies: true,
+    copyNpmrcFile: true,
+    copyYarnrcFile: true,
+    pkgRegistryAuthUrl: "//test/",
     extraFiles: ["public/**"],
   };
 

@@ -33,6 +33,8 @@ export const createDockerBuildContext = (
       "package.json",
       ...extraFiles,
       ...entrypointDependencies.map(entry => path.relative(dir, entry)),
+      ...(!config.copyNpmrcFile ? [] : [".npmrc"]),
+      ...(!config.copyYarnrcFile ? [] : [".yarnrc"]),
       ...(!config.copyLockFile
         ? []
         : [config.useYarn ? "yarn.lock" : "package-lock.json"]),

@@ -41,6 +41,10 @@ const program = new Command()
     "Define the port that the container exposes at runtime.",
     collectValues
   )
+  .option(
+    "--pkg-registry-auth-url <url>",
+    "Define the Node.js package registry authentication URL."
+  )
   .option("--tag <tag>", "Define the container image tag.", collectValues)
   .action(options => {
     if (typeof options === "string") {
@@ -60,6 +64,7 @@ const program = new Command()
       labels: options.label,
       name: options.name,
       tags: options.tags,
+      pkgRegistryAuthUrl: options.pkgRegistryAuthUrl,
     })
       .then(stream => stream.on("error", errorHandler).pipe(process.stdout))
       .catch(errorHandler);
