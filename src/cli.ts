@@ -66,7 +66,7 @@ const program = new Command()
       tags: options.tags,
       pkgRegistryAuthUrl: options.pkgRegistryAuthUrl,
     })
-      .then(stream => stream.on("error", errorHandler).pipe(process.stdout))
+      .then(stream => stream.once("error", errorHandler).pipe(process.stdout))
       .catch(errorHandler);
   });
 
