@@ -17,7 +17,7 @@ export const getBuildConfig = async (dir: string): Promise<BuildConfig> => {
     promisify(fs.readdir)(dir),
   ]);
 
-  const { author, description, name, version, bin, main } = pkgJson;
+  const { author = {}, description, name, version, bin, main } = pkgJson;
   const useYarn = rootFiles.includes("yarn.lock");
   const configFiles = rootFiles.filter(
     name => name === ".npmrc" || (name === ".yarnrc" && useYarn)
@@ -33,6 +33,10 @@ export const getBuildConfig = async (dir: string): Promise<BuildConfig> => {
     lockFile,
     tags: getSemverTags(version),
     entrypoint: (bin && Object.values(bin)[0]) || main || "index.js",
-    labels: { version, description, maintainer: author && author.email },
+    labels: {
+      ...(version ? { version } : undefined),
+      ...(description ? { description } : undefined),
+      ...(author.email ? { maintainer: author.email } : undefined),
+    },
   };
 };

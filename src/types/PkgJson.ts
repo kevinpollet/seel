@@ -5,15 +5,15 @@
  * found in the LICENSE.md file.
  */
 
-import { StringDictionary } from "./StringDictionary";
+import { Dictionary } from "./Dictionary";
 
 export interface PkgJson {
   readonly name: string;
   readonly description?: string;
   readonly version: string;
   readonly main?: string;
-  readonly bin?: Readonly<StringDictionary>;
-  readonly dependencies?: Readonly<StringDictionary>;
+  readonly bin?: Readonly<Dictionary<string>>;
+  readonly dependencies?: Readonly<Dictionary<string>>;
   readonly author?: {
     readonly name?: string;
     readonly email?: string;

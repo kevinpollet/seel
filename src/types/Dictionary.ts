@@ -5,6 +5,6 @@
  * found in the LICENSE.md file.
  */
 
-export interface StringDictionary {
-  [key: string]: string;
+export interface Dictionary<T> {
+  [key: string]: T;
 }
