@@ -5,38 +5,34 @@
  * found in the LICENSE.md file.
  */
 
+import fs from "fs";
+import { promisify } from "util";
 import { BuildConfig } from "./BuildConfig";
-import { pathExists } from "../utils/pathExists";
 import { readPkg } from "../utils/readPkg";
 import { getSemverTags } from "./getSemverTags";
 
 export const getBuildConfig = async (dir: string): Promise<BuildConfig> => {
-  const [
-    hasYarnLock,
-    hasPkgLock,
-    hasNpmrc,
-    hasYarnrc,
-    { author, description, name, version, bin, main },
-  ] = await Promise.all([
-    pathExists(dir, "yarn.lock"),
-    pathExists(dir, "package-lock.json"),
-    pathExists(dir, ".npmrc"),
-    pathExists(dir, ".yarnrc"),
+  const [pkgJson, rootFiles] = await Promise.all([
     readPkg(dir),
+    promisify(fs.readdir)(dir),
   ]);
+
+  const { author, description, name, version, bin, main } = pkgJson;
+  const useYarn = rootFiles.includes("yarn.lock");
+  const configFiles = rootFiles.filter(
+    name => name === ".npmrc" || (name === ".yarnrc" && useYarn)
+  );
+  const lockFile = rootFiles.find(
+    name => name === (useYarn ? "yarn.lock" : "package-lock.json")
+  );
 
   return {
     name,
-    entrypoint: (bin && Object.values(bin)[0]) || main || "index.js",
+    useYarn,
+    configFiles,
+    lockFile,
     tags: getSemverTags(version),
-    useYarn: hasYarnLock,
-    copyLockFile: hasYarnLock || hasPkgLock,
-    copyNpmrcFile: hasNpmrc,
-    copyYarnrcFile: hasYarnrc,
-    labels: {
-      version,
-      description,
-      maintainer: author && author.email,
-    },
+    entrypoint: (bin && Object.values(bin)[0]) || main || "index.js",
+    labels: { version, description, maintainer: author && author.email },
   };
 };

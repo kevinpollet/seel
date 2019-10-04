@@ -7,10 +7,7 @@
 
 import { BuildConfig } from "./config/BuildConfig";
 
-type InternalOptions<T> = {
-  [K in keyof T]-?: T[K] extends boolean ? K : never;
-}[keyof T];
-
+// TODO must be refactor safe
 export type BuildImageOptions = Partial<
-  Omit<BuildConfig, InternalOptions<BuildConfig>>
+  Omit<BuildConfig, "useYarn" | "lockFile" | "configFiles">
 >;

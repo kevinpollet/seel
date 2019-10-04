@@ -12,11 +12,10 @@ export interface BuildConfig {
   readonly entrypoint: string;
   readonly tags?: ReadonlyArray<string>;
   readonly labels?: Readonly<Partial<StringDictionary>>;
-  readonly ports?: ReadonlyArray<string>;
-  readonly useYarn: boolean;
-  readonly extraFiles?: ReadonlyArray<string>;
   readonly pkgRegistryAuthUrl?: string;
-  readonly copyLockFile: boolean;
-  readonly copyNpmrcFile: boolean;
-  readonly copyYarnrcFile: boolean;
+  readonly ports?: ReadonlyArray<string>;
+  readonly extraFiles?: ReadonlyArray<string>;
+  readonly useYarn: boolean;
+  readonly lockFile?: string;
+  readonly configFiles?: ReadonlyArray<string>;
 }

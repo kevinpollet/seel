@@ -15,22 +15,22 @@ FROM node:8-alpine AS builder
 {{ "ARG AUTH_TOKEN" if pkgRegistryAuthUrl }}
 WORKDIR app
 
-{% if copyNpmrcFile or copyYarnrcFile %}
-  COPY {{ ".npmrc" if copyNpmrcFile }} {{ ".yarnrc" if copyYarnrcFile }} ./
+{% if configFiles and configFiles.length > 0 %}
+  COPY {% for file in configFiles %}{{ comma() }}{{ file }}{% endfor %} ./
 {% endif %}
 
-COPY package.json {{ "package-lock.json" if copyLockFile and not useYarn }} {{ "yarn.lock" if copyLockFile and useYarn }} ./
+COPY package.json {{ lockFile if lockFile }} ./
 
-{% set install_command = "npm install --production --no-package-lock" %}
+{% set installCommand = "npm install --production --no-package-lock" %}
 {% if useYarn %}
-  {% set install_command = "yarn install --production --pure-lockfile" %}
+  {% set installCommand = "yarn install --production --pure-lockfile" %}
 {% endif %}
 
 {% if not pkgRegistryAuthUrl %}
-  RUN {{ install_command }}
+  RUN {{ installCommand }}
 {% else %}
   RUN echo -e 'always-auth=true\\n{{pkgRegistryAuthUrl}}:_authToken=\${AUTH_TOKEN}\\n' >> ~/.npmrc && \
-    {{ install_command }} && \
+    {{ installCommand }} && \
     rm -rf ~/.npmrc
 {% endif %}
 

@@ -5,48 +5,40 @@
  * found in the LICENSE.md file.
  */
 
-import dependencyTree from "dependency-tree";
 import fg from "fast-glob";
-import path from "path";
 import tar from "tar-fs";
 import { Pack } from "tar-stream";
 import { BuildConfig } from "./config/BuildConfig";
 import { generateDockerfile } from "./generateDockerfile";
+import { listModuleDependencies } from "./utils/listModuleDependencies";
 
-export const createDockerBuildContext = (
+export const createDockerBuildContext = async (
   dir: string,
   config: BuildConfig
-): Promise<NodeJS.ReadableStream> =>
-  Promise.all([
+): Promise<NodeJS.ReadableStream> => {
+  const [extraFiles, moduleDependencies] = await Promise.all([
     fg((config.extraFiles as string[]) || [], { cwd: dir }),
-    new Promise<string[]>((resolve): void =>
-      resolve(
-        dependencyTree.toList({
-          directory: dir,
-          filename: path.resolve(dir, config.entrypoint),
-          filter: path => !path.includes("node_modules"),
-        })
-      )
-    ),
-  ])
-    .then(([extraFiles, entrypointDependencies]) => [
-      "package.json",
-      ...extraFiles,
-      ...entrypointDependencies.map(entry => path.relative(dir, entry)),
-      ...(!config.copyNpmrcFile ? [] : [".npmrc"]),
-      ...(!config.copyYarnrcFile ? [] : [".yarnrc"]),
-      ...(!config.copyLockFile
-        ? []
-        : [config.useYarn ? "yarn.lock" : "package-lock.json"]),
-    ])
-    .then(entries =>
-      tar.pack(dir, {
-        entries,
-        finalize: false,
-        finish(pack: Pack): void {
-          pack.entry({ name: "Dockerfile" }, generateDockerfile(config));
-          pack.entry({ name: ".dockerignore" }, "*");
-          pack.finalize();
-        },
-      })
-    );
+    listModuleDependencies(dir, config.entrypoint),
+  ]);
+
+  const entries = [
+    ...moduleDependencies,
+    ...extraFiles,
+    ...(config.configFiles || []),
+    "package.json",
+  ];
+
+  if (config.lockFile) {
+    entries.push(config.lockFile);
+  }
+
+  return tar.pack(dir, {
+    entries,
+    finalize: false,
+    finish(pack: Pack): void {
+      pack.entry({ name: "Dockerfile" }, generateDockerfile(config));
+      pack.entry({ name: ".dockerignore" }, "*");
+      pack.finalize();
+    },
+  });
+};
