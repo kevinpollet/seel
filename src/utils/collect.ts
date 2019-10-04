@@ -5,12 +5,12 @@
  * found in the LICENSE.md file.
  */
 
-import { StringDictionary } from "../types/StringDictionary";
+import { Dictionary } from "../types/Dictionary";
 
 const collectKeyPairs = (separator = "=") => (
   curr: string,
-  acc: Readonly<StringDictionary> = {}
-): Readonly<StringDictionary> => {
+  acc: Readonly<Dictionary<string>> = {}
+): Readonly<Dictionary<string>> => {
   const pair = curr.split(separator);
   return pair.length >= 2 ? { ...acc, [pair[0].trim()]: pair[1].trim() } : acc;
 };
