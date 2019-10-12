@@ -1,7 +1,7 @@
 {
   "name": "seel",
   "description": "Build container images for your Node.js applications",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "author": "kevinpollet <pollet.kevin@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/kevinpollet/seel#readme",
