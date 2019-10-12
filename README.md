@@ -1,6 +1,8 @@
 # seel <!-- omit in toc -->
 
 [![Build Status](https://github.com/kevinpollet/seel/workflows/build/badge.svg)](https://github.com/kevinpollet/seel/actions)
+[![npm Latest Version](https://img.shields.io/npm/v/seel/latest)](https://www.npmjs.com/package/seel)
+[![npm Downloads](https://img.shields.io/npm/dm/seel)](https://www.npmjs.com/package/seel)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.md)
