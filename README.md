@@ -9,7 +9,7 @@
 
 **seel** is a command-line tool that facilitates the build of container image for your Node.js applications. You don't need to master container best practices or write a Dockerfile to build a container image, it's just as simple as invoking a command from your shell or npm script.
 
-![screencast](./screencast.svg)
+![screencast](https://cdn.jsdelivr.net/gh/kevinpollet/seel/screencast.svg)
 
 ## Table of Contents <!-- omit in toc -->
 
@@ -23,13 +23,17 @@
 
 ## Install
 
+**npm**
+
 ```shell
-# npm
 $ npx seel                      # Run it once.
 $ npm install --global seel     # Install globally.
 $ npm install --save-dev seel   # Install locally to use it in npm scripts.
+```
 
-# yarn
+**yarn**
+
+```shell
 $ yarn global add seel          # Install globally.
 $ yarn add seel --dev           # Install locally to use it in npm scripts.
 ```
