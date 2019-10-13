@@ -8,7 +8,7 @@ update_configs:
       - match:
           dependency_name: "@types/node"
     default_labels:
-      - dependencies
+      - "type: deps"
     commit_message:
       prefix: fix
       prefix_development: chore
