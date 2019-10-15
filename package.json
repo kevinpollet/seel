@@ -5,7 +5,7 @@
   "author": "kevinpollet <pollet.kevin@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/kevinpollet/seel#readme",
-  "repository": "github.com:kevinpollet/seel",
+  "repository": "github:kevinpollet/seel",
   "bugs": "https://github.com/kevinpollet/seel/issues",
   "keywords": [
     "docker",
