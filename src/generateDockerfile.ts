@@ -7,6 +7,7 @@
 
 import nunjucks from "nunjucks";
 import { BuildConfig } from "./config/BuildConfig";
+import { normalizePkgRegistryUrl } from "./utils/normalizePkgRegistryUrl";
 
 const dockerfileTemplate = `
 {% set comma = joiner(" ") %}
@@ -29,7 +30,7 @@ COPY package.json {{ lockFile if lockFile }} ./
 {% if not pkgRegistryAuthUrl %}
   RUN {{ installCommand }}
 {% else %}
-  RUN echo -e 'always-auth=true\\n{{pkgRegistryAuthUrl}}:_authToken=\${AUTH_TOKEN}\\n' >> ~/.npmrc && \
+  RUN echo -e 'always-auth=true\\n{{normalizePkgRegistryUrl(pkgRegistryAuthUrl)}}:_authToken=\${AUTH_TOKEN}\\n' >> ~/.npmrc && \
     {{ installCommand }} && \
     rm -rf ~/.npmrc
 {% endif %}
@@ -53,4 +54,7 @@ ENTRYPOINT ["/nodejs/bin/node", "{{ entrypoint }}"]
 `;
 
 export const generateDockerfile = (config: BuildConfig): string =>
-  nunjucks.renderString(dockerfileTemplate, config);
+  nunjucks.renderString(dockerfileTemplate, {
+    ...config,
+    normalizePkgRegistryUrl,
+  });
