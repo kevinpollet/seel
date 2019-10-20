@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-18.04, macOS-10.14]
-        node: [8, 10, 12]
+        node: [10, 12]
 
     steps:
       - uses: actions/checkout@master
@@ -28,7 +28,7 @@ jobs:
 
     strategy:
       matrix:
-        node: [8, 10, 12]
+        node: [10, 12]
 
     steps:
       - uses: actions/checkout@master
@@ -50,7 +50,7 @@ jobs:
       - uses: actions/checkout@master
       - uses: actions/setup-node@v1
         with:
-          node-version: 8
+          node-version: 10
           registry-url: https://registry.npmjs.org/
 
       - run: npm install

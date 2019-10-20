@@ -11,7 +11,7 @@ import { BuildConfig } from "./config/BuildConfig";
 const dockerfileTemplate = `
 {% set comma = joiner(" ") %}
 
-FROM node:8-alpine AS builder
+FROM node:10-alpine AS builder
 {{ "ARG AUTH_TOKEN" if pkgRegistryAuthUrl }}
 WORKDIR app
 

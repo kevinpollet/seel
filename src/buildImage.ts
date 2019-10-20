@@ -34,9 +34,8 @@ export const buildImage = async (
 
   const getDaemonMessage = new Transform({
     writableObjectMode: true,
-    transform(chunk, _, callback): void {
-      const { stream, error } = chunk as any; // eslint-disable-line @typescript-eslint/no-explicit-any
-      callback(error ? new Error(error) : null, stream || null);
+    transform({ stream, error }, _, callback): void {
+      callback(error ? new Error(error) : undefined, stream || undefined);
     },
   });
 
