@@ -43,7 +43,7 @@ const program = new Command()
   )
   .option(
     "--pkg-registry-auth-url <url>",
-    "Define the Node.js package registry authentication URL."
+    "Set-up authentication for the given package registry URL."
   )
   .option("--tag <tag>", "Define the container image tag.", collectValues)
   .action(options => {
