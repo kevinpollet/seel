@@ -67,11 +67,16 @@ import { buildImage, BuildImageOptions } from "seel";
 const options: BuildImageOptions = {
   entrypoint?: string;
   extraFiles?: string[];
-  labels?: { [key: string]: string };
   name?: string;
-  pkgRegistryAuthUrl?: string;
   ports?: string[];
   tags?: string[];
+  labels?: {
+    [key: string]: string
+  };
+  pkgRegistryAuth?: {
+    url: string;
+    token: string
+  };
 };
 
 buildImage("/usr/app", options)

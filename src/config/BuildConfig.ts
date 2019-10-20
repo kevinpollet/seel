@@ -12,7 +12,7 @@ export interface BuildConfig {
   readonly entrypoint: string;
   readonly tags?: ReadonlyArray<string>;
   readonly labels?: Readonly<Dictionary<string>>;
-  readonly pkgRegistryAuthUrl?: string;
+  readonly pkgRegistryAuth?: Readonly<{ url: string; token: string }>;
   readonly ports?: ReadonlyArray<string>;
   readonly extraFiles?: ReadonlyArray<string>;
   readonly useYarn: boolean;

@@ -13,7 +13,7 @@ const dockerfileTemplate = `
 {% set comma = joiner(" ") %}
 
 FROM node:10-alpine AS builder
-{{ "ARG AUTH_TOKEN" if pkgRegistryAuthUrl }}
+{{ "ARG AUTH_TOKEN" if pkgRegistryAuth }}
 WORKDIR app
 
 {% if configFiles and configFiles.length > 0 %}
@@ -27,10 +27,10 @@ COPY package.json {{ lockFile if lockFile }} ./
   {% set installCommand = "yarn install --production --pure-lockfile" %}
 {% endif %}
 
-{% if not pkgRegistryAuthUrl %}
+{% if not pkgRegistryAuth %}
   RUN {{ installCommand }}
 {% else %}
-  RUN echo -e 'always-auth=true\\n{{normalizePkgRegistryUrl(pkgRegistryAuthUrl)}}:_authToken=\${AUTH_TOKEN}\\n' >> ~/.npmrc && \
+  RUN echo -e 'always-auth=true\\n{{normalizePkgRegistryUrl(pkgRegistryAuth.url)}}:_authToken=\${AUTH_TOKEN}\\n' >> ~/.npmrc && \
     {{ installCommand }} && \
     rm -rf ~/.npmrc
 {% endif %}

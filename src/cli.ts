@@ -64,7 +64,10 @@ const program = new Command()
       labels: options.label,
       name: options.name,
       tags: options.tags,
-      pkgRegistryAuthUrl: options.pkgRegistryAuthUrl,
+      pkgRegistryAuth: options.pkgRegistryAuthUrl && {
+        url: options.pkgRegistryAuthUrl,
+        token: process.env.AUTH_TOKEN || "",
+      },
     })
       .then(stream => stream.once("error", errorHandler).pipe(process.stdout))
       .catch(errorHandler);

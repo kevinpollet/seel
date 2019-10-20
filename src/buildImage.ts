@@ -20,16 +20,13 @@ export const buildImage = async (
 ): Promise<NodeJS.ReadableStream> => {
   const absoluteDir = resolve(process.cwd(), dir);
   const defaultBuildConfig = await getBuildConfig(absoluteDir);
-  const buildConfigWithOverrides = overrideBuildConfig(
-    defaultBuildConfig,
-    options
-  );
+  const buildConfig = overrideBuildConfig(defaultBuildConfig, options);
   const dockerBuildContext = await createDockerBuildContext(
     absoluteDir,
-    buildConfigWithOverrides
+    buildConfig
   );
-  const dockerImageTags = (buildConfigWithOverrides.tags || []).map(
-    tag => `${buildConfigWithOverrides.name}:${tag}`
+  const dockerImageTags = (buildConfig.tags || []).map(
+    tag => `${buildConfig.name}:${tag}`
   );
 
   const getDaemonMessage = new Transform({
@@ -42,7 +39,10 @@ export const buildImage = async (
   return new Dockerode()
     .buildImage(dockerBuildContext, {
       t: dockerImageTags,
-      buildargs: { AUTH_TOKEN: process.env.AUTH_TOKEN },
+      buildargs: {
+        AUTH_TOKEN:
+          buildConfig.pkgRegistryAuth && buildConfig.pkgRegistryAuth.token,
+      },
     })
     .then(daemonStream =>
       daemonStream.pipe(split2(line => JSON.parse(line))).pipe(getDaemonMessage)
