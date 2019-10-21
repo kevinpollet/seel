@@ -1,3 +1,4 @@
+.vscode/
 lib/
 !examples/*/lib
 node_modules/
