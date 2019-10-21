@@ -7,7 +7,7 @@
 [![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.md)
 
-**seel** is a command-line tool that facilitates the build of container image for your Node.js applications. You don't need to master container best practices or write a Dockerfile to build a container image, it's just as simple as invoking a command from your shell or npm script.
+**seel** is a command-line tool that facilitates the build of container images for your [Node.js](https://nodejs.org/) applications. You don't need to master container best practices or write a [Dockerfile](https://docs.docker.com/engine/reference/builder/) to build a container image, it's just as simple as invoking a command from your shell or npm script.
 
 ![screencast](https://cdn.jsdelivr.net/gh/kevinpollet/seel/screencast.svg)
 
@@ -31,7 +31,7 @@ $ npm install --global seel     # Install globally.
 $ npm install --save-dev seel   # Install locally to use it in npm scripts.
 ```
 
-**yarn**
+**Yarn**
 
 ```shell
 $ yarn global add seel          # Install globally.
@@ -40,7 +40,7 @@ $ yarn add seel --dev           # Install locally to use it in npm scripts.
 
 ## Usage
 
-> **seel** uses the Docker daemon to build the container image for your Node.js application. When you invoke the **seel** command, the Docker daemon must be **running** and **accessible** through the `/var/run/docker.sock` socket.
+> **seel** uses the [Docker daemon](https://docs.docker.com/engine/docker-overview/) to build the container image. When you invoke the **seel** command, the daemon must be **running** and **accessible** through the `/var/run/docker.sock` socket.
 
 ### CLI
 
