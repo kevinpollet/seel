@@ -37,20 +37,27 @@ COPY package.json {{ lockFile if lockFile }} ./
 
 COPY . .
 
-FROM gcr.io/distroless/nodejs
+FROM node:10-alpine
 
 {% if labels %}
   LABEL {% for key, value in labels %}{{ comma() }}"{{ key }}"="{{value}}"{% endfor %}
 {% endif %}
 
+RUN apk add --no-cache tini \
+  && mkdir /app \
+  && chown -R node:node /app
+
 WORKDIR app
-COPY --from=builder app/ ./
+
+USER node
+
+COPY --chown=node:node --from=builder app/ ./
 
 {% if ports %}
-  EXPOSE {% for port in ports %}{{ comma() }}{{ port }}{% endfor %}
+EXPOSE {% for port in ports %}{{ comma() }}{{ port }}{% endfor %}
 {% endif %}
 
-ENTRYPOINT ["/nodejs/bin/node", "{{ entrypoint }}"]
+ENTRYPOINT ["/sbin/tini", "--", "node", "{{ entrypoint }}"]
 `;
 
 export const generateDockerfile = (config: BuildConfig): string =>
