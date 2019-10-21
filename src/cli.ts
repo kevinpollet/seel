@@ -43,7 +43,11 @@ const program = new Command()
   )
   .option(
     "--pkg-registry-auth-url <url>",
-    "Set-up authentication for the given package registry URL."
+    "Set-up authentication for the given package registry base URL."
+  )
+  .option(
+    "--pkg-registry-auth-token <token>",
+    "Define the authentication token for the package registry base URL previously configured."
   )
   .option("--tag <tag>", "Define the container image tag.", collectValues)
   .action(options => {
@@ -66,7 +70,7 @@ const program = new Command()
       tags: options.tags,
       pkgRegistryAuth: options.pkgRegistryAuthUrl && {
         url: options.pkgRegistryAuthUrl,
-        token: process.env.AUTH_TOKEN || "",
+        token: options.pkgRegistryAuthToken || process.env.AUTH_TOKEN,
       },
     })
       .then(stream => stream.once("error", errorHandler).pipe(process.stdout))

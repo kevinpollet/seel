@@ -6,13 +6,14 @@
  */
 
 import { Dictionary } from "../types/Dictionary";
+import { PkgRegistryAuth } from "./PkgRegistryAuth";
 
 export interface BuildConfig {
   readonly name: string;
   readonly entrypoint: string;
   readonly tags?: ReadonlyArray<string>;
   readonly labels?: Readonly<Dictionary<string>>;
-  readonly pkgRegistryAuth?: Readonly<{ url: string; token: string }>;
+  readonly pkgRegistryAuth?: Readonly<PkgRegistryAuth>;
   readonly ports?: ReadonlyArray<string>;
   readonly extraFiles?: ReadonlyArray<string>;
   readonly useYarn: boolean;
