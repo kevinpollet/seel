@@ -1,29 +1,13 @@
-# cli
+# Command-line application
+
+This example is a command-line application that outputs `Hello, World!` or greets the `name` given as argument.
+
+To build and run the container image:
+
+- Run `npm run build:image`
+- Run `docker run --rm cli:latest`
 
 ```shell
-$ npm run build:image # Build container image with seel
-
-$ docker run --rm cli:latest # Run container with Docker
-
-   ╔═════════════════════════╗
-   ║                         ║
-   ║                         ║
-   ║      Hello, World!      ║
-   ║                         ║
-   ║                         ║
-   ╚═════════════════════════╝
-
-$ docker run --rm cli:latest Docker
-
-   ╔══════════════════════════╗
-   ║                          ║
-   ║                          ║
-   ║      Hello, Docker!      ║
-   ║                          ║
-   ║                          ║
-   ╚══════════════════════════╝
+$ docker run --rm cli:latest
+Hello, World!
 ```
-
-## License
-
-[MIT](../../LICENSE.md) © kevinpollet

@@ -39,7 +39,7 @@ jobs:
       - run: npm install
       - run: npm run build:image --prefix examples/cli
       - run: npm run build:image --prefix examples/express
-      - run: npm run build:image --prefix examples/express-static
+      - run: npm ci --prefix examples/cli-esm && npm run build:image --prefix examples/cli-esm
 
   publish:
     needs: [build, build-examples]

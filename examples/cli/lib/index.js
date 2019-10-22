@@ -5,8 +5,8 @@
  * found in the LICENSE.md file.
  */
 
-const { greet } = require("./greet");
+const sayHello = name => `Hello, ${name || "World"}!`;
 
 module.exports = {
-  greet,
+  sayHello,
 };

@@ -96,11 +96,11 @@ buildImage("/usr/app", options)
 
 ## Examples
 
-- [cli](./examples/cli) - A command-line app that outputs `Hello, World!` or greets the name passed as an argument.
+The [examples](./examples) directory contains the following examples:
 
-- [express](./examples/express) - An Express app that responds `{"message":"Hello, World!"}` to HTTP `GET /` requests or greets the name passed as query param.
-
-- [express-static](./examples/express-static) - An Express app that serves the static files stored in the `public` directory.
+- [Express application](./examples/express)
+- [Command-line application](./examples/cli)
+- [Command-line application with ECMAScript Modules](./examples/cli-esm)
 
 ## Contributing
 

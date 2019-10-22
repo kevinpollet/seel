@@ -1,6 +1,6 @@
 .vscode/
 lib/
-!examples/*/lib
+!examples/!esm/lib
 node_modules/
 .DS_Store
 package-lock.json

@@ -5,8 +5,6 @@
  * found in the LICENSE.md file.
  */
 
-const greet = name => `Hello, ${name || "World"}!`;
+import { sayHello } from "./sayHello";
 
-module.exports = {
-  greet,
-};
+console.log(sayHello());

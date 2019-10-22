@@ -9,7 +9,7 @@
   "main": "lib/index.js",
   "scripts": {
     "build:seel": "npm run --prefix ../../ build",
-    "build:image": "npm run build:seel && ../../bin/seel.js --port 3000"
+    "build:image": "npm run build:seel && ../../bin/seel.js --port 3000 --extra-files 'public/**'"
   },
   "dependencies": {
     "express": "^4.17.1"

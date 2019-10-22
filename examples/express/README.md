@@ -1,17 +1,9 @@
-# express
+# Express application
 
-```shell
-$ npm run build:image # Build container image with seel
+This example is an [Express](https://www.express.com/) application that serves the files in the [public](./public) directory and exposes a REST service endpoint. The REST endpoint outputs `Hello, World!` or greets the `name` passed as a query parameter.
 
-$ docker run --rm -p 3000:3000 express:latest # Run container with Docker
+To build and run the container image:
 
-$ curl http://localhost:3000
-{"message":"Hello, World!"}
-
-$ curl http://localhost:3000?name=Docker
-{"message":"Hello, Docker!"}
-```
-
-## License
-
-[MIT](../../LICENSE.md) © kevinpollet
+- Run `npm run build:image`
+- Run `docker run --rm -p 3000:3000 express:latest`
+- Go to http://localhost:3000/ or http://localhost:3000/hello

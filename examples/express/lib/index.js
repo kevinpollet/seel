@@ -5,13 +5,17 @@
  * found in the LICENSE.md file.
  */
 
-const { greet } = require("./greet");
 const express = require("express");
+const { sayHello } = require("./sayHello");
 
-const app = express().get("/", (req, res) => {
-  const { name } = req.query;
-  res.json({ message: greet(name) });
-});
+const app = express()
+  .use(express.static("public"))
+  .get("/hello", (req, res) => {
+    const { name } = req.query;
+    const message = sayHello(name);
+
+    res.header("Content-Type", "text/plain").end(message);
+  });
 
 module.exports = {
   app,

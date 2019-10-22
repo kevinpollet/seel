@@ -5,8 +5,4 @@
  * found in the LICENSE.md file.
  */
 
-const greet = name => `Hello, ${name || "World"}!`;
-
-module.exports = {
-  greet,
-};
+export const sayHello = name => `Hello, ${name ?? "World"}`;

@@ -1,6 +1,6 @@
 {
   "name": "cli",
-  "description": "CLI tool packaged as a container with seel",
+  "description": "A command-line application that outputs a greeting message",
   "version": "1.0.0",
   "author": "kevinpollet <pollet.kevin@gmail.com>",
   "license": "MIT",
@@ -9,8 +9,5 @@
   "scripts": {
     "build:seel": "npm run --prefix ../../ build",
     "build:image": "npm run build:seel && ../../bin/seel.js"
-  },
-  "dependencies": {
-    "boxen": "^4.1.0"
   }
 }
