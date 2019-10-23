@@ -1,9 +1,8 @@
 .vscode/
-dist/
-lib/
-!examples/!esm/lib
 node_modules/
+/examples/nestjs/dist/
+/examples/cli-esm/lib/
+/lib/
+./package-lock.json
 .DS_Store
-package-lock.json
-!examples/*/package-lock.json
 *.log
