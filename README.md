@@ -44,7 +44,7 @@ $ yarn add seel --dev           # Install locally to use it in npm scripts.
 
 ## Usage
 
-> **seel** uses the [Docker daemon](https://docs.docker.com/engine/docker-overview/) to build the container image. When you invoke the **seel** command, the daemon must be **running** and **accessible** through the `/var/run/docker.sock` socket.
+> **Note: seel uses the [Docker daemon](https://docs.docker.com/engine/docker-overview/) to build the container image. When you invoke the seel command, the daemon must be running and accessible through the `/var/run/docker.sock` socket.**
 
 ### CLI
 
