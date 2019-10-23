@@ -9,11 +9,11 @@ import fg from "fast-glob";
 import tar from "tar-fs";
 import { Pack } from "tar-stream";
 import { createGzip } from "zlib";
-import { BuildConfig } from "./config/BuildConfig";
+import { BuildConfig } from "../config/BuildConfig";
 import { generateDockerfile } from "./generateDockerfile";
-import { listModuleDependencies } from "./utils/listModuleDependencies";
+import { listModuleDependencies } from "../utils/listModuleDependencies";
 
-export const createDockerBuildContext = async (
+export const createBuildContext = async (
   dir: string,
   config: BuildConfig
 ): Promise<NodeJS.ReadableStream> => {

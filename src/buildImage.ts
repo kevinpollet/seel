@@ -9,7 +9,7 @@ import Dockerode from "dockerode";
 import { resolve } from "path";
 import split2 from "split2";
 import { Transform } from "stream";
-import { createDockerBuildContext } from "./createDockerBuildContext";
+import { createBuildContext } from "./docker/createBuildContext";
 import { BuildImageOptions } from "./BuildImageOptions";
 import { getBuildConfig } from "./config/getBuildConfig";
 import { overrideBuildConfig } from "./config/overrideBuildConfig";
@@ -21,10 +21,7 @@ export const buildImage = async (
   const absoluteDir = resolve(process.cwd(), dir);
   const defaultBuildConfig = await getBuildConfig(absoluteDir);
   const buildConfig = overrideBuildConfig(defaultBuildConfig, options);
-  const dockerBuildContext = await createDockerBuildContext(
-    absoluteDir,
-    buildConfig
-  );
+  const buildContext = await createBuildContext(absoluteDir, buildConfig);
   const dockerImageTags = (buildConfig.tags || []).map(
     tag => `${buildConfig.name}:${tag}`
   );
@@ -37,7 +34,7 @@ export const buildImage = async (
   });
 
   return new Dockerode()
-    .buildImage(dockerBuildContext, {
+    .buildImage(buildContext, {
       t: dockerImageTags,
       buildargs: {
         AUTH_TOKEN:

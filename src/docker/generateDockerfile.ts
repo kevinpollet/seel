@@ -6,8 +6,8 @@
  */
 
 import nunjucks from "nunjucks";
-import { BuildConfig } from "./config/BuildConfig";
-import { normalizePkgRegistryUrl } from "./utils/normalizePkgRegistryUrl";
+import { BuildConfig } from "../config/BuildConfig";
+import { normalizePkgRegistryUrl } from "../utils/normalizePkgRegistryUrl";
 
 const dockerfileTemplate = `
 {% set comma = joiner(" ") %}
