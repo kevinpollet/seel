@@ -17,7 +17,7 @@
 
 ## Table of Contents <!-- omit in toc -->
 
-- [Install](#install)
+- [Installation](#installation)
 - [Usage](#usage)
   - [CLI](#cli)
   - [API](#api)
@@ -25,7 +25,7 @@
 - [Contributing](#contributing)
 - [License](#license)
 
-## Install
+## Installation
 
 **npm**
 
