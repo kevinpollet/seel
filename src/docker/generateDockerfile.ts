@@ -12,7 +12,7 @@ import { normalizePkgRegistryUrl } from "../utils/normalizePkgRegistryUrl";
 const dockerfileTemplate = `
 {% set comma = joiner(" ") %}
 
-FROM node:10-alpine AS builder
+FROM node:12-alpine AS builder
 {{ "ARG AUTH_TOKEN" if pkgRegistryAuth }}
 WORKDIR app
 
@@ -37,7 +37,7 @@ COPY package.json {{ lockFile if lockFile }} ./
 
 COPY . .
 
-FROM node:10-alpine
+FROM node:12-alpine
 
 {% if labels %}
   LABEL {% for key, value in labels %}{{ comma() }}"{{ key }}"="{{value}}"{% endfor %}
