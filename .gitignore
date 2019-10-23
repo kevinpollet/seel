@@ -1,4 +1,5 @@
 .vscode/
+dist/
 lib/
 !examples/!esm/lib
 node_modules/

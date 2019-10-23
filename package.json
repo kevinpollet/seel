@@ -67,10 +67,13 @@
     "typescript": "^3.6.4"
   },
   "eslintConfig": {
+    "env": {
+      "node": true
+    },
     "overrides": [
       {
         "files": [
-          "**/cli-esm/**/*.js"
+          "examples/cli-esm/src/*.js"
         ],
         "parser": "babel-eslint",
         "extends": [
@@ -80,13 +83,10 @@
       },
       {
         "files": [
-          "*.js"
+          "examples/{cli,express}/**/*.js"
         ],
         "parserOptions": {
           "ecmaVersion": 9
-        },
-        "env": {
-          "node": true
         },
         "extends": [
           "eslint:recommended",
@@ -95,7 +95,27 @@
       },
       {
         "files": [
-          "*.ts"
+          "examples/nestjs/src/**/*.ts"
+        ],
+        "parser": "@typescript-eslint/parser",
+        "plugins": [
+          "@typescript-eslint"
+        ],
+        "parserOptions": {
+          "project": "./examples/nestjs/tsconfig.json"
+        },
+        "extends": [
+          "eslint:recommended",
+          "plugin:@typescript-eslint/eslint-recommended",
+          "plugin:@typescript-eslint/recommended",
+          "plugin:@typescript-eslint/recommended-requiring-type-checking",
+          "prettier",
+          "prettier/@typescript-eslint"
+        ]
+      },
+      {
+        "files": [
+          "{src,test}/**/*.ts"
         ],
         "parser": "@typescript-eslint/parser",
         "plugins": [

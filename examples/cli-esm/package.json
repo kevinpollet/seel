@@ -1,7 +1,7 @@
 {
   "name": "cli-esm",
   "version": "1.0.0",
-  "description": "A command-line application that outputs 'Hello, World!'",
+  "description": "A command-line application that outputs a greeting message",
   "author": "kevinpollet <pollet.kevin@gmail.com>",
   "license": "MIT",
   "private": true,

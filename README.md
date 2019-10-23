@@ -102,6 +102,7 @@ buildImage("/usr/app", options)
 
 The [examples](./examples) directory contains the following examples:
 
+- [NestJS application](./examples/nestjs)
 - [Express application](./examples/express)
 - [Command-line application](./examples/cli)
 - [Command-line application with ECMAScript Modules](./examples/cli-esm)
