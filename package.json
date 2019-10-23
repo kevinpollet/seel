@@ -25,7 +25,7 @@
     "build": "rm -rf lib && tsc -p tsconfig.build.json",
     "format": "prettier --write '*.{json,md}' '{bin,examples,src,test}/**/*.{ts,js,json,md}'",
     "format:check": "prettier --check '*.{json,md}' '{bin,examples,src,test}/**/*.{ts,js,json,md}'",
-    "lint": "eslint --max-warnings 0 '{bin,examples,src,test}/**/*.{js,ts}'",
+    "lint": "eslint --max-warnings 0 --ignore-path .gitignore '**/*.{js,ts}'",
     "prepare": "npm run build",
     "release": "standard-version --sign",
     "test": "jest --preset ts-jest"
@@ -73,17 +73,7 @@
     "overrides": [
       {
         "files": [
-          "examples/cli-esm/src/*.js"
-        ],
-        "parser": "babel-eslint",
-        "extends": [
-          "eslint:recommended",
-          "prettier"
-        ]
-      },
-      {
-        "files": [
-          "examples/{cli,express}/**/*.js"
+          "*.js"
         ],
         "parserOptions": {
           "ecmaVersion": 9
@@ -95,27 +85,7 @@
       },
       {
         "files": [
-          "examples/nestjs/src/**/*.ts"
-        ],
-        "parser": "@typescript-eslint/parser",
-        "plugins": [
-          "@typescript-eslint"
-        ],
-        "parserOptions": {
-          "project": "./examples/nestjs/tsconfig.json"
-        },
-        "extends": [
-          "eslint:recommended",
-          "plugin:@typescript-eslint/eslint-recommended",
-          "plugin:@typescript-eslint/recommended",
-          "plugin:@typescript-eslint/recommended-requiring-type-checking",
-          "prettier",
-          "prettier/@typescript-eslint"
-        ]
-      },
-      {
-        "files": [
-          "{src,test}/**/*.ts"
+          "*.ts"
         ],
         "parser": "@typescript-eslint/parser",
         "plugins": [
