@@ -1,6 +1,6 @@
 {
   "name": "express",
-  "description": "Express application packaged as a container with seel",
+  "description": "An Express application that serves static files and exposes a REST endpoint",
   "version": "1.0.0",
   "author": "kevinpollet <pollet.kevin@gmail.com>",
   "license": "MIT",

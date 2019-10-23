@@ -40,6 +40,7 @@ jobs:
       - run: npm run build:image --prefix examples/cli
       - run: npm run build:image --prefix examples/express
       - run: npm ci --prefix examples/cli-esm && npm run build:image --prefix examples/cli-esm
+      - run: npm ci --prefix examples/nestjs && npm run build:image --prefix examples/nestjs
 
   publish:
     needs: [build, build-examples]
