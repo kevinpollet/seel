@@ -15,7 +15,8 @@
 
 ![screencast](https://cdn.jsdelivr.net/gh/kevinpollet/seel/screencast.svg)
 
-## Table of Contents <!-- omit in toc -->
+<details>
+  <summary><strong>Table of Contents</strong> (click to expand)</summary>
 
 - [Installation](#installation)
 - [Usage](#usage)
@@ -24,6 +25,8 @@
 - [Examples](#examples)
 - [Contributing](#contributing)
 - [License](#license)
+
+</details>
 
 ## Installation
 
