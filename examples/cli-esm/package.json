@@ -8,7 +8,7 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "rm -rf lib && babel src --out-dir lib",
-    "build:seel": "npm run --prefix ../../ build",
+    "build:seel": "npm install --prefix ../../",
     "build:image": "npm run build:seel && npm run build && ../../bin/seel.js",
     "prepare": "npm run build"
   },

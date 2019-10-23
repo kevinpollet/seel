@@ -7,7 +7,7 @@
   "private": true,
   "bin": "bin/cli.js",
   "scripts": {
-    "build:seel": "npm run --prefix ../../ build",
+    "build:seel": "npm install --prefix ../../",
     "build:image": "npm run build:seel && ../../bin/seel.js"
   }
 }
