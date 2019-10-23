@@ -8,6 +8,7 @@
 import fg from "fast-glob";
 import tar from "tar-fs";
 import { Pack } from "tar-stream";
+import { createGzip } from "zlib";
 import { BuildConfig } from "./config/BuildConfig";
 import { generateDockerfile } from "./generateDockerfile";
 import { listModuleDependencies } from "./utils/listModuleDependencies";
@@ -32,13 +33,15 @@ export const createDockerBuildContext = async (
     entries.push(config.lockFile);
   }
 
-  return tar.pack(dir, {
-    entries,
-    finalize: false,
-    finish(pack: Pack): void {
-      pack.entry({ name: "Dockerfile" }, generateDockerfile(config));
-      pack.entry({ name: ".dockerignore" }, "*");
-      pack.finalize();
-    },
-  });
+  return tar
+    .pack(dir, {
+      entries,
+      finalize: false,
+      finish(pack: Pack): void {
+        pack.entry({ name: "Dockerfile" }, generateDockerfile(config));
+        pack.entry({ name: ".dockerignore" }, "*");
+        pack.finalize();
+      },
+    })
+    .pipe(createGzip());
 };
