@@ -14,7 +14,7 @@
 - **Flexible** - Overwrite opinionated defaults to fit your needs.
 - **Fast** - Optimized image layers to take advantage of build caching.
 
-![screencast](https://cdn.jsdelivr.net/gh/kevinpollet/seel/screencast.svg)
+![screencast](https://cdn.jsdelivr.net/gh/kevinpollet/seel@be83df272ac6ca4f19455093f46013dba7541530/screencast.svg)
 
 <details>
   <summary><strong>Table of Contents</strong> (click to expand)</summary>
