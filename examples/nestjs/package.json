@@ -4,14 +4,14 @@
   "description": "A NestJS application that exposes a REST endpoint",
   "author": "kevinpollet <pollet.kevin@gmail.com>",
   "license": "MIT",
+  "private": true,
   "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "nest build",
+    "build": "rm -rf dist && nest build",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:prod": "node dist/main",
-    "build:seel": "npm install --prefix ../../",
-    "build:image": "npm run build:seel && ../../bin/seel.js --port 3000 --entrypoint dist/main",
+    "build:seel": "npm install --no-package-lock --prefix ../../",
+    "build:image": "npm run build:seel && ../../bin/seel.js --port 3000 --entrypoint dist/main.js",
     "prepare": "npm run build"
   },
   "dependencies": {
@@ -19,8 +19,7 @@
     "@nestjs/core": "^6.7.2",
     "@nestjs/platform-express": "^6.7.2",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^6.5.3",
-    "rimraf": "^3.0.0"
+    "rxjs": "^6.5.3"
   },
   "devDependencies": {
     "@nestjs/cli": "^6.9.0",

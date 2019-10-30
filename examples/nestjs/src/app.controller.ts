@@ -15,6 +15,6 @@ export class AppController {
   @Get()
   @Header("Content-Type", "text/plain")
   getHello(): string {
-    return this.appService.getHello();
+    return this.appService.sayHello();
   }
 }
