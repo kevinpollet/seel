@@ -3,6 +3,6 @@ node_modules/
 /examples/nestjs/dist/
 /examples/cli-esm/lib/
 /lib/
-./package-lock.json
+/package-lock.json
 .DS_Store
 *.log

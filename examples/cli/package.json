@@ -7,7 +7,7 @@
   "private": true,
   "bin": "bin/cli.js",
   "scripts": {
-    "build:seel": "npm install --prefix ../../",
+    "build:seel": "npm install --no-package-lock --prefix ../../",
     "build:image": "npm run build:seel && ../../bin/seel.js"
   },
   "dependencies": {}
