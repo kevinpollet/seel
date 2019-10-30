@@ -31,7 +31,7 @@
     "test": "jest --preset ts-jest"
   },
   "dependencies": {
-    "@types/node": "^10.14.22",
+    "@types/node": "^8.10.56",
     "commander": "^3.0.0",
     "dependency-tree": "^7.0.2",
     "dockerode": "^3.0.2",

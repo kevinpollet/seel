@@ -28,7 +28,7 @@ jobs:
 
     strategy:
       matrix:
-        node: [10, 12]
+        node: [8, 10, 12, 13]
 
     steps:
       - uses: actions/checkout@master
@@ -51,7 +51,7 @@ jobs:
       - uses: actions/checkout@master
       - uses: actions/setup-node@v1
         with:
-          node-version: 10
+          node-version: 8
           registry-url: https://registry.npmjs.org/
 
       - run: npm install
