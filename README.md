@@ -6,6 +6,7 @@
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![License](https://img.shields.io/github/license/kevinpollet/seel)](./LICENSE.md)
+[![GitHub stars](https://img.shields.io/github/stars/kevinpollet/seel?style=social)](https://github.com/kevinpollet/seel/stargazers)
 [![Twitter Follow](https://img.shields.io/twitter/follow/kevinpollet?style=social)](https://twitter.com/kevinpollet)
 
 **seel** is a command-line tool that facilitates the build of container images for your [Node.js](https://nodejs.org/) applications. You don't need to master container best practices or write a [Dockerfile](https://docs.docker.com/engine/reference/builder/) to build a container image, it's just as simple as invoking a command from your shell or npm script.
