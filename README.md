@@ -25,6 +25,7 @@
   - [API](#api)
 - [Examples](#examples)
 - [Contributing](#contributing)
+- [Contributors](#contributors)
 - [License](#license)
 
 </details>
@@ -118,6 +119,26 @@ Contributions are welcome!
 Want to file a bug, request a feature or contribute some code?
 
 Check out the [contribution guidelines](./CONTRIBUTING.md).
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://kevinpollet.dev"><img src="https://avatars0.githubusercontent.com/u/299142?v=4" width="100px;" alt="Kevin Pollet"/><br /><sub><b>Kevin Pollet</b></sub></a><br /><a href="https://github.com/kevinpollet/seel/commits?author=kevinpollet" title="Code">💻</a> <a href="https://github.com/kevinpollet/seel/commits?author=kevinpollet" title="Documentation">📖</a> <a href="#infra-kevinpollet" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 ## License
 

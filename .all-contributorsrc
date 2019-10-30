@@ -1,0 +1,26 @@
+{
+  "projectName": "seel",
+  "projectOwner": "kevinpollet",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "kevinpollet",
+      "name": "Kevin Pollet",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/299142?v=4",
+      "profile": "https://kevinpollet.dev",
+      "contributions": [
+        "code",
+        "doc",
+        "infra"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
