@@ -20,7 +20,7 @@
 <details>
   <summary><strong>Table of Contents</strong> (click to expand)</summary>
 
-- [Installation](#installation)
+- [Install](#install)
 - [Usage](#usage)
   - [CLI](#cli)
   - [API](#api)
@@ -31,7 +31,7 @@
 
 </details>
 
-## Installation
+## Install
 
 **npm**
 
