@@ -36,16 +36,16 @@
 **npm**
 
 ```shell
-$ npx seel                      # Run it once.
-$ npm install --global seel     # Install globally.
-$ npm install --save-dev seel   # Install locally to use it in npm scripts.
+npx seel                      # Run it once.
+npm install --global seel     # Install globally.
+npm install --save-dev seel   # Install locally to use it in npm scripts.
 ```
 
 **Yarn**
 
 ```shell
-$ yarn global add seel          # Install globally.
-$ yarn add seel --dev           # Install locally to use it in npm scripts.
+yarn global add seel          # Install globally.
+yarn add seel --dev           # Install locally to use it in npm scripts.
 ```
 
 ## Usage
@@ -143,4 +143,4 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ## License
 
-[MIT](./LICENSE.md) © kevinpollet
+[MIT](./LICENSE.md)
