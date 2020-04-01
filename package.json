@@ -51,7 +51,7 @@
     "@types/semver": "^6.0.1",
     "@types/split2": "^2.1.6",
     "@types/tar-fs": "^1.16.1",
-    "@types/tar-stream": "^1.6.1",
+    "@types/tar-stream": "^2.1.0",
     "@typescript-eslint/eslint-plugin": "^2.4.0",
     "@typescript-eslint/parser": "^2.4.0",
     "babel-eslint": "^10.0.3",
