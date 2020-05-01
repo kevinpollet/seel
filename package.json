@@ -43,7 +43,7 @@
     "tar-fs": "^2.0.0"
   },
   "devDependencies": {
-    "@types/dependency-tree": "^6.1.0",
+    "@types/dependency-tree": "^7.2.0",
     "@types/dockerode": "^2.5.20",
     "@types/jest": "^24.0.19",
     "@types/normalize-package-data": "^2.4.0",
