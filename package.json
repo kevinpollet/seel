@@ -50,7 +50,7 @@
     "@types/nunjucks": "^3.1.2",
     "@types/semver": "^6.0.1",
     "@types/split2": "^2.1.6",
-    "@types/tar-fs": "^1.16.1",
+    "@types/tar-fs": "^2.0.0",
     "@types/tar-stream": "^1.6.1",
     "@typescript-eslint/eslint-plugin": "^2.4.0",
     "@typescript-eslint/parser": "^2.4.0",
