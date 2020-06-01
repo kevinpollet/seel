@@ -48,7 +48,7 @@
     "@types/jest": "^24.0.19",
     "@types/normalize-package-data": "^2.4.0",
     "@types/nunjucks": "^3.1.2",
-    "@types/semver": "^6.0.1",
+    "@types/semver": "^7.2.0",
     "@types/split2": "^2.1.6",
     "@types/tar-fs": "^1.16.1",
     "@types/tar-stream": "^1.6.1",
