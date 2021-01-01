@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@types/node": "^8.10.56",
-    "commander": "^3.0.0",
+    "commander": "^6.2.1",
     "dependency-tree": "^7.0.2",
     "dockerode": "^3.0.2",
     "fast-glob": "^3.1.0",
