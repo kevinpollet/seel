@@ -1,0 +1,38 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: monthly
+    time: "01:00"
+  open-pull-requests-limit: 10
+  labels:
+  - "type: deps"
+  ignore:
+  - dependency-name: "@types/node"
+    versions:
+    - ">= 0"
+  - dependency-name: husky
+    versions:
+    - 4.3.6
+    - 4.3.8
+  - dependency-name: commander
+    versions:
+    - 6.2.1
+    - 7.0.0
+  - dependency-name: standard-version
+    versions:
+    - 9.1.0
+  - dependency-name: lint-staged
+    versions:
+    - 10.5.3
+  - dependency-name: "@types/dependency-tree"
+    versions:
+    - 7.2.0
+  - dependency-name: "@types/tar-stream"
+    versions:
+    - 2.1.0
+  commit-message:
+    prefix: fix
+    prefix-development: chore
+    include: scope
